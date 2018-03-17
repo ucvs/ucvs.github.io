@@ -33,6 +33,14 @@
         }
     </style>
     
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
     <!--<script type="text/javascript">
       if (document.images) {
         var avatar = new Image();
@@ -144,11 +152,11 @@
                         
                         
                         <li>
-                            <a href="/tags/Java/">Java</a>
+                            <a href="/tags/C/">C</a>
                         </li>
                         
                         <li>
-                            <a href="/tags/C/">C</a>
+                            <a href="/tags/Java/">Java</a>
                         </li>
                         
                         
@@ -267,6 +275,18 @@
     
     <!-- 要配置好leancloud才能开启此小工具 -->
     
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
     
     <aside id="sidebar-recent_posts">
     <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
@@ -314,7 +334,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/16/hello-world/">Hello World</a>
+                    <a href="/2018/03/17/三方登录集成/">三方登录集成</a>
                 </span>
             </li>
             
@@ -326,7 +346,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/17/三方登录集成/">三方登录集成</a>
+                    <a href="/2018/03/16/hello-world/">Hello World</a>
                 </span>
             </li>
             
@@ -351,9 +371,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Java/" style="font-size: 19.08366026105315px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/C/" style="font-size: 18.097678671630696px;" class="tag-cloud-link">C</a>
     
-    <a href="/tags/C/" style="font-size: 13.314767184968115px;" class="tag-cloud-link">C</a>
+    <a href="/tags/Java/" style="font-size: 14.685301206511424px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
@@ -458,5 +478,31 @@
 <script src="/js/oni.js"></script>
 
 
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'git@github.com:ucvs/MyBlogComment-repo.git'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'git@github.com:ucvs/MyBlogComment-repo.git',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
 
 </html>
