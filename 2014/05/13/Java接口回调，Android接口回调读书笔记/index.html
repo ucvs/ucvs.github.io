@@ -12,7 +12,7 @@
     
     
     
-    <title>Android第三方登录集成 | 欢迎来到唯美的网站</title>
+    <title>Java接口回调，Android接口回调读书笔记 | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -204,13 +204,13 @@
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>Android第三方登录集成</span>
+        <span>Java接口回调，Android接口回调读书笔记</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/2014/03/17/Android第三方登录集成/">Android第三方登录集成</a>
+                <a href="/2014/05/13/Java接口回调，Android接口回调读书笔记/">Java接口回调，Android接口回调读书笔记</a>
             </h1>
         </div>
         <div class="tag-article">
@@ -218,12 +218,12 @@
             <span class="label label-gal">
                 <i class="fa fa-tags"></i>
                 
-                <a href="/tags/Android/">Android</a>
+                <a href="/tags/Java/">Java</a>
                 
             </span>
             
             <span class="label label-gal">
-                <i class="fa fa-calendar"></i> 2014-03-17
+                <i class="fa fa-calendar"></i> 2014-05-13
             </span>
             
             <span class="label label-gal">
@@ -237,17 +237,17 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/2014/03/17/Android第三方登录集成/">Android第三方登录集成</a>
+                    <a href="/2014/05/13/Java接口回调，Android接口回调读书笔记/">Java接口回调，Android接口回调读书笔记</a>
                 </h4>
             </div>
             <p>
-                <i class="fa fa-calendar"></i> 2014-03-17
+                <i class="fa fa-calendar"></i> 2014-05-13
             </p>
             <p>
                 
                 <i class="fa fa-tags"></i>
                 
-                <a href="/tags/Android/">Android</a>
+                <a href="/tags/Java/">Java</a>
                 
                 
                 
@@ -258,104 +258,374 @@
     </div>
     <div class="content-article">
         <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
-<p>转帖请注明本文出自weimeig的博客（<a href="http://blog.csdn.net/weimeig/article/details/78818085" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/78818085</a>）， 请尊重他人的辛勤劳动成果，谢谢</p>
-<p>ShareSDK集成</p>
-<p>一、集成</p>
-<p>二、第三方开发平台注册</p>
-<p>三、项目中使用</p>
-<p>一、集成</p>
-<p>到mob.com下载ShareSDK，选择要集成的功能并下载，下载好后，解压，并点击QuickIntegrater.rar生成需要功能，得到Sample文件夹，生成时候记得填写项目包名才点击生成，不然会报错。</p>
-<p>（1）将Sample文件夹的libs文件夹里的jar包复制到项目下的app文件夹下的libs文件夹内。</p>
-<p>（2）res文件夹内的文件，不做任何改名更改，复制到项目下的app文件夹下的res文件夹内。</p>
-<p>（3）将ShareSDK.xml文件复制到项目下的app文件夹下的src下的main文件夹下的assets文件夹中，如果没有这个文件夹则创建一个。</p>
-<p>（4）将src文件夹内复制到项目下的app文件夹下的src下的main文件夹下的java文件夹中，与自己原包名项目并列。</p>
-<p>（5）更改AndroidManifest.xml文件内应用权限，照着官方文档填写即可，或者下载本文提供的demo，从demo中复制AndroidManifest.xml文件内权限到自己的项目</p>
-<p> ( 6 )AndroidManifest.xml文件内设置您从Mob开发者后台中得到的Appkey和AppSecret，如<br><img src="http://img.blog.csdn.net/20171216101226265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<p>此时如果有地方报红，点击AndroidStudio上方工具栏里的BuiId下的Clean Project ，结束后点击RebuiId Project,然后再点击一下这个按钮，<br><img src="http://img.blog.csdn.net/20171216094453965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>原因是新引入的包需要同步一下，就不报红了。</p>
-<p>集成完成。</p>
-<p>二、第三方开发平台注册</p>
-<p>如需要集成第三方登录是QQ、微信、微博。则分别到对应的第三方开放平台注册账号，如微信是微信第三方开放平台，在平台选择开启登录功能，然后填写完应用相关信息后，得到AppId和AppSecret将两者保存下来，一会第三步要用到。这里需要注意的是，平台填写的应用信息中，包名和应用签名，要和app对应。最后面附上怎么查看应用签名的方法。</p>
-<p>特别注明：新浪微博的话，还需要在开放平台里选择回调接口地址，在开放平台应用信息附近找到OAuth2.0 授权设置编辑，设置微博回调地址。</p>
-<p>比如官方默认的回调地址（默认的也可以使用）：</p>
-<p>授权回调页：<a href="http://sns.whalecloud.com/sina2/callback" target="_blank" rel="noopener">http://sns.whalecloud.com/sina2/callback</a><br>取消授权回调页：<a href="http://sns.whalecloud.com/sina2/callback" target="_blank" rel="noopener">http://sns.whalecloud.com/sina2/callback</a></p>
-<p>三、项目中使用</p>
-<p>（1）将你在第三方开发平台申请到的AppId和AppSecret填写到src下的main文件夹下的assets文件夹内的ShareSDK.xml文件中，替换掉mob提供的初始的。微博的话，还需要在这个文件里面的微博的配置里，设置RedirectUrl这个参数，微博官方默认的是</p>
-<p>RedirectUrl=”<a href="http://sns.whalecloud.com/sina2/callback&quot;" target="_blank" rel="noopener">http://sns.whalecloud.com/sina2/callback&quot;</a></p>
-<p>如果你申请开发平台时用了默认的，可以设置为这个</p>
-<p>（2）第三方登录的方法</p>
-<pre><code>`/**
- * 第三方登录方法
- * Created by weimei on 2017/12/16.
- * Email:ucvs@qq.com
- */
-private void thirdLogin(String platformName,final String backType) {
+<p>单看文章比较难理解，照着多敲几遍代码就理解了</p>
+<p>回调就是A类中调用B类中的某个方法C，然后B类中反过来调用A类中的方法D，D这个方法就叫回调方法，这样子说你是不是有点晕晕的，其实我刚开始也是这样不理解，看了人家说比较经典的回调方式：</p>
+<ul>
+<li><p>Class A实现接口CallBack callback——背景1</p>
+</li>
+<li><p>class A中包含一个class B的引用b ——背景2</p>
+</li>
+<li><p>class B有一个参数为callback的方法f(CallBack callback) ——背景3</p>
+</li>
+<li><p>A的对象a调用B的方法 f(CallBack callback) ——A类调用B类的某个方法 C</p>
+</li>
+<li><p>然后b就可以在f(CallBack callback)方法中调用A的方法 ——B类调用A类的某个方法D</p>
+</li>
+</ul>
+<p>大家都喜欢用打电话的例子，好吧，为了跟上时代，我也用这个例子好了，我这个例子采用异步加回调</p>
+<p>有一天小王遇到一个很难的问题，问题是“1 + 1 = ?”，就打电话问小李，小李一下子也不知道，就跟小王说，等我办完手上的事情，就去想想答案，小王也不会傻傻的拿着电话去等小李的答案吧，于是小王就对小李说，我还要去逛街，你知道了答案就打我电话告诉我，于是挂了电话，自己办自己的事情，过了一个小时，小李打了小王的电话，告诉他答案是2</p>
+<pre><code>/** 
+ * 这是一个回调接口 
+ * @author xiaanming 
+ * 
+ */  
+public interface CallBack {  
+    /** 
+     * 这个是小李知道答案时要调用的函数告诉小王，也就是回调函数 
+     * @param result 是答案 
+     */  
+    public void solve(String result);  
+}  
+</code></pre><hr>
+<pre><code>/** 
+ * 这个是小王 
+ * @author xiaanming 
+ * 实现了一个回调接口CallBack，相当于-----&gt;背景一 
+ */  
+public class Wang implements CallBack {  
+    /** 
+     * 小李对象的引用 
+     * 相当于-----&gt;背景二 
+     */  
+    private Li li;   
 
-    Platform wechat = ShareSDK.getPlatform(platformName);
-    wechat.SSOSetting(false);  //设置false表示使用SSO授权方式
-    if(wechat.isAuthValid()){
-        wechat.removeAccount(true);
+    /** 
+     * 小王的构造方法，持有小李的引用 
+     * @param li 
+     */  
+    public Wang(Li li){  
+        this.li = li;  
+    }  
+
+    /** 
+     * 小王通过这个方法去问小李的问题 
+     * @param question  就是小王要问的问题,1 + 1 = ? 
+     */  
+    public void askQuestion(final String question){  
+        //这里用一个线程就是异步，  
+        new Thread(new Runnable() {  
+            @Override  
+            public void run() {  
+                /** 
+                 * 小王调用小李中的方法，在这里注册回调接口 
+                 * 这就相当于A类调用B的方法C 
+                 */  
+                li.executeMessage(Wang.this, question);   
+            }  
+        }).start();  
+
+        //小网问完问题挂掉电话就去干其他的事情了，诳街去了  
+        play();  
+    }  
+
+    public void play(){  
+        System.out.println(&quot;我要逛街去了&quot;);  
+    }  
+
+    /** 
+     * 小李知道答案后调用此方法告诉小王，就是所谓的小王的回调方法 
+     */  
+    @Override  
+    public void solve(String result) {  
+        System.out.println(&quot;小李告诉小王的答案是---&gt;&quot; + result);  
+    }  
+
+}  
+</code></pre><hr>
+<pre><code>/** 
+ * 这个就是小李啦 
+ * @author xiaanming 
+ * 
+ */  
+public class Li {  
+    /** 
+     * 相当于B类有参数为CallBack callBack的f()----&gt;背景三 
+     * @param callBack   
+     * @param question  小王问的问题 
+     */  
+    public void executeMessage(CallBack callBack, String question){  
+        System.out.println(&quot;小王问的问题---&gt;&quot; + question);  
+
+        //模拟小李办自己的事情需要很长时间  
+        for(int i=0; i&lt;10000;i++){  
+
+        }  
+
+        /** 
+         * 小李办完自己的事情之后想到了答案是2 
+         */  
+        String result = &quot;答案是2&quot;;  
+
+        /** 
+         * 于是就打电话告诉小王，调用小王中的方法 
+         * 这就相当于B类反过来调用A的方法D 
+         */  
+        callBack.solve(result);   
+
+
+
+    }  
+
+}  
+</code></pre><hr>
+<pre><code>/** 
+ * 测试类 
+ * @author xiaanming 
+ * 
+ */  
+public class Test {  
+    public static void main(String[]args){  
+        /** 
+         * new 一个小李 
+         */  
+        Li li = new Li();  
+
+        /** 
+         * new 一个小王 
+         */  
+        Wang wang = new Wang(li);  
+
+        /** 
+         * 小王问小李问题 
+         */  
+        wang.askQuestion(&quot;1 + 1 = ?&quot;);  
+    }  
+}  
+</code></pre><p>通过上面的那个例子你是不是差不多明白了回调机制呢，上面是一个异步回调，我们看看同步回调吧，onClick（）方法</p>
+<p>现在来分析分析下Android View的点击方法onclick（）;我们知道onclick()是一个回调方法，当用户点击View就执行这个方法，我们用Button来举例好了</p>
+<pre><code>//这个是View的一个回调接口  
+/** 
+ * Interface definition for a callback to be invoked when a view is clicked. 
+ */  
+public interface OnClickListener {  
+    /** 
+     * Called when a view has been clicked. 
+     * 
+     * @param v The view that was clicked. 
+     */  
+    void onClick(View v);  
+}  
+</code></pre><hr>
+<pre><code>package com.example.demoactivity;  
+
+import android.app.Activity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.view.View.OnClickListener;  
+import android.widget.Button;  
+import android.widget.Toast;  
+
+/** 
+ * 这个就相当于Class A 
+ * @author xiaanming 
+ * 实现了 OnClickListener接口----&gt;背景一 
+ */  
+public class MainActivity extends Activity implements OnClickListener{  
+    /** 
+     * Class A 包含Class B的引用-----&gt;背景二 
+     */  
+    private Button button;  
+
+    @Override  
+    public void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        button = (Button)findViewById(R.id.button1);  
+
+        /** 
+         * Class A 调用View的方法,而Button extends View-----&gt;A类调用B类的某个方法 C 
+         */  
+        button.setOnClickListener(this);  
+    }  
+
+    /** 
+     * 用户点击Button时调用的回调函数，你可以做你要做的事 
+     * 这里我做的是用Toast提示OnClick 
+     */  
+    @Override  
+    public void onClick(View v) {  
+        Toast.makeText(getApplication(), &quot;OnClick&quot;, Toast.LENGTH_LONG).show();  
+    }  
+
+}  
+</code></pre><p>下面是View类的setOnClickListener方法，就相当于B类咯，只把关键代码贴出来</p>
+<hr>
+<pre><code>/** 
+ * 这个View就相当于B类 
+ * @author xiaanming 
+ * 
+ */  
+public class View implements Drawable.Callback, KeyEvent.Callback, AccessibilityEventSource {  
+    /** 
+     * Listener used to dispatch click events. 
+     * This field should be made private, so it is hidden from the SDK. 
+     * {@hide} 
+     */  
+    protected OnClickListener mOnClickListener;  
+
+    /** 
+     * setOnClickListener()的参数是OnClickListener接口------&gt;背景三 
+     * Register a callback to be invoked when this view is clicked. If this view is not 
+     * clickable, it becomes clickable. 
+     * 
+     * @param l The callback that will run 
+     * 
+     * @see #setClickable(boolean) 
+     */  
+
+    public void setOnClickListener(OnClickListener l) {  
+        if (!isClickable()) {  
+            setClickable(true);  
+        }  
+        mOnClickListener = l;  
+    }  
+
+
+    /** 
+     * Call this view&apos;s OnClickListener, if it is defined. 
+     * 
+     * @return True there was an assigned OnClickListener that was called, false 
+     *         otherwise is returned. 
+     */  
+    public boolean performClick() {  
+        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);  
+
+        if (mOnClickListener != null) {  
+            playSoundEffect(SoundEffectConstants.CLICK);  
+
+            //这个不就是相当于B类调用A类的某个方法D，这个D就是所谓的回调方法咯  
+            mOnClickListener.onClick(this);  
+            return true;  
+        }  
+
+        return false;  
+    }  
+}  
+</code></pre><p>这个例子就是Android典型的回调机制，看完这个你是不是更进一步的理解了回调机制呢？ 线程run()也是一个回调方法，当执行Thread的start（）方法就会回调这个run()方法，还有处理消息都比较经典等等</p>
+<p>案例二、</p>
+<p>接口回调简单理解就是：类A中调用B类的中方法C，而B又反过去调用A中的方法D，然后D称为A的回调方法。是不是心中有一万只草泥马在奔腾，到底说的是什么。感觉像是你中有我，我中有你，纠缠不清。<br>举个通俗易懂的例子，比如顾客是A，厨师是B。面粉是接口Callback。然后面粉的吃法D是在顾客A的手中，厨师B有包子的做法C。现在需求是A有面粉，想吃包子，但是A是不会做包子，就需要去找厨师，让他调方法C做包子，A就把面粉Callback给了厨师，至于厨师怎么做，A不管，A只要你做好了给我一个结果（包子）就OK了。至于包子怎么吃，我是直接吃，还是蘸点醋吃，那是A的事了（A怎么吃的过程就是方法D里具体执行的代码）。<br>下面结合一个简单的例子看就容易多了。<br>首先是定义接口（面粉）：</p>
+<pre><code>package com.example.interfacecallbackdemo;
+public interface Callback {
+    //因为是一堆面粉，肯定是没法吃的，所以没有具体的方法体，俗称“吃法”
+    public void D(String result);
+}
+</code></pre><p>然后定义A类（客户）：</p>
+<pre><code>package com.example.interfacecallbackdemo;
+public class A implements Callback{
+    /**
+     * B类引用
+     */
+    private B b;
+    public A(B b) {
+        this.b = b;
     }
-    wechat.setPlatformActionListener(new PlatformActionListener() {
-        @Override
-        public void onComplete(Platform platform, int i, HashMap&lt;String, Object&gt; hashMap) {
-            Log.d(TAG, &quot;onComplete: &quot;+i+new Gson().toJson(hashMap));
+    /**
+     * A类通过该方法调用B的方法C（可理解为找到厨师并将面粉给他）。
+     */
+    public void selectMenu(){
+        b.C(this);
+    }
+    /**
+     * A类中的D方法，也称为A类的回调方法（厨师做好包子将包子（result）返回给顾客A）
+     */
+    @Override
+    public void D(String result) {
+        System.out.print(result);
+    }
 
-            if (i == Platform.ACTION_USER_INFOR) {
-                final PlatformDb platDB = platform.getDb();//获取数平台数据DB
-                //通过DB获取各种数据
-                platDB.getToken();
-                platDB.getUserGender();
-                platDB.getUserIcon();
-                platDB.getUserId();
-                platDB.getUserName();
+}
+</code></pre><p>然后是B类：</p>
+<pre><code>package com.example.interfacecallbackdemo;
+public class B {
+    /**
+     * B类的C方法（接受面粉Callback,然后开工做包子，做好后返回给客户A）。
+     */
+    public void C(Callback callback){
+        String result = &quot;2&quot;;
+        callback.D(result);
+    }
+}
+</code></pre><p>再加上一个执行的对象，我是利用android中button调用的：</p>
+<pre><code>package com.example.interfacecallbackdemo;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+public class MainActivity extends Activity implements OnClickListener{
+    private A a;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        findViewById(R.id.btn_main)
+        .setOnClickListener(this);
+        a = new A(new B());
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+        case R.id.btn_main:
+            a.selectMenu();
+            break;
+        default:
+            break;
+        }
 
-                Log.d(TAG, &quot;onComplete: &quot;+ platDB.getToken()+&quot;-&quot;+ platDB.getUserId()+&quot;-&quot;+ platDB.getUserName());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // platDB.getUserId()是唯一的
-                       //这里写你的业务逻辑，如网络请求
-// mPresenter.trilateralLogin(backType,platDB.getUserId(),platDB.getUserName(),
-//                          platDB.getUserIcon(),platDB.getUserGender(),LoginActivity.this);
-                    }
-                });
+    }
+}
+</code></pre><p>（ABCD分别对应什么自己脑补，很easy吧）前面说的是A 调用B中的方法C，B又反过来调用A中的方法D。在代码中我就直接用ABCD ,简单、直接、粗暴。<br>但是，B类的C方法的参数不必一定要把Callback作为参数，如果C方法中没有这个参数，那在B类中一定要在其它地方把Callback接收进来。比如，我把B类稍微改动一下：</p>
+<pre><code>package com.example.interfacecallbackdemo;
+public class B {
+    private Callback callback;
+
+    public B(Callback callback){
+        this.callback = callback;
+    }
+    /**
+     * B类的C方法
+     */
+    public void C(){
+        String result = &quot;2&quot;;
+        callback.D(result);
+    }
+}
+</code></pre><p>此时A类也要做相应的调整：</p>
+<pre><code>package com.example.interfacecallbackdemo;
+import android.util.Log;
+public class A {
+    /**
+     * B类引用
+     */
+    private B b;
+
+    /**
+     * A类同过该方法调用B类的C方法
+     */
+    public void selectMenu(){
+        b = new B(new Callback() {
+
+            @Override
+            public void D(String result) {
+                System.out.print(result);               
             }
-        }
-
-        @Override
-        public void onError(Platform platform, int i, Throwable throwable) {
-            Log.d(TAG, &quot;onError: &quot;+throwable.toString());
-        }
-
-        @Override
-        public void onCancel(Platform platform, int i) {
-            /**
-             * 给用户取消的提示
-             */
-        }
-    }); // 设置分享事件回调
-    wechat.authorize();//单独授权
-    wechat.showUser(null);
-}`
-</code></pre><p>然后在需要使用第三方登录的地方调用该方法即可</p>
-<p>如果此时报红，则用第一步教的那个方法，同步一下，就不报红了。</p>
-<p>此时</p>
-<p>QQ调用时，如：</p>
-<pre><code>thirdLogin(QQ.NAME,&quot;AndroidQQ&quot;);
-</code></pre><p>微信调用时，如：</p>
-<pre><code>thirdLogin(Wechat.NAME,&quot;AndroidWechat&quot;);
-</code></pre><p>微博调用时，如：</p>
-<pre><code>thirdLogin(SinaWeibo.NAME,&quot;Androidweibo&quot;);
-</code></pre><p>其中第一个参数的，如：QQ.NAME，是第三方规定的，不可随意更改，第二个参数，是来源，如果你后台的url不需要这个参数，直接删除即可，同时也在thirdLogin方法里面删除即可。</p>
-<p>附：查看应用签名的方法。</p>
-<p>用密钥打包apk，打包的时候，选择生成release版本，切记不要生成debug版本。<br><img src="http://img.blog.csdn.net/20171216094854974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>然后安装到手机中。</p>
-<p>同时安装下面提供的这个apk。打开这个apk，输入你的应用包名，点击生成，生成的这个就是你的安卓签名。<br><img src="http://img.blog.csdn.net/20171216095431251?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>注意这个是要用你发布app的那个密钥去生成apk，并且输入的包名和你发布的app的包名一致，满足这两个要求前提下，才能生成一致的安卓签名。</p>
-<p>安卓签名生成软件</p>
-<p><a href="http://download.csdn.net/download/weimeig/10161075" target="_blank" rel="noopener">http://download.csdn.net/download/weimeig/10161075</a></p>
-<p>项目Demo下载</p>
-<p><a href="http://download.csdn.net/download/weimeig/10161093" target="_blank" rel="noopener">http://download.csdn.net/download/weimeig/10161093</a></p>
+        });
+        b.C();
+    }
+}
+</code></pre><p>呃，这个算是标准版的变异版，其实也是很简单的，毕竟这种可能是大家项目中实际中会见到而不至于弄不清楚，但是有一点，C方法中一定会有接口的实例对象调用其抽象方法。其实我们不需要按接口回调的定义去对比，重要的是理解其原理机制，只需记住，哪个类传递Callback实例对象过去的，就是我们所说的A，接受的就是B。<br>接口回调在android中是非常常见的，典型的就是各种监听器了，如果去分析下源码，你就会发现跟上面得那个例子大同小异。 </p>
 
     </div>
 </article>
@@ -366,7 +636,7 @@ private void thirdLogin(String platformName,final String backType) {
 <script>
 	if(!window.commentConfig) {
       window.commentConfig = {}
-      window.commentConfig.title = 'Android第三方登录集成'
+      window.commentConfig.title = 'Java接口回调，Android接口回调读书笔记'
     }
 </script>
 
@@ -546,21 +816,21 @@ private void thirdLogin(String platformName,final String backType) {
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/2014/03/17/Android第三方登录集成/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2014/05/13/Java接口回调，Android接口回调读书笔记/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/2014/03/17/Android第三方登录集成/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2014/05/13/Java接口回调，Android接口回调读书笔记/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/2014/03/17/Android第三方登录集成/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2014/05/13/Java接口回调，Android接口回调读书笔记/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 8.435775435515701px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 11.87252219152709px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 18.960598113589647px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 13.815936196798912px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
