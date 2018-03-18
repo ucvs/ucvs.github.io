@@ -12,7 +12,7 @@
     
     
     
-    <title>tags: Android | 欢迎来到唯美的网站</title>
+    <title>AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法 | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,19 +198,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <article class="article well article-body" id="article-tag">
+                    
+<article class="article well article-body" id="article">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>标签</span>
+        <span>AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/tags/Android/index.html">Android</a>
+                <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
             </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2014-03-18
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -218,36 +237,49 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/tags/Android/index.html">Android</a>
+                    <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
                 </h4>
             </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2014-03-18
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
         </center>
     </div>
-    <div class="content-article" style="margin-top: 30px;">
-        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
-            
-            <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
-            <br>
-            
-            <a href="/2014/12/11/WeChatAlipayPaymentIntegration/">微信支付及支付宝支付集成</a>
-            <br>
-            
-            <a href="/2014/05/11/RetrofitReadingNotesOne/">Retrofit框架读书总结笔记（一）</a>
-            <br>
-            
-            <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
-            <br>
-            
-            <a href="/2014/03/18/AndroidThirdPartySharingIntegration/">Android第三方分享集成</a>
-            <br>
-            
-            <a href="/2014/03/17/AndroidThirdPartyLogonIntegration/">Android第三方登录集成</a>
-            <br>
-            
-            
-        </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>转帖请注明本文出自weimeig的博客（<a href="http://blog.csdn.net/weimeig/article/details/78854345" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/78854345</a>），请尊重他人的辛勤劳动成果，谢谢</p>
+<p>当出现AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码时，多数是因为Google被墙，导致gradle无法更新下来。</p>
+<p>解决的方法是，先在本地创建一个Android项目，然后找到<br><img src="http://img.blog.csdn.net/20171220161118028?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>随后再找到<br><img src="http://img.blog.csdn.net/20171220162252753?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>完成这两步的目的是，通过找到本地的gradle配置，将网上下载的不同配置的项目的gradle配置改成读本地配置，来解决Google被墙无法更新网上可行版本的问题。通常设置完这两个地方，再点击一下AndroidStudio上方工具栏里的BuiId下的Clean Project ，结束后点击RebuiId Project,然后再点击一下这个按钮，</p>
+<p><img src="http://img.blog.csdn.net/20171216094453965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>同步一下，问题就可以解决了</p>
+<p>一般来说，网上下载的项目更新慢，或编译器无代码提示，都是因为这个原因引起。</p>
+
     </div>
 </article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法'
+    }
+</script>
+
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -424,21 +456,21 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/tags/Android/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/tags/Android/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/tags/Android/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 11.242676970224297px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 15.489471971788417px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 12.455662221394043px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 18.728161289587998px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

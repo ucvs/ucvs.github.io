@@ -12,7 +12,7 @@
     
     
     
-    <title>tags: Android | 欢迎来到唯美的网站</title>
+    <title>OkHttp框架读书总结笔记 | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -198,19 +198,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <article class="article well article-body" id="article-tag">
+                    
+<article class="article well article-body" id="article">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>标签</span>
+        <span>OkHttp框架读书总结笔记</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/tags/Android/index.html">Android</a>
+                <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
             </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2015-02-11
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -218,36 +237,210 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/tags/Android/index.html">Android</a>
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
                 </h4>
             </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2015-02-11
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
         </center>
     </div>
-    <div class="content-article" style="margin-top: 30px;">
-        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
-            
-            <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
-            <br>
-            
-            <a href="/2014/12/11/WeChatAlipayPaymentIntegration/">微信支付及支付宝支付集成</a>
-            <br>
-            
-            <a href="/2014/05/11/RetrofitReadingNotesOne/">Retrofit框架读书总结笔记（一）</a>
-            <br>
-            
-            <a href="/2014/03/18/AndroidStudioImportCodeSlowAndNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
-            <br>
-            
-            <a href="/2014/03/18/AndroidThirdPartySharingIntegration/">Android第三方分享集成</a>
-            <br>
-            
-            <a href="/2014/03/17/AndroidThirdPartyLogonIntegration/">Android第三方登录集成</a>
-            <br>
-            
-            
-        </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>转帖请注明本文出自weimeig的博客（<a href="http://blog.csdn.net/weimeig/article/details/78656734" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/78656734</a>），请尊重他人的辛勤劳动成果，谢谢</p>
+<p>一、添加依赖</p>
+<p>build.gradle</p>
+<pre><code>dependencies {
+
+compile &apos;com.squareup.okhttp3:okhttp:3.2.0&apos;
+compile &apos;com.squareup.okio:okio:1.7.0&apos;
+
+  }
+</code></pre><p>权限:</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+</code></pre><p>HelloOkhttp</p>
+<pre><code>import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Created by Administrator on 2017/11/27.
+ */
+
+public class HelloOkhttp {
+    public static void main(String [] args) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().
+                url(&quot;http://www.baidu.com&quot;).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                System.out.println(response.body().string());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p>QueryHttp</p>
+<pre><code>import java.io.IOException;
+
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Created by Administrator on 2017/11/27.
+ */
+public class QueryHttp {
+
+    public static void main(String args[]) {
+
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl httpUrl = HttpUrl.parse(&quot;https://api.heweather.com/x3/weather&quot;).
+                newBuilder().
+                addQueryParameter(&quot;city&quot;, &quot;beijing&quot;).
+                addQueryParameter(&quot;key&quot;, &quot;d17ce22ec5404ed883e1cfcaca0ecaa7&quot;).
+                build();
+        String url = httpUrl.toString();
+        System.out.println(httpUrl.toString());
+        Request request = new Request.Builder().url(url).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                System.out.println(response.body().string());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+</code></pre><p>HeadHttp</p>
+<pre><code>import java.io.IOException;
+
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Created by Administrator on 2017/11/27.
+ */
+/**
+ * 请求头
+ */
+
+public class HeadHttp {
+    public static void HadeHttp(String url){
+        OkHttpClient client =new OkHttpClient();
+        Request request = new Request.Builder().url(url).
+                addHeader(&quot;User-Agent&quot;,&quot;from nate http&quot;).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if(response.isSuccessful()){
+                Headers headers = response.headers();
+                for(int i=0;i&lt;headers.size();i++){
+                    System.out.println(headers.name(i)+&quot;:&quot;+headers.value(i));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void main(String []args){
+        HadeHttp(&quot;http://www.baidu.com&quot;);
+    }
+}
+</code></pre><p>同步和异步请求比较</p>
+<pre><code>import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+/**
+ * Created by Administrator on 2017/11/27.
+ */
+
+/**同步
+ *
+ */
+public class AsyncHttp {
+    public static void SendHttp(String url){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()){
+                System.out.println(response.body().string());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *异步
+     *
+     */
+    public static void SendAsyncHttp(String url){
+        System.out.println(Thread.currentThread().getId());
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+
+        client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (response.isSuccessful()){
+                        System.out.println(Thread.currentThread().getId());
+                    }
+                }
+            });
+
+
+    }
+    public static void main(String [] args){
+
+        SendAsyncHttp(&quot;http://www.baidu.com&quot;);
+//        SendHttp(&quot;http://www.baidu.com&quot;);
+    }
+}
+</code></pre>
     </div>
 </article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'OkHttp框架读书总结笔记'
+    }
+</script>
+
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -424,21 +617,21 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/tags/Android/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2015/02/11/OkHttpReadingNotes/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/tags/Android/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2015/02/11/OkHttpReadingNotes/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/tags/Android/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2015/02/11/OkHttpReadingNotes/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 11.242676970224297px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 18.289884045961724px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 12.455662221394043px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 13.412607553310252px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
