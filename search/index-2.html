@@ -132,10 +132,22 @@
                 
                 
                 
-                <li class="">
-                    <a href="/categories">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-list"></i>分类
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
@@ -152,11 +164,7 @@
                         
                         
                         <li>
-                            <a href="/tags/Java/">Java</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/tags/C/">C</a>
+                            <a href="/tags/Android/">Android</a>
                         </li>
                         
                         
@@ -237,7 +245,7 @@
       	var [month, day] = article.date.split('-')
         ''
         ''
-        var defaultPreview = '/imgs/preview/preview2.jpg'
+        var defaultPreview = '/imgs/preview/preview3.jpg'
         var preview = article.preview ? article.preview : defaultPreview
         var path = '/' + article.path
         resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
@@ -429,19 +437,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/17/三方登录集成/">三方登录集成</a>
+                    <a href="/2018/03/17/Android第三方登录集成/">三方登录集成</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2018/03/16/第一篇/">第一篇</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2018/03/16/hello-world/">Hello World</a>
                 </span>
             </li>
             
@@ -463,19 +465,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/16/hello-world/">Hello World</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/03/16/第一篇/">第一篇</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/17/三方登录集成/">三方登录集成</a>
+                    <a href="/2018/03/17/Android第三方登录集成/">三方登录集成</a>
                 </span>
             </li>
             
@@ -500,9 +496,7 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Java/" style="font-size: 18.465512296622528px;" class="tag-cloud-link">Java</a>
-    
-    <a href="/tags/C/" style="font-size: 17.916304264117745px;" class="tag-cloud-link">C</a>
+    <a href="/tags/Android/" style="font-size: 10.998823195706857px;" class="tag-cloud-link">Android</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
