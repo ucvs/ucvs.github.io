@@ -12,7 +12,7 @@
     
     
     
-    <title>search | 欢迎来到唯美的网站</title>
+    <title>Android第三方分享集成 | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -190,183 +190,143 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <!-- 搜索页面(尽可能接近ZanBlog搜索功能) -->
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Android第三方分享集成</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2014/03/18/Android第三方分享集成/">Android第三方分享集成</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2014-03-18
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2014/03/18/Android第三方分享集成/">Android第三方分享集成</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2014-03-18
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>转帖请注明本文出自weimeig的博客（<a href="http://blog.csdn.net/weimeig/article/details/78818943" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/78818943</a>），请尊重他人的辛勤劳动成果，谢谢</p>
+<p>一、环境集成</p>
+<p>二、调用方法</p>
+<p>一、环境集成</p>
+<p>请看我的另一篇文章，里面详尽的介绍了整个集成的流程。分享只是在那个前提下多写一个分享的方法。</p>
+<p>文章链接：<a href="http://download.csdn.net/download/weimeig/10161093" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/78818085</a></p>
+<p>二、调用方法</p>
+<pre><code>`/**
+ * 第三方分享方法
+ * Created by weimei on 2017/12/16.
+ * Email:ucvs@qq.com
+ */
+public void share(){
+    OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
 
-<!-- search自定义页面 -->
-<script type="text/javascript">
+        // 分享时Notification的图标和文字  2.5.9以后的版本不     调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle(&quot;分享&quot;);
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl(&quot;http://blog.csdn.net/weimeig&quot;);
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(&quot;我是分享文本&quot;);
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImageUrl(&quot;http://www.ld12.com/upimg358/20160130/23120952396496.jpg&quot;);//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl(&quot;http://blog.csdn.net/weimeig&quot;);
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment(&quot;我是测试评论文本&quot;);
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl(&quot;http://blog.csdn.net/weimeig&quot;);
+        oks.setCallback(new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap&lt;String, Object&gt; hashMap) {
+                /**
+                 * 不得到优惠券
+                 */
+                //分享成功逻辑在这里处理
+            }
 
-	var htmlEntityMap = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		'\'': '&#39;',
-		'/': '&#x2F;'
-	};
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+                //分享失败逻辑在这里处理
+            }
 
-	// 参照hexo过滤html的方法(事实上感觉静态也没什么可以过滤的)
-	function escapeKey(str) {
-		if (typeof str !== 'string') throw new TypeError('str must be a string!');
+            @Override
+            public void onCancel(Platform platform, int i) {
+                //分享取消逻辑在这里处理
+            }
+        });
+        // 启动分享GUI
+        oks.show(this);
+}`
+</code></pre><p>调用时候，在调用的地方使用</p>
+<pre><code>share();
+</code></pre><p>即可</p>
+<p>如果分享的图标和渠道，不想要那么多，在项目下的app文件夹下的libs文件夹内删除对应的jar包即可。</p>
+<p>例如不想要微信分享，直接删除ShareSDK-Wechat-Favorite-3.1.2.jar这个jar包，分享的时候就没有这个图标和对应的分享渠道了。<br><img src="http://img.blog.csdn.net/20171216114731949?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>项目Demo下载</p>
+<p><a href="http://download.csdn.net/download/weimeig/10161093" target="_blank" rel="noopener">http://download.csdn.net/download/weimeig/10161093</a></p>
 
-		// http://stackoverflow.com/a/12034334
-		return str.replace(/[&<>"'\/]/g, function(a) {
-			return htmlEntityMap[a];
-		});
-	}
+    </div>
+</article>
 
-	var query = decodeURIComponent(window.location.search).substring(1).split('&')
-    // 获取搜索关键词
-    var s = escapeKey(query[0].split('=')[1])
-    // 获取当前页数
-    var p = query.length > 1 ? query[1].split('=')[1] : 1
-    // 获取每页的页码数
-    var pageSize = '10'
-    var useLeancloud = 'uObC0YFS5lY314GTLGc6hTtg'
-    $.getJSON('/content.json', function (json) {
-      $('#search-breadcrumb').append(`搜索'${s}'的结果`)
-      var result = getArticles(s, 'posts', json).concat(getArticles(s, 'pages', json))
-      if (result.length === 0 || result.length <= (p - 1) * pageSize) {
-      	// TODO 显示404页面
-      } else {
-        displaySearchResult(result.slice((p - 1) * pageSize, p * pageSize))
-        displayPagination(result)
-      }
-    })
 
-    function getArticles(val, type, json) {
-      return json[type].filter((e) => {
-        return e.title.indexOf(val) !== -1 || e.text.indexOf(val) !== -1
-      })
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Android第三方分享集成'
     }
-
-    function displaySearchResult(result) {
-      var resultList = $('#article-list')
-      result.forEach(function (article) {
-      	var [month, day] = article.date.split('-')
-        ''
-        ''
-        var defaultPreview = '/imgs/preview/preview4.jpg'
-        var preview = article.preview ? article.preview : defaultPreview
-        var path = '/' + article.path
-        resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-                                <div class="data-article hidden-xs">
-                                    <span class="month">${month}月</span>
-                                    <span class="day">${day}</span>
-                                </div>
-                                <section class="hidden-xs">
-                                    <div class="title-article">
-                                        <h1>
-                                            <a href="${path}">
-                                                <span>${article.title}</span>
-                                            </a>
-                                        </h1>
-                                    </div>
-                                    <div class="tag-article">
-                                        ${ useLeancloud ? '<span class="label label-gal"><i class="fa fa-eye"></i></span>' : ''}
-                                        <span class="label label-gal">
-                                            <i class="fa fa-comments"></i>
-                                            <a href="${path}#comments">739</a>
-                                        </span>
-                                    </div>
-                                    <div class="alert alert-gal article-body content-article">
-                                         <div class="item">
-                                            <a href="${path}">
-                                                <div class="img">
-                                                    <img src="${preview}" alt="${article.title}">
-                                                </div>
-                                                <div class="info">
-                                                    <p>${article.excerpt}</p>
-                                                </div>
-                                            </a>
-                                         </div>
-					                </div>
-					            </section>
-                           </div>`)
-      })
-      if (useLeancloud) {
-        var Counter = AV.Object.extend('Counter')
-        showPostsTime(Counter)
-      }
-    }
-
-    function displayPagination(result) {
-      var pgContainer = $('#gal-pagination')
-      var pg = $(pgContainer.find('.pagination-gal')[0])
-      if(result.length > 0) {
-        pgContainer.css('display', 'block')
-      }
-      var num = Math.ceil(result.length / pageSize)
-      var root = '/search'
-      var link = root + `/index.html?s=${s}`
-      if(p > 1) {
-      	pg.append(`<li class="prev"><a href="${link}&page=${p-1}">«</a></li>`)
-      }
-      if(p > 7) {
-      	pg.append(`<li><a href="${link}">1</a></li>
-                   <li><span>...</span></li>`)
-        for(var i = p - 3; i < p; i++) {
-          pg.append(`<li><a href="${link}&page=${i}">${i}</a></li>`)
-        }
-      } else {
-      	for(var j = 1; j < p; j++) {
-          pg.append(`<li><a href="${link}${j === 1 ? '' : `&page=${j}`}">${j}</a></li>`)
-        }
-      }
-      pg.append(`<li class="current"><span>${p}</span></li>`)
-      if(p + 7 < num) {
-      	for(var i = p + 1; i <= p + 3; i++) {
-          pg.append(`<li><a href="${link}&page=${i}">${i}</a></li>`)
-        }
-        pg.append(`<li><span>...</span></li>`)
-      } else {
-      	for(var j = p + 1; j <= num; j++) {
-          pg.append(`<li><a href="${link}&page=${j}">${j}</a></li>`)
-        }
-      }
-      if(p < num) {
-      	pg.append(`<li class="next"><a href="${link}&page=${p+1}">»</a></li>`)
-      }
-    }
-
-    // 很挫地定义了多一次, 到时再改了...
-    function showPostsTime(Counter) {
-      var entries = []
-      var excerpts = $('.article-excerpt')
-      excerpts.each(function () {
-        entries.push($(this).find('.title-article').first().find('a').attr('href').trim())
-      })
-      var query = new AV.Query(Counter)
-      query.containedIn('url', entries)
-      query.find().then(function (result) {
-        excerpts.each(function () {
-          var href = $(this).find('.title-article').first().find('a').attr('href').trim()
-          var r = result.filter(function (e) {
-            return e.get('url') === href
-          })
-          if(r.length > 0) {
-            $(this).find('i.fa-eye').each(function () {
-              $(this).after(' ' + r[0].get('time') + ' ℃')
-            })
-          } else {
-            $(this).find('i.fa-eye').each(function () {
-              $(this).after(' 0 ℃')
-            })
-          }
-        })
-      }).then(function (error) {
-        console.log('Error:' + error.code + ' ' + error.message)
-      })
-    }
-
 </script>
-<div class="breadcrumb breadcrumb-gal" id="search-breadcrumb">
-    <i class="fa fa-home"></i>
-</div>
-<div id="article-list"></div>
-<div id="gal-pagination" class="clearfix" style="display: none;">
-    <ul class="pagination pagination-gal pull-right"></ul>
-</div>
-<!-- 404页面 -->
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -532,19 +492,19 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/search/index-2.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2014/03/18/Android第三方分享集成/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/search/index-2.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2014/03/18/Android第三方分享集成/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/search/index-2.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2014/03/18/Android第三方分享集成/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 13.653789465589053px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 14.010572541629731px;" class="tag-cloud-link">Android</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

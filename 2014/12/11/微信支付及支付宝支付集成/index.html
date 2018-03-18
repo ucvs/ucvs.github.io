@@ -12,7 +12,7 @@
     
     
     
-    <title>search | 欢迎来到唯美的网站</title>
+    <title>微信支付及支付宝支付集成 | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -190,183 +190,268 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <!-- 搜索页面(尽可能接近ZanBlog搜索功能) -->
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>微信支付及支付宝支付集成</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2014/12/11/微信支付及支付宝支付集成/">微信支付及支付宝支付集成</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2014-12-11
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2014/12/11/微信支付及支付宝支付集成/">微信支付及支付宝支付集成</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2014-12-11
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>文章转载自互联网</p>
+<p>1.微信支付</p>
+<p><a href="https://link.jianshu.com/?t=https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=1417751808&amp;token=&amp;lang=zh_CN" target="_blank" rel="noopener">1.微信官方的集成文档</a> <a href="https://link.jianshu.com/?t=https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419319167&amp;lang=zh_CN" target="_blank" rel="noopener">2.微信官方资源下载</a></p>
+<p>首先官方文档实在是没有看懂，里面有很多东西都没有提及到，反正当时我看的时候就没有看懂可能是能力有限吧！</p>
+<p>先说一下我们这边的需求吧，我们这边订单处理是在服务器，没有在app内进行，一些字段都是从服务器返回的，这里只要请求之后，唤起微信支付就算是完成了，还是很简单的一个操作，下面我们就一步一步往下说吧！<br>集成步骤如下：<br>1.首先就是导入最新的SDK，这个从<a href="https://link.jianshu.com/?t=https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419319167&amp;lang=zh_CN" target="_blank" rel="noopener">微信官方资源下载</a>处就可以下载（这里就不说了）<br>2.添加必要的权限</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
 
-<!-- search自定义页面 -->
-<script type="text/javascript">
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;
 
-	var htmlEntityMap = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		'\'': '&#39;',
-		'/': '&#x2F;'
-	};
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;
 
-	// 参照hexo过滤html的方法(事实上感觉静态也没什么可以过滤的)
-	function escapeKey(str) {
-		if (typeof str !== 'string') throw new TypeError('str must be a string!');
+&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;
 
-		// http://stackoverflow.com/a/12034334
-		return str.replace(/[&<>"'\/]/g, function(a) {
-			return htmlEntityMap[a];
-		});
-	}
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
+</code></pre><p>3.创建一个wxapi的包并且创建一个WXEntryActivity类<br>这里有几点要注意以下：</p>
+<p>1.首先这个包必须在你项目的根目录下创建的，例如应用程序的包名为net.sourceforge.simcpux，则新添加的应该在net.sourceforge.simcpux.wxapi下面）</p>
+<p>2.在AndroidManifest中添加相应的标签</p>
+<pre><code>&lt;activity
+    android:name=&quot;.wxapi.WXEntryActivity&quot;
+    android:configChanges=&quot;keyboardHidden|orientation|screenSize&quot;
+    android:exported=&quot;true&quot;
+    android:screenOrientation=&quot;portrait&quot;
+    android:theme=&quot;@android:style/Theme.Translucent.NoTitleBar&quot;/&gt;
+</code></pre><p>4.关于APPID存放问题</p>
+<p>关于这个APPID的存放，因为做了分享，所以我就直接存放到本地了的静态字段中了，还有就是从服务器请求，其实从服务器请求我有一点我不太明白之后再说！<br>5.创建一个WXPayEntryActivity类</p>
+<p>创建的这个类我就直接放在wxapi中了，不知都放在别的地方会不会有什么问题，没有尝试过。<br>这个类就是用来支付回调的类了。<br>关于这个类有几点说明：</p>
+<p>1.这个类是集成Activity的实现IWXAPIEventHandler接口的，别忘了在AndroidManifest注册，否则不走回调的！</p>
+<pre><code>&lt;activity
+   android:name=&quot;.wxapi.WXPayEntryActivity&quot;
+   android:exported=&quot;true&quot;
+   android:launchMode=&quot;singleTop&quot;/&gt;
+</code></pre><p>2.在onCreat()方法中要注册到微信，这里要注意这个是你微信成功签名的那个APPID</p>
+<pre><code>private IWXAPI api;
 
-	var query = decodeURIComponent(window.location.search).substring(1).split('&')
-    // 获取搜索关键词
-    var s = escapeKey(query[0].split('=')[1])
-    // 获取当前页数
-    var p = query.length > 1 ? query[1].split('=')[1] : 1
-    // 获取每页的页码数
-    var pageSize = '10'
-    var useLeancloud = 'uObC0YFS5lY314GTLGc6hTtg'
-    $.getJSON('/content.json', function (json) {
-      $('#search-breadcrumb').append(`搜索'${s}'的结果`)
-      var result = getArticles(s, 'posts', json).concat(getArticles(s, 'pages', json))
-      if (result.length === 0 || result.length <= (p - 1) * pageSize) {
-      	// TODO 显示404页面
-      } else {
-        displaySearchResult(result.slice((p - 1) * pageSize, p * pageSize))
-        displayPagination(result)
-      }
-    })
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      //这里面的APPID就是存放在本地的微信的ID
+      api = WXAPIFactory.createWXAPI(this, Constants.ACCOUNT.APP_ID);
+      api.handleIntent(getIntent(), this);
+  }
+</code></pre><p>3.在onResp(BaseResp resp)方法中处理回调数据，也就是处理回调失败啊，成功啊什么的！</p>
+<pre><code>@Override
+public void onResp(BaseResp resp) {
+    Logger.e(&quot;WXPayEntryActivity回调微信支付的结果errCode = &quot; + resp.errCode);
+    if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+        int errCode = resp.errCode;
+        if (errCode == -1) {/*支付失败*/
+            Toast.makeText(this, &quot;支付失败&quot;, Toast.LENGTH_LONG).show();
+        } else if (errCode == 0) {/*支付成功*/
+            Toast.makeText(this, &quot;支付成功&quot;, Toast.LENGTH_SHORT).show();
+            EventBusUtils.post(new EventBusWechatGoldBean());
+        } else if (errCode == -2) {/*取消支付*/
+            Toast.makeText(this, &quot;取消支付&quot;, Toast.LENGTH_LONG).show();
+        }
+        finish();
+    }
+}
+</code></pre><p>6.之后就可以在相应的地方从服务器获取相应的参数调用微信支付了</p>
+<p>调用的代码如下：</p>
+<pre><code>  /**
+     * 唤起微信充值界面
+     */
+private void payWechat(WechatGoldBean wechatGoldBean) {
+    PayReq req = new PayReq();
+    req.appId = wechatGoldBean.getAppid();
+    req.partnerId = wechatGoldBean.getPartnerid();
+    req.prepayId = wechatGoldBean.getPrepayid();
+    req.nonceStr = wechatGoldBean.getNoncestr();
+    req.timeStamp = wechatGoldBean.getTimestamp();
+    req.packageValue = &quot;Sign=WXPay&quot;;
+    req.sign = wechatGoldBean.getSign();
 
-    function getArticles(val, type, json) {
-      return json[type].filter((e) => {
-        return e.title.indexOf(val) !== -1 || e.text.indexOf(val) !== -1
-      })
+    IWXAPI api = WXAPIFactory.createWXAPI(mContext, wechatGoldBean.getAppid());
+    api.sendReq(req);
+}
+</code></pre><p>这里WechatGoldBean是从服务器请求来的实体类，这里面封装了关于微信支付的所有订单信息，这样做的好处就是生成订单服务器做比较安全，第二也省去了自己的麻烦。<br>到了这里基本上都能唤起微信支付了<br>常见问题：</p>
+<p>关于微信的签名要说明的问题：<br>首先按照微信的签名的话，一般步骤都可以往下走，但是有一点需要注意就是签完名之后，如果你打包成正式版的话也就是releasea签名的话要用正式的包安装才能唤起微信，否则会出错的，如果要是想使用Dug签名的话，你要把签名后的keystore替换掉android studio的默认签名就可以使用了。<br>关于微信支付能只能想到这么多了，基本上集成就这么多问题，有什么不懂得欢迎在下方留言，看到了我会第一时间回复！！！<br>2.支付宝支付</p>
+<p><a href="https://link.jianshu.com/?t=https://docs.open.alipay.com/204/105296/" target="_blank" rel="noopener">1.支付宝官方集成文档</a><br><a href="https://link.jianshu.com/?t=https://docs.open.alipay.com/54/104509" target="_blank" rel="noopener">2.支付宝官方资源下载</a></p>
+<p>其实支付宝支付的话还是比较简单的按照Demo集成的话基本上没有什么问题就是导入几个类就可以了。</p>
+<p>还是先说一下我们这边的需求，还是订单处理在服务器这边，没有在app内进行，一些字段都是从服务器返回的，这里只要请求之后，唤起支付宝支付就算完成了，比较简单，下面一步一步往下说吧！<br>集成步骤如下：<br>1.首先就是导入最新的SDK，这个从<a href="https://link.jianshu.com/?t=https://docs.open.alipay.com/54/104509" target="_blank" rel="noopener">支付宝官方资源下载</a>处就可以下载（这里就不说了）<br>2.添加必要的权限</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+</code></pre><p>3.在AndroidManifest中添加相应的标签</p>
+ <!-- 支付宝H5页面支付用的 -->
+<pre><code>&lt;activity
+    android:name=&quot;com.alipay.sdk.app.H5PayActivity&quot;
+    android:configChanges=&quot;orientation|keyboardHidden|navigation&quot;
+    android:exported=&quot;false&quot;
+    android:screenOrientation=&quot;behind&quot; &gt;
+&lt;/activity&gt;
+</code></pre> <!-- 支付宝App支付页面用的 -->
+<pre><code>&lt;activity
+    android:name=&quot;com.alipay.sdk.auth.AuthActivity&quot;
+    android:configChanges=&quot;orientation|keyboardHidden|navigation&quot;
+    android:exported=&quot;false&quot;
+    android:screenOrientation=&quot;behind&quot; &gt;
+ &lt;/activity&gt;
+</code></pre><p>4.支付接口调用</p>
+<p>这里说明一下，支付宝调用的时候必须在异步线程中调用！切记</p>
+<pre><code>  public void payAlipay(final ALipayGoldBean aLipayGoldBean) {
+        Runnable payRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            PayTask alipay = new PayTask((DiamondActivity) mContext);
+            Map&lt;String, String&gt; result = alipay.payV2(aLipayGoldBean.getPayInfo(), true);
+
+            Message msg = new Message();
+            msg.what = SDK_PAY_FLAG;
+            msg.obj = result;
+            mHandler.sendMessage(msg);
+        }
+    };
+
+    Thread payThread = new Thread(payRunnable);
+    payThread.start();
+}
+</code></pre><p>这里说明一下：这个ALipayGoldBean是从服务器请求过来的，里面就一个payInfo参数，其实就是payV2()所需要的定单的信息(orderInfo)！<br>5.支付结果的处理</p>
+<p>官方文档上说有两种处理方式，但是作为APP我只按第一种处理方式进行的，第二种没有研究！</p>
+<pre><code> private Handler mHandler = new Handler() {
+    @Override
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+            case SDK_PAY_FLAG:
+                @SuppressWarnings(&quot;unchecked&quot;)
+                PayResult payResult = new PayResult((Map&lt;String, String&gt;) msg.obj);
+                String resultStatus = payResult.getResultStatus();
+                // 判断resultStatus 为9000则代表支付成功
+                if (TextUtils.equals(resultStatus, &quot;9000&quot;)) {/*支付成功*/                        Toast.makeText(mContext, &quot;支付成功&quot;, Toast.LENGTH_SHORT).show();
+                } else {/*支付失败*/
+                    Toast.makeText(mContext, &quot;支付失败&quot;, Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+};
+</code></pre><p>这里有几点说明的问题：<br>1.这个PayResult从Demo中直接复制过来就行，要不没有的；<br>如果你不想复制，好的在下面：</p>
+<pre><code>public class PayResult {
+    private String resultStatus;
+    private String result;
+    private String memo;
+
+    public PayResult(Map&lt;String, String&gt; rawResult) {
+        if (rawResult == null) {
+            return;
+        }
+
+        for (String key : rawResult.keySet()) {
+            if (TextUtils.equals(key, &quot;resultStatus&quot;)) {
+                resultStatus = rawResult.get(key);
+            } else if (TextUtils.equals(key, &quot;result&quot;)) {
+                result = rawResult.get(key);
+            } else if (TextUtils.equals(key, &quot;memo&quot;)) {
+                memo = rawResult.get(key);
+            }
+        }
     }
 
-    function displaySearchResult(result) {
-      var resultList = $('#article-list')
-      result.forEach(function (article) {
-      	var [month, day] = article.date.split('-')
-        ''
-        ''
-        var defaultPreview = '/imgs/preview/preview4.jpg'
-        var preview = article.preview ? article.preview : defaultPreview
-        var path = '/' + article.path
-        resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-                                <div class="data-article hidden-xs">
-                                    <span class="month">${month}月</span>
-                                    <span class="day">${day}</span>
-                                </div>
-                                <section class="hidden-xs">
-                                    <div class="title-article">
-                                        <h1>
-                                            <a href="${path}">
-                                                <span>${article.title}</span>
-                                            </a>
-                                        </h1>
-                                    </div>
-                                    <div class="tag-article">
-                                        ${ useLeancloud ? '<span class="label label-gal"><i class="fa fa-eye"></i></span>' : ''}
-                                        <span class="label label-gal">
-                                            <i class="fa fa-comments"></i>
-                                            <a href="${path}#comments">739</a>
-                                        </span>
-                                    </div>
-                                    <div class="alert alert-gal article-body content-article">
-                                         <div class="item">
-                                            <a href="${path}">
-                                                <div class="img">
-                                                    <img src="${preview}" alt="${article.title}">
-                                                </div>
-                                                <div class="info">
-                                                    <p>${article.excerpt}</p>
-                                                </div>
-                                            </a>
-                                         </div>
-					                </div>
-					            </section>
-                           </div>`)
-      })
-      if (useLeancloud) {
-        var Counter = AV.Object.extend('Counter')
-        showPostsTime(Counter)
-      }
+    @Override
+    public String toString() {
+        return &quot;resultStatus={&quot; + resultStatus + &quot;};memo={&quot; + memo
+                + &quot;};result={&quot; + result + &quot;}&quot;;
     }
 
-    function displayPagination(result) {
-      var pgContainer = $('#gal-pagination')
-      var pg = $(pgContainer.find('.pagination-gal')[0])
-      if(result.length > 0) {
-        pgContainer.css('display', 'block')
-      }
-      var num = Math.ceil(result.length / pageSize)
-      var root = '/search'
-      var link = root + `/index.html?s=${s}`
-      if(p > 1) {
-      	pg.append(`<li class="prev"><a href="${link}&page=${p-1}">«</a></li>`)
-      }
-      if(p > 7) {
-      	pg.append(`<li><a href="${link}">1</a></li>
-                   <li><span>...</span></li>`)
-        for(var i = p - 3; i < p; i++) {
-          pg.append(`<li><a href="${link}&page=${i}">${i}</a></li>`)
-        }
-      } else {
-      	for(var j = 1; j < p; j++) {
-          pg.append(`<li><a href="${link}${j === 1 ? '' : `&page=${j}`}">${j}</a></li>`)
-        }
-      }
-      pg.append(`<li class="current"><span>${p}</span></li>`)
-      if(p + 7 < num) {
-      	for(var i = p + 1; i <= p + 3; i++) {
-          pg.append(`<li><a href="${link}&page=${i}">${i}</a></li>`)
-        }
-        pg.append(`<li><span>...</span></li>`)
-      } else {
-      	for(var j = p + 1; j <= num; j++) {
-          pg.append(`<li><a href="${link}&page=${j}">${j}</a></li>`)
-        }
-      }
-      if(p < num) {
-      	pg.append(`<li class="next"><a href="${link}&page=${p+1}">»</a></li>`)
-      }
+    /**
+     * @return the resultStatus
+     */
+    public String getResultStatus() {
+        return resultStatus;
     }
 
-    // 很挫地定义了多一次, 到时再改了...
-    function showPostsTime(Counter) {
-      var entries = []
-      var excerpts = $('.article-excerpt')
-      excerpts.each(function () {
-        entries.push($(this).find('.title-article').first().find('a').attr('href').trim())
-      })
-      var query = new AV.Query(Counter)
-      query.containedIn('url', entries)
-      query.find().then(function (result) {
-        excerpts.each(function () {
-          var href = $(this).find('.title-article').first().find('a').attr('href').trim()
-          var r = result.filter(function (e) {
-            return e.get('url') === href
-          })
-          if(r.length > 0) {
-            $(this).find('i.fa-eye').each(function () {
-              $(this).after(' ' + r[0].get('time') + ' ℃')
-            })
-          } else {
-            $(this).find('i.fa-eye').each(function () {
-              $(this).after(' 0 ℃')
-            })
-          }
-        })
-      }).then(function (error) {
-        console.log('Error:' + error.code + ' ' + error.message)
-      })
+    /**
+     * @return the memo
+     */
+    public String getMemo() {
+        return memo;
     }
 
+    /**
+     * @return the result
+     */
+    public String getResult() {
+        return result;
+    }
+}
+</code></pre><p>2.关于Handler内存泄漏的问题，自己可以改的，如果改不了百度一下就可以了。<br>至此支付宝支付就算集成完毕了，是不是很简单！<br>作为小白的我们真的要多学习，多看别人的代码，学习这个东西就是这样，不论什么天才和小白，没有什么捷径可以走，只有不断的学习才能跟得上时代，不被淘汰！<br>座右铭：只有自己强大才能无所畏惧！</p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = '微信支付及支付宝支付集成'
+    }
 </script>
-<div class="breadcrumb breadcrumb-gal" id="search-breadcrumb">
-    <i class="fa fa-home"></i>
-</div>
-<div id="article-list"></div>
-<div id="gal-pagination" class="clearfix" style="display: none;">
-    <ul class="pagination pagination-gal pull-right"></ul>
-</div>
-<!-- 404页面 -->
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -532,19 +617,19 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/search/index-2.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2014/12/11/微信支付及支付宝支付集成/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/search/index-2.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2014/12/11/微信支付及支付宝支付集成/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/search/index-2.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2014/12/11/微信支付及支付宝支付集成/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 13.653789465589053px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 16.839245342072715px;" class="tag-cloud-link">Android</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
