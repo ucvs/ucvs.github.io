@@ -12,7 +12,7 @@
     
     
     
-    <title>404 | 欢迎来到唯美的网站</title>
+    <title>欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -200,19 +200,49 @@
                 <div class="col-md-8 gal-right" id="mainstay">
                     <!-- 搜索页面(尽可能接近ZanBlog搜索功能) -->
 
-<!-- 404 自定义页面 -->
-<!DOCTYPE html>
-<html lang="en">
-<head>]\
-	
-	<meta charset="UTF-8">
-	<title>404</title>
-</head>
-<body>
-	<script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
-</body>
-</html>
-<!-- 有其他想自定义的page在这里添加判断条件, 并且写好对应的模板渲染文件 -->
+
+<article class="article well article-body" id="article">
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/404.html"></a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-03-20
+            </span>
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/404.html"></a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-03-20
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = ''
+    }
+</script>
+
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -359,19 +389,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2015/03/20/AbstractClass/">AbstractClass</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
                 </span>
             </li>
             
@@ -383,13 +401,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
+                    <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
                 </span>
             </li>
             
@@ -401,13 +419,25 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/23/Multithreading/">Multithreading</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
                 </span>
             </li>
             
@@ -426,21 +456,21 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/404/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/404.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/404/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/404.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/404/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/404.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 15.610217523938287px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 10.50165324427621px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 16.342767939872747px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 18.017954669411584px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
