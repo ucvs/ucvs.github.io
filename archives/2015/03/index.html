@@ -12,7 +12,7 @@
     
     
     
-    <title>toString方法 | 欢迎来到唯美的网站</title>
+    <title>archive_a | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -123,7 +123,7 @@
                 
                 
                 
-                <li class="">
+                <li class="current">
                     <a href="/archives">
                         <i class="fa fa-archive"></i>归档
                     </a>
@@ -198,38 +198,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    
-<article class="article well article-body" id="article">
+                    <article class="article well article-body" id="article-archive">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>toString方法</span>
+        <span>归档</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/2018/03/19/Java-toString/">toString方法</a>
+                <a href="/archives">归档</a>
             </h1>
-        </div>
-        <div class="tag-article">
-            
-            <span class="label label-gal">
-                <i class="fa fa-tags"></i>
-                
-                <a href="/tags/Java/">Java</a>
-                
-            </span>
-            
-            <span class="label label-gal">
-                <i class="fa fa-calendar"></i> 2018-03-19
-            </span>
-            
-            <span class="label label-gal">
-                <i class="fa fa-eye"></i>
-            </span>
-            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -237,76 +218,60 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/2018/03/19/Java-toString/">toString方法</a>
+                    <a href="/archives">归档</a>
                 </h4>
             </div>
-            <p>
-                <i class="fa fa-calendar"></i> 2018-03-19
-            </p>
-            <p>
-                
-                <i class="fa fa-tags"></i>
-                
-                <a href="/tags/Java/">Java</a>
-                
-                
-                
-                <i class="fa fa-eye"></i>
-                
-            </p>
         </center>
     </div>
-    <div class="content-article">
-        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
-<p>转帖请注明本文出自weimeig的博客（<a href="http://blog.csdn.net/weimeig/article/details/79497172" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/79497172</a>），请尊重他人的辛勤劳动成果，谢谢</p>
-<p>应朋友们反馈的JAVA基础薄弱的问题，决定出一套完整的JAVA基础教程，帮助大家复习，巩固JAVA基础，今天要讲的是toString方法。</p>
-<pre><code>public class toStringFangFa {  
-    public static void main(String []args){  
-        System.out.println(new String(&quot;你好&quot;));  
-    }  
-
-}  
-</code></pre><p>我们不难发现，在这行代码中，我们找不到字符串的时候，直接new的一个String传你好进去，他可以正常打印运行，因为在java中，我们尽管没有调用toString方法，当他给我们默认的调用了，出现的效果和我们的</p>
-<pre><code>public class toStringFangFa {  
-    public static void main(String []args){  
-        System.out.println(new String(&quot;你好&quot;).toString());  
-    }  
-
-}  
-</code></pre><p>是一样的。</p>
-<p>好了，大家可以继续练习一下。</p>
-<pre><code>class Ca{  
-    String name;  
-    int avg;  
-    public String toString(){  
-        return &quot;我的名字&quot; + name + &quot;,我的年龄&quot; + avg;  
-    }  
-}  
-public class toStringFangFa {  
-
-
-    public static void main(String []args){  
-        Ca ca = new Ca();  
-        ca.name = &quot;张三&quot;;  
-        ca.avg = 18;  
-        System.out.println(ca);  
-    }  
-
-}  
-</code></pre>
+    <div class="content-article" style="margin-top: 30px;">
+        
+        
+            <h1 style="font-size: 24px; margin-top: 40px;">2015年</h1>
+            
+        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+            
+             
+             
+                        <a href="/2015/03/19/Java-toString/">toString方法</a>
+                        <br>
+            
+             
+                        <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                        <br>
+            
+             
+                        </div>
+                    <h1 style="font-size: 24px; margin-top: 40px;">2014年</h1>
+                    <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+                 
+             
+                        <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
+                        <br>
+            
+             
+                        <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                        <br>
+            
+             
+                        <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                        <br>
+            
+             
+                        <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
+                        <br>
+            
+             
+                        <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
+                        <br>
+            
+                    </div>
+        
     </div>
 </article>
-
-
-<div id="comments-template"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script>
-	if(!window.commentConfig) {
-      window.commentConfig = {}
-      window.commentConfig.title = 'toString方法'
-    }
-</script>
-
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -376,7 +341,7 @@ public class toStringFangFa {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/19/Java-toString/">toString方法</a>
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
                 </span>
             </li>
             
@@ -440,19 +405,13 @@ public class toStringFangFa {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
+                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
                 </span>
             </li>
             
@@ -464,13 +423,19 @@ public class toStringFangFa {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/19/Java-toString/">toString方法</a>
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
                 </span>
             </li>
             
@@ -495,21 +460,21 @@ public class toStringFangFa {
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/2018/03/19/Java-toString/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/archives/2015/03/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/2018/03/19/Java-toString/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/archives/2015/03/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/2018/03/19/Java-toString/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/archives/2015/03/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 13.116375114844097px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 18.124929308842628px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 18.464812734425276px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 19.94590229523275px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
