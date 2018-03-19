@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="weimei">
+    
+    
+    
+    
+    
+    
+    <title>Multithreading | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Multithreading</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2015/04/23/Multithreading/">Multithreading</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2015-04-23
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2015/04/23/Multithreading/">Multithreading</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2015-04-23
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>转帖请注明本文出自weimeig的博客（<a href="http://blog.csdn.net/weimeig/article/details/79510581" target="_blank" rel="noopener">http://blog.csdn.net/weimeig/article/details/79510581</a>），请尊重他人的辛勤劳动成果，谢谢</p>
+<p>应朋友们反馈的JAVA基础薄弱的问题，决定出一套完整的JAVA基础教程，帮助大家复习，巩固JAVA基础，今天要讲的是多线程。</p>
+<p>创建线程的第一种方法，创建线程的类。</p>
+<pre><code>class Xc extends Thread{//创建线程所需要继承的类  
+    public void run(){//run方法是覆盖的父类方法  
+        for(int i=0;i&lt;100;i++){  
+            System.out.println(&quot;子线程&quot;);  
+        }  
+    }  
+}  
+public class XianCheng {  
+    public static void main(String [] args){  
+    new Xc().start();//谁调Start方法，就会去自动调用run方法  
+        for(int i=0;i&lt;100;i++){  
+            System.out.println(&quot;主线程&quot;);  
+        }  
+    }  
+}  
+</code></pre><p>创建线程的第二种方法，实现线程的接口。 </p>
+<pre><code>class Xc2 implements Runnable{  
+    public void run(){  
+        for(int i=0;i&lt;100;i++){  
+            System.out.println(&quot;子线程&quot;);  
+        }  
+    }  
+}  
+public class XianCheng {  
+    public static void main(String [] args){  
+    new Thread(new Xc2()).start();  
+    for(int i=0;i&lt;100;i++){  
+            System.out.println(&quot;主线程&quot;);  
+        }  
+    }  
+}  
+</code></pre><p>创建线程的第三种方法，简约写法。  </p>
+<pre><code>public class XianCheng {  
+    public static void main(String [] args){  
+    new Thread(){  
+        public void run(){  
+            for(int i=0;i&lt;100;i++){  
+                System.out.println(&quot;子线程&quot;);  
+            }  
+        }  
+    }.start();  
+    for(int i=0;i&lt;100;i++){  
+            System.out.println(&quot;主线程&quot;);  
+        }  
+    }  
+
+}  
+</code></pre><p>创建线程的第四种方法，简约写法。</p>
+<pre><code>public class XianCheng {      
+    public static void main(String [] args){      
+    new Runnable() {    
+        public void run() {    
+            for(int i=0;i&lt;30;i++){      
+                System.out.println(&quot;我是子线程！！！&quot;);      
+            }      
+        }      
+    }.run();    
+    for(int i=0;i&lt;30;i++){      
+            System.out.println(&quot;主线程&quot;);      
+        }      
+    }      
+}     
+</code></pre><p>观察线程的竞争</p>
+<pre><code>class Xc3 extends Thread{  
+    public void run(){  
+        System.out.println(Thread.currentThread().getName()+&quot;线程在运行&quot;);  
+    }  
+}  
+public class XianCheng {  
+    public static void main(String [] args){  
+
+        Xc3 xc3 = new Xc3();  
+        xc3.setName(&quot;线程3&quot;);  
+        xc3.start();  
+
+        Xc3 xc31 = new Xc3();  
+        xc31.setName(&quot;线程2&quot;);  
+        xc31.start();  
+
+        Xc3 xc32 = new Xc3();  
+        xc32.setName(&quot;线程3&quot;);  
+        xc32.start();  
+
+            System.out.println(Thread.currentThread().getName()+&quot;线程在运行&quot;);  
+
+    }  
+}  
+</code></pre><p>线程的优先级</p>
+<pre><code>static int MAX_PRIORITY = 10;//线程可以具有的最高优先级（执行概率最高）
+static int MIN_PRIORITY = 1; //线程可以具有的最低优先级（执行概率最低）
+static int NORM_PRIORITY = 5；//分配给线程的默认优先级
+</code></pre><p>写法（1）</p>
+<pre><code>class Xc extends Thread{  
+    public void run(){  
+        System.out.println(&quot;线程1在运行&quot;);  
+    }  
+}  
+public class XianCheng {  
+    public static void main(String [] args){  
+
+        Xc xc = new Xc();//线程默认优先级是5  
+        xc.setPriority(Thread.NORM_PRIORITY + 3);//数字越大优先级越高  
+        xc.start();  
+
+
+     new Thread(){  
+        public void run(){  
+            System.out.println(&quot;第二个线程正在被执行&quot;);  
+        }  
+      }.start();      
+    }  
+
+}  
+</code></pre><p>写法（2）</p>
+<pre><code>public class XianCheng {  
+    public static void main(String [] args){  
+
+
+    new Thread(){  
+         public void run(){//线程默认优先级是5  
+            setPriority(Thread.NORM_PRIORITY + 3);//数字越大优先级越高  
+            System.out.println(&quot;第1个线程&quot;);  
+         }  
+        }.start();    
+     new Thread(){  
+        public void run(){  
+            System.out.println(&quot;第二个线程正在被执行&quot;);  
+        }  
+      }.start();      
+    }  
+}  
+</code></pre><p>线程的睡眠</p>
+<pre><code>public class XianCheng {  
+    public static void main(String [] args){  
+
+    new Thread(){     
+            public void run(){  
+                for(int i=0;i&lt;10;i++){  
+                    System.out.println(Thread.currentThread().getName() + &quot; &quot; + i);  
+                    try {  
+                        Thread.sleep(1000);//1000毫秒等于一秒  
+                    } catch (Exception e) {  
+                        // TODO: handle exception  
+                    }  
+                }  
+            }  
+        }.start();  
+    }  
+}  
+</code></pre><p>线程的抛异常问题，举例</p>
+<p>都是会报错的，因为<br>用throws抛异常的时候，如果向主调处抛异常的方法是从父类继承的或者是从接口实现的<br>那么，覆盖父类的方法或实现接口方法时，如果父类中的原方法或接口中的原抽象方法<br>没有抛异常，则子类覆盖父类的方法或实现接口的方法也不能抛异常。</p>
+<pre><code>class Yy implements Runnable{  
+    public void run() throws Exception  
+    {  
+
+    }  
+}  
+class Xx extends Thread{  
+    public void run() throws Exception  
+    {  
+
+    }  
+}  
+</code></pre><p>当出现这种情况只能try…catch，大不了catch中什么都不写。</p>
+<p>线程的让步</p>
+<pre><code>public class XianCheng {  
+    public static void main(String [] args){  
+        new Thread(){  
+            public void run(){  
+                setName(&quot;线程一：&quot;);  
+                for(int i=1;i&lt;=30;i++){  
+                    System.out.println(Thread.currentThread().getName() + i);  
+                }  
+            }  
+        }.start();  
+        new Thread(){  
+            public void run(){  
+                setName(&quot;线程二：&quot;);  
+                for(int i=1;i&lt;=30;i++){  
+                    System.out.println(Thread.currentThread().getName() + i);  
+                    if(i%5==0){  
+                        Thread.yield(); //线程让步出去让其他线程先执行，再次执行时，从让步的这个位置重新执行。  
+                    }  
+                }  
+            }  
+        }.start();  
+    }  
+}  
+</code></pre><p>线程的阻塞</p>
+<pre><code>class Xc implements Runnable{  
+    public void run(){  
+        for(int i=0;i&lt;30;i++){  
+            System.out.println(&quot;子线程&quot; + i);  
+        }  
+    }  
+}  
+public class XianCheng {  
+    public static void main(String [] args){  
+        Thread xc = new Thread(new Xc());  
+        xc.start();  
+        try {  
+            xc.join();//阻塞时将当前线程暂停，直至调用join函数所对应的线程执行完毕，才继续执行程序。  
+            //也就是说，当执行到这里，当前执行线程就暂停了，而去执行join所对应的xc这个线程，直到xc这个线程执行完毕才回来，此时线程们重新竞争CPU。  
+        } catch (Exception e) {  
+            // TODO: handle exception  
+        }  
+        for(int i=0;i&lt;30;i++){  
+            System.out.println(&quot;主线程&quot; + i);  
+        }  
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Multithreading'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>weimei</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/23/Multithreading/">Multithreading</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/20/Interface/">Interface</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/20/AbstractClass/">AbstractClass</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/20/AbstractClass/">AbstractClass</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/20/Interface/">Interface</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2015/04/23/Multithreading/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2015/04/23/Multithreading/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2015/04/23/Multithreading/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 9.040296763057325px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 16.903225908883265px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
