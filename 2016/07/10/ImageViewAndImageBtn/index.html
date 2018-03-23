@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>ImageView和ImageButton | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>ImageView和ImageButton</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2016-07-10
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2016-07-10
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<pre><code>android:scaleType=&quot;center&quot; //ImageView的缩放位置属性
+</code></pre><p>项目中使用ImageButton,但是给图片设置具体尺寸(width,height)之后,发现还是原来的大小,为了保持图片的原始像素,并没有给ImageButton设置ScaleType,后来将ImageButton换成ImageView之后就ok了(并不是唯一解决方案)</p>
+<p>于是,想搞明白ImageView和ImageButton之间到底有什么不同,发现两者之间还是有不小的区别.</p>
+<p>源码的角度看继承关系,一目了然: </p>
+<p><img src="https://img-blog.csdn.net/2018032313170966" alt=""></p>
+<p><img src="https://img-blog.csdn.net/20180323131716820" alt=""></p>
+<p>下面分几种不同的情况去说明两者之间的差别:</p>
+<p>1,不设置具体宽高</p>
+<pre><code>&lt;code class=&quot;hljs xml has-numbering&quot; style=&quot;display: block; padding: 0px; color: inherit; box-sizing: border-box; font-family: &apos;Source Code Pro&apos;, monospace;font-size:undefined; white-space: pre; border-radius: 0px; word-wrap: normal; background: transparent;&quot;&gt;&lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageView &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;#00f&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:src&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search&quot;&lt;/span&gt;/&gt;&lt;/span&gt; &lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageButton &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_marginTop&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;20dp&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;#0f0&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:src&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search&quot;&lt;/span&gt;/&gt;&lt;/span&gt;&lt;/code&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;12&lt;/li&gt;&lt;/ul&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;12&lt;/li&gt;&lt;/ul&gt;
+</code></pre><p>效果是这样的: </p>
+<p><img src="https://img-blog.csdn.net/20180323131725702" alt=""></p>
+<p>效果就很明显了,ImageView会根据设置的具体宽高尺寸变化,但是ImageButton只会显示图片的原始像素大小.<br>当然,给ImageButton设置scaletype属性是可以完成ImageView的效果,但是那样会是图片失真.</p>
+<p>3,设置背景选择器</p>
+<pre><code>&lt;code class=&quot;hljs xml has-numbering&quot; style=&quot;display: block; padding: 0px; color: inherit; box-sizing: border-box; font-family: &apos;Source Code Pro&apos;, monospace;font-size:undefined; white-space: pre; border-radius: 0px; word-wrap: normal; background: transparent;&quot;&gt;&lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageView &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:clickable&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;#00f&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:src&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search_selector&quot;&lt;/span&gt;/&gt;&lt;/span&gt; &lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageButton &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_marginTop&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;20dp&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;#0f0&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:src&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search_selector&quot;&lt;/span&gt;/&gt;&lt;/span&gt;&lt;/code&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;12&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;13&lt;/li&gt;&lt;/ul&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;12&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;13&lt;/li&gt;&lt;/ul&gt;
+</code></pre><p>注意:<br>ImageView要想使选择器效果生效,需要让控件是有焦点的,这里加上clickable=true处理一下<br>ImageButton就不需要处理,因为源码中,ImageButton的构造中,已经setFocusable(true)处理过了 </p>
+<p><img src="https://img-blog.csdn.net/20180323131745476" alt=""></p>
+<p>效果都一样的,选择器都会生效,这里就不上图了.<br>同时,将宽高改成的具体尺寸,效果也是一样的,选择器都会生效</p>
+<p>将两者的src换成background试了一下:</p>
+<pre><code>&lt;code class=&quot;hljs xml has-numbering&quot; style=&quot;display: block; padding: 0px; color: inherit; box-sizing: border-box; font-family: &apos;Source Code Pro&apos;, monospace;font-size:undefined; white-space: pre; border-radius: 0px; word-wrap: normal; background: transparent;&quot;&gt;&lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageView &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:clickable&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search_selector&quot;&lt;/span&gt;/&gt;&lt;/span&gt; &lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageButton &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_marginTop&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;20dp&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search_selector&quot;&lt;/span&gt;/&gt;&lt;/span&gt;&lt;/code&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;/ul&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;/ul&gt;
+</code></pre><p>效果也是一样的,选择器都会生效<br>同时,将宽高改成的具体尺寸,效果也是一样的,选择器都会生效</p>
+<p>所以,在选择器的使用上,两者基本没有差别,要说差别,那就是ImageView需要处理一下焦点问题吧</p>
+<p>4,设置background(无具体宽高)</p>
+<pre><code>&lt;code class=&quot;hljs xml has-numbering&quot; style=&quot;display: block; padding: 0px; color: inherit; box-sizing: border-box; font-family: &apos;Source Code Pro&apos;, monospace;font-size:undefined; white-space: pre; border-radius: 0px; word-wrap: normal; background: transparent;&quot;&gt;&lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageView &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:clickable&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search_selected&quot;&lt;/span&gt;/&gt;&lt;/span&gt; &lt;span class=&quot;hljs-tag&quot; style=&quot;color: rgb(0, 102, 102); box-sizing: border-box;&quot;&gt;&lt;&lt;span class=&quot;hljs-title&quot; style=&quot;box-sizing: border-box; color: rgb(0, 0, 136);&quot;&gt;ImageButton &lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_width&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_height&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;wrap_content&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:layout_marginTop&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;20dp&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attribute&quot; style=&quot;box-sizing: border-box; color: rgb(102, 0, 102);&quot;&gt;android:background&lt;/span&gt;=&lt;span class=&quot;hljs-value&quot; style=&quot;box-sizing: border-box; color: rgb(0, 136, 0);&quot;&gt;&quot;@drawable/search_selected&quot;&lt;/span&gt;/&gt;&lt;/span&gt;&lt;/code&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;/ul&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;/ul&gt;
+</code></pre><p>效果如图: </p>
+<p><img src="https://img-blog.csdn.net/20180323131754698" alt=""></p>
+<p>两者效果一样的,但是跟使用src不同的是,ImageButton的效果也跟着具体参数不同而改变了.</p>
+<p>下面就说一下src和background的区别吧(ImageView和ImageButton通用):</p>
+<p>(1),src指定的是原图的大小,宽高设置成图片的原始尺寸,在分辨率不同的手机上,显示效果会不同,但不会进行拉伸;<br>background会根据具体的宽高进行拉伸</p>
+<p>注意:<br>src指定的图片的宽高要是设置成超过其原始尺寸,比如图片原始像素是48<em>48,但是宽高设置成100</em>100,图片也是会被拉伸的</p>
+<p>(2),src是图片的前景,background是背景,background是所有控件都有的属性,两者可以同时使用</p>
+<p>(3),scaleType属性只有src才生效</p>
+<p>6,点9图</p>
+<pre><code>&lt;code class=&quot;hljs perl has-numbering&quot; style=&quot;display: block; padding: 0px; color: inherit; box-sizing: border-box; font-family: &apos;Source Code Pro&apos;, monospace;font-size:undefined; white-space: pre; border-radius: 0px; word-wrap: normal; background: transparent;&quot;&gt;&lt;ImageView android:layout_width=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_height=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:src=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;&lt;span class=&quot;hljs-variable&quot; style=&quot;color: rgb(102, 0, 102); box-sizing: border-box;&quot;&gt;@drawable&lt;/span&gt;/bg&quot;&lt;/span&gt;/&gt; &lt;ImageButton android:layout_width=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_height=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_marginTop=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;10dp&quot;&lt;/span&gt; android:background=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;&lt;span class=&quot;hljs-variable&quot; style=&quot;color: rgb(102, 0, 102); box-sizing: border-box;&quot;&gt;@null&lt;/span&gt;&quot;&lt;/span&gt; android:src=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;&lt;span class=&quot;hljs-variable&quot; style=&quot;color: rgb(102, 0, 102); box-sizing: border-box;&quot;&gt;@drawable&lt;/span&gt;/bg&quot;&lt;/span&gt;/&gt; &lt;ImageView android:layout_width=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_height=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_marginTop=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;10dp&quot;&lt;/span&gt; android:background=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;&lt;span class=&quot;hljs-variable&quot; style=&quot;color: rgb(102, 0, 102); box-sizing: border-box;&quot;&gt;@drawable&lt;/span&gt;/bg&quot;&lt;/span&gt;/&gt; &lt;ImageButton android:layout_width=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_height=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;150dp&quot;&lt;/span&gt; android:layout_marginTop=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;10dp&quot;&lt;/span&gt; android:background=&lt;span class=&quot;hljs-string&quot; style=&quot;color: rgb(0, 136, 0); box-sizing: border-box;&quot;&gt;&quot;&lt;span class=&quot;hljs-variable&quot; style=&quot;color: rgb(102, 0, 102); box-sizing: border-box;&quot;&gt;@drawable&lt;/span&gt;/bg&quot;&lt;/span&gt;/&gt;&lt;/code&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;12&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;13&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;14&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;15&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;16&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;17&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;18&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;19&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;20&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;21&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;22&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;23&lt;/li&gt;&lt;/ul&gt;&lt;ul class=&quot;pre-numbering&quot; style=&quot;box-sizing: border-box; position: absolute; width: 50px; top: 0px; left: 0px; margin: 0px; padding: 6px 0px 40px; border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); list-style: none; text-align: right; background-color: rgb(238, 238, 238);&quot;&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;1&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;2&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;3&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;4&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;5&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;6&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;7&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;8&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;9&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;10&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;11&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;12&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;13&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;14&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;15&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;16&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;17&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;18&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;19&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;20&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;21&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;22&lt;/li&gt;&lt;li style=&quot;box-sizing: border-box; padding: 0px 5px;&quot;&gt;23&lt;/li&gt;&lt;/ul&gt;
+</code></pre><p>效果如下: </p>
+<p><img src="https://img-blog.csdn.net/20180323131815670" alt=""></p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'ImageView和ImageButton'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/06/ToggleButton/">ToggleButton开关按钮</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/20/Interface/">接口</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 13.522237495428898px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 9.978856528086517px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
