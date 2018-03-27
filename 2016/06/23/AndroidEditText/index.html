@@ -12,7 +12,7 @@
     
     
     
-    <title>categories: Java | 欢迎来到唯美的网站</title>
+    <title>Android中EditText的常见属性 | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -73,7 +73,7 @@
         <div class="ring">
             <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
             
-            <a href="/categories/Java/page/2/" class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
             
             <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
             <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
@@ -198,19 +198,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <article class="article well article-body" id="article-category">
+                    
+<article class="article well article-body" id="article">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>目录</span>
+        <span>Android中EditText的常见属性</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/categories/Java/index.html">Java</a>
+                <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
             </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2016-06-23
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -218,48 +237,125 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/categories/Java/index.html">Java</a>
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
                 </h4>
             </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2016-06-23
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
         </center>
     </div>
-    <div class="content-article" style="margin-top: 30px;">
-        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
-            
-            <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
-            <br>
-            
-            <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
-            <br>
-            
-            <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
-            <br>
-            
-            <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
-            <br>
-            
-            <a href="/2015/04/23/Multithreading/">多线程</a>
-            <br>
-            
-            <a href="/2015/04/20/Interface/">接口</a>
-            <br>
-            
-            <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
-            <br>
-            
-            <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
-            <br>
-            
-            <a href="/2015/03/20/AbstractClass/">抽象类</a>
-            <br>
-            
-            <a href="/2015/03/19/Java-toString/">toString方法</a>
-            <br>
-            
-            
-        </div>
+    <div class="content-article">
+        <p>EditText介绍:</p>
+<p>EditText 在开发中也是经常用到的控件，也是一个比较必要的组件，可以说它是用户跟Android应用进行数据传输的窗户，比如实现一个登陆界面，需要用户输入账号密码，然后我们获取用户输入的内容，提交给服务器进行判断。</p>
+<p><img src="http://img-blog.csdn.net/20180322031946874" alt=""><br><img src="http://img-blog.csdn.net/20180322031958809" alt=""><br>EditText实例:开发中常用的登录界面</p>
+<p>首先我们来看布局文件:activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;&gt;  
+
+    &lt;EditText  
+        android:id=&quot;@+id/et_phone&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_marginLeft=&quot;20dp&quot;  
+        android:layout_marginRight=&quot;20dp&quot;  
+        android:background=&quot;@null&quot;  
+        android:inputType=&quot;number&quot;  
+        android:maxLength=&quot;11&quot;  
+        android:hint=&quot;请输入手机号&quot;  
+        android:drawablePadding=&quot;10dp&quot;  
+        android:padding=&quot;10dp&quot;  
+        android:drawableLeft=&quot;@mipmap/icon_phone&quot;  
+        android:drawableBottom=&quot;@drawable/shape_et_bottom_line&quot;  
+        android:layout_marginTop=&quot;20dp&quot;/&gt;  
+
+    &lt;EditText  
+        android:id=&quot;@+id/et_password&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_marginLeft=&quot;20dp&quot;  
+        android:layout_marginRight=&quot;20dp&quot;  
+        android:layout_marginTop=&quot;10dp&quot;  
+        android:background=&quot;@null&quot;  
+        android:inputType=&quot;textPassword&quot;  
+        android:maxLength=&quot;16&quot;  
+        android:padding=&quot;10dp&quot;  
+        android:drawablePadding=&quot;10dp&quot;  
+        android:hint=&quot;请输入密码&quot;  
+        android:drawableBottom=&quot;@drawable/shape_et_bottom_line&quot;  
+        android:drawableLeft=&quot;@mipmap/icon_password&quot;/&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/tv_login&quot;  
+        style=&quot;@style/Widget.AppCompat.Button.Colored&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;50dp&quot;  
+        android:layout_marginLeft=&quot;10dp&quot;  
+        android:layout_marginRight=&quot;10dp&quot;  
+        android:layout_marginTop=&quot;30dp&quot;  
+        android:text=&quot;登 录&quot;  
+        android:textColor=&quot;#ffffffff&quot;  
+        android:textSize=&quot;18sp&quot; /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>运行效果图如下:</p>
+<p><img src="http://img-blog.csdn.net/20180322032048911" alt=""></p>
+<p>这两个输入框的用的的大部分属性都在上面的表格中了，我这里解决下没有说过的属性。<br>android:background=”@null” 输入框无背景<br>android:drawableBottom=”@drawable/shape_et_bottom_line” 底部引入一个shape布局文件，这个布局文件就是输入框的下划线。</p>
+<p>shape_et_bottom_line.xml内容如下:</p>
+<pre><code>&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:shape=&quot;rectangle&quot; &gt;  
+
+    &lt;solid android:color=&quot;#1E7EE3&quot; /&gt;  
+    &lt;size android:height=&quot;1dp&quot; android:width=&quot;500dp&quot;/&gt;  
+
+&lt;/shape&gt;  
+</code></pre><p>EditeText还有哪些功能？</p>
+<p>1.监听用户输入的内容.<br>有这样一个场景，一个搜索框，只要用户输入了内容就去请求服务器，于是我们在Activity里面监听EditeText文本改变事件。</p>
+<pre><code>EditText etOne= (EditText) findViewById(R.id.et_phone);  
+etOne.addTextChangedListener(new TextWatcher() {  
+            @Override  
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {  
+                Log.i(&quot;Ansen&quot;,&quot;内容改变之前调用:&quot;+s);  
+            }  
+
+            @Override  
+            public void onTextChanged(CharSequence s, int start, int before, int count) {  
+                Log.i(&quot;Ansen&quot;,&quot;内容改变，可以去告诉服务器:&quot;+s);  
+            }  
+
+            @Override  
+            public void afterTextChanged(Editable s) {  
+                Log.i(&quot;Ansen&quot;,&quot;内容改变之后调用:&quot;+s);  
+            }  
+ });  
+</code></pre><p>首先我们通过id找到EditText控件，并且添加监听函数，内部内实现TextWatcher接口，重写三个方法。我们可以在onTextChanged方法中告诉服务器我要搜索的内容。</p>
+
     </div>
 </article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Android中EditText的常见属性'
+    }
+</script>
+
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -405,13 +501,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                    <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
                 </span>
             </li>
             
@@ -423,37 +519,37 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
+                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/23/Multithreading/">多线程</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2016/05/22/OnClickListener/">Android中onClick按钮单击事件的四种常用写法读书笔记</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
                 </span>
             </li>
             
@@ -472,21 +568,21 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/categories/Java/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2016/06/23/AndroidEditText/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/categories/Java/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2016/06/23/AndroidEditText/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/categories/Java/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2016/06/23/AndroidEditText/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 19.20466027511305px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 10.713004559915534px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 19.821495659015245px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 15.02281779703587px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

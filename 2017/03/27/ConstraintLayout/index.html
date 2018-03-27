@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>Android新特性ConstraintLayout约束布局读书笔记 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Android新特性ConstraintLayout约束布局读书笔记</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-03-27
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-03-27
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>转帖请注明本文出自weimeig的博客（<a href="https://blog.csdn.net/weimeig/article/details/79706819" target="_blank" rel="noopener">https://blog.csdn.net/weimeig/article/details/79706819</a>），请尊重他人的辛勤劳动成果，谢谢</p>
+<p>本来打算自己写一篇，看到郭霖大神已经写了，不打算重复造轮子，决定参考郭神的文章下，写一篇学习ConstraintLayout约束布局的读书笔记。同时感谢《第一行代码》作者郭霖大神的无私分享。</p>
+<p>首先说一下什么是约束布局</p>
+<p>在2016年的Google I/O大会上 , Google 发布了Android Studio 2.2预览版，同时也发布了Android 新的布局方案 ConstraintLayout ， 但是最近的一年也没有大规模的使用。2017年Google发布了 Android Studio 2.3 正式版，在 Android Studio 2.3 版本中新建的Module中默认的布局就是 ConstraintLayout 。如下所示：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:context=&quot;com.constraintlayout.app.Main2Activity&quot;&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>下面我们开始用边学边练的方式来进行学习，首先打开你的Android Studio，并新建一个ConstraintLayoutTest项目。另外，确保你的Android Studio是2.2或以上版本。</p>
+<pre><code>dependencies {  
+    compile &apos;com.android.support.constraint:constraint-layout:1.0.0-beta4&apos;  
+}  
+</code></pre><p>现在打开res/layout/activity_main.xml文件，由于这是一个新建的空项目，Android Studio会自动帮我们创建好一个布局，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054304846?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p>不过，Android Studio自动创建的这个布局默认使用的是RelativeLayout，我们可以通过如下操作将它转换成ConstraintLayout。</p>
+<p><img src="https://img-blog.csdn.net/20180327063638455" alt=""></p>
+<p>转换完成之后，原RelativeLayout中的内容也会自动转换到ConstraintLayout中，比如图中的TextView。如果你不需要它的话，可以选中这个控件，然后按键盘上的Delete键即可删除</p>
+<p><img src="https://img-blog.csdn.net/20180327054444164" alt=""></p>
+<p>我们可以看到，现在主操作区域内有两个类似于手机屏幕的界面，左边的是预览界面，右边的是蓝图界面。这两部分都可以用于进行布局编辑工作，区别是左边部分主要用于预览最终的界面效果，右边部分主要用于观察界面内各个控件的约束情况。</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>下面我们来学习一些具体的操作吧，ConstraintLayout的基本用法很简单，比如我们想要向布局中添加一个按钮，那么只需要从左侧的Palette区域拖一个Button进去就可以了，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054518966" alt=""></p>
+<p>虽说现在Button已经添加到界面上了，但是由于我们还没有给Button添加任何的约束，因此Button并不知道自己应该出现在什么位置。现在我们在预览界面上看到的Button位置并不是它最终运行后的实际位置，如果一个控件没有添加任何约束的话，它在运行之后会自动位于界面的左上角。</p>
+<p>那么下面我们就来给Button添加约束，每个控件的约束都分为垂直和水平两类，一共可以在四个方向上给控件添加约束，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054537996?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p>上图中Button的上下左右各有一个圆圈，这圆圈就是用来添加约束的，我们可以将约束添加到ConstraintLayout，也可以将约束添加到另一个控件。比如说，想让Button位于布局的右下角，就可以这样添加约束，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054602477" alt=""></p>
+<p>我们给Button的右边和下边添加了约束，因此Button就会将自己定位到布局的右下角了。类似地，如果我们想要让Button居中显示，那么就需要给它的上下左右都添加约束，如下图所示。</p>
+<p><a href="https://img-blog.csdn.net/20180327054654626" target="_blank" rel="noopener">https://img-blog.csdn.net/20180327054654626</a></p>
+<p>这就是添加约束最基本的用法了。</p>
+<p>除此之外，我们还可以使用约束让一个控件相对于另一个控件进行定位。比如说，我们希望再添加一个Button，让它位于第一个Button的正下方，并且间距64dp，那么操作如下所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054722524" alt=""></p>
+<p>现在添加约束的方式我们已经学完了，那么该怎样删除约束呢？其实也很简单，删除约束的方式一共有三种，第一种用于删除一个单独的约束，将鼠标悬浮在某个约束的圆圈上，然后该圆圈会变成红色，这个时候单击一下就能删除了，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054749779" alt=""></p>
+<p>第二种用于删除某一个控件的所有约束，选中一个控件，然后它的左下角会出现一个删除约束的图标，点击该图标就能删除当前控件的所有约束了，如下所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054806295" alt=""></p>
+<p>第三种用于删除当前界面中的所有约束，点击工具栏中的删除约束图标即可，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054923107" alt=""></p>
+<h2 id="Inspector"><a href="#Inspector" class="headerlink" title="Inspector"></a>Inspector</h2><p>这样我们就把ConstraintLayout的基本用法学完了，接下来我们开始学习一些进阶的内容。</p>
+<p>当你选中任意一个控件的时候，在右侧的Properties区域就会出现很多的属性选项，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327054953491" alt=""></p>
+<p>在这里我们就可以设置当前控件的所有属性，如文本内容、颜色、点击事件等等。这些功能都非常简单，我就不再进行详细介绍，大家自己点一点就会操作了。</p>
+<p>需要我们重点掌握的是Properties区域的上半部分，这部分也被称为Inspector。</p>
+<p><img src="https://img-blog.csdn.net/20180327055015157" alt=""></p>
+<p>首先可以看到，在Inspector中有一个纵向的轴和一个横向的轴，这两个轴也是用于确定控件的位置的。我们刚才给Button的上下左右各添加了一个约束，然后Button就能居中显示了，其实就是因为这里纵横轴的值都是50。如果调整了纵横轴的比例，那么Button的位置也会随之改变，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055044211" alt=""></p>
+<p>不过，虽然我们将横轴的值拖动到了100，但是Button并没有紧贴到布局的最右侧，这是为什么呢？实际上，Android Studio给控件的每个方向上的约束都默认添加了一个16dp的间距，从Inspector上面也可以明显地看出来这些间距的值。如果这些默认值并不是你想要的，可以直接在Inspector上进行修改，如下图所示：</p>
+<p><img src="https://img-blog.csdn.net/20180327055115156" alt=""></p>
+<p>可以看到，修改成0之后Button右侧的间距就没了。</p>
+<p>接下来我们再来学习一下位于Inspector最中间的那个正方形区域，它是用来控制控件大小的。一共有三种模式可选，每种模式都使用了一种不同的符号表示，点击符号即可进行切换。</p>
+<ul>
+<li><p><img src="https://img-blog.csdn.net/20180327055223268" alt="">  表示wrap content，这个我们很熟悉了，不需要进行什么解释。</p>
+</li>
+<li><p><img src="https://img-blog.csdn.net/20180327055230795" alt="">  表示固定值，也就是给控件指定了一个固定的长度或者宽度值。</p>
+</li>
+<li><p><img src="https://img-blog.csdn.net/2018032705523710" alt="">   表示any size，它有点类似于match parent，但和match parent并不一样，是属于ConstraintLayout中特有的一种大小控制方式，下面我们来重点讲解一下。</p>
+</li>
+</ul>
+<p>首先需要说明，在ConstraintLayout中是有match parent的，只不过用的比较少，因为ConstraintLayout的一大特点就是为了解决布局嵌套，既然没有了布局嵌套，那么match parent也就没有多大意义了。</p>
+<p>而any size就是用于在ConstraintLayout中顶替match parent的，先看一下我们怎样使用any size实现和match parent同样的效果吧。比如说我想让Button的宽度充满整个布局，操作如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055305707" alt=""></p>
+<p>可以看到，我们将Button的宽度指定成any size，它就会自动充满整个布局了。当然还要记得将Button左侧的间距设置成0才行。</p>
+<p>那有的朋友可能会问了，这和match parent有什么区别呢？其实最大的区别在于，match parent是用于填充满当前控件的父布局，而any size是用于填充满当前控件的约束规则。举个例子更好理解，如果我们有一个新的Button，它的其中一个约束是添加到当前这个Button上的，那么any size的效果也会发生改变，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055349497" alt=""></p>
+<p>通过上图的演示，相信你已经很好地理解any size的作用了。</p>
+<h2 id="Guidelines"><a href="#Guidelines" class="headerlink" title="Guidelines"></a>Guidelines</h2><p>现在你已经对ConstraintLayout比较熟悉，并且能使用ConstraintLayout来编写一些简单的界面了。不过目前有一个问题可能还比较头疼，刚才我们已经实现了让一个按钮居中对齐的功能，如果我们想让两个按钮共同居中对齐该怎么实现呢？</p>
+<p>其实这个需求很常见，比如说在应用的登录界面，都会有一个登录按钮和一个注册按钮，不管它们是水平居中也好还是垂直居中也好，但肯定都是两个按钮共同居中的。</p>
+<p>想要实现这个功能，仅仅用我们刚刚学的那些知识是不够的，这需要用到ConstraintLayout中的一个新的功能，Guidelines。</p>
+<p>下面我们还是通过实际操作来学习一下Guidelines的用法吧。比如现在已经向界面中添加了登录和注册这两个按钮，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055421182?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p>然后我们希望让这两个按钮在水平方向上居中显示，在垂直方向上都距离底部64dp，那么就需要先添加一个垂直方向上的Guideline，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055444469" alt=""></p>
+<p>我来对上图中的操作进行一下解释。首先点击通知栏中的Guidelines图标可以添加一个垂直或水平方向上的Guideline，这里我们需要的是垂直方向上的。而Guideline默认是使用的dp尺，我们需要选中Guideline，并点击一下最上面的箭头图标将它改成百分比尺，然后将垂直方向上的Guideline调整到50%的位置，这样就将准备工作做好了。</p>
+<p>接下来我们开始实现让两个按钮在水平方向上居中显示，并距离底部64dp的功能，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055509371" alt=""></p>
+<p>可以看到，我们给登录按钮的右边向Guideline添加约束，登录按钮的下面向底部添加约束，并拖动按钮让它距离底部64dp。然后给注册按钮的左边向Guideline添加约束，注册按钮的下面向登录按钮的下面添加约束。这样就实现了让两个按钮在水平方向上居中显示，在垂直方向上都距离底部64dp的功能了。</p>
+<h2 id="自动添加约束"><a href="#自动添加约束" class="headerlink" title="自动添加约束"></a>自动添加约束</h2><p>不过如果界面中的内容变得复杂起来，给每个控件一个个地添加约束也是一件很繁琐的事情。为此，ConstraintLayout中支持自动添加约束的功能，可以极大程度上简化那些繁琐的操作。</p>
+<p>自动添加约束的方式主要有两种，一种叫Autoconnect，一种叫Inference，我们先来看第一种。</p>
+<p>想要使用Autoconnect，首先需要在工具栏中将这个功能启用，默认情况下Autoconnect是不启用的，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055538639" alt=""></p>
+<p>Autoconnect可以根据我们拖放控件的状态自动判断应该如何添加约束，比如我们将Button放到界面的正中央，那么它的上下左右都会自动地添加上约束，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055600336" alt=""></p>
+<p>然后我们在这个Button的下方再放置一个Button，效果如下。</p>
+<p><img src="https://img-blog.csdn.net/20180327055658335" alt=""></p>
+<p>可以看到，只需要将Button拖放到界面上，Autoconnect会判断我们的意图，并自动给控件添加约束。不过Autoconnect是无法保证百分百准确判断出我们的意图的，如果自动添加的约束并不是你想要的话，还可以在任何时候进行手动修改。总之，可以把它当成一个辅助工具，但不能完全靠它去添加控件的约束。</p>
+<p>以上是Autoconnect的用法，接下来我们看一下Inference的用法。Inference也是用于自动添加约束的，但它比Autoconnect的功能要更为强大，因为AutoConnect只能给当前操作的控件自动添加约束，而Inference会给当前界面中的所有元素自动添加约束。因而Inference比较适合用来实现复杂度比较高的界面，它可以一键自动生成所有的约束。</p>
+<p>下面我们就通过一个例子来演示一下Inference的用法，比如界面上现在有两个TextView，两个EditText，和两个Button，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055726385?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p>接下来我们先将各个控件按照界面设计的位置进行摆放，摆放完成之后点击一下工具栏上的Infer Constraints按钮，就能为所有控件自动添加约束了，如下图所示。</p>
+<p><img src="https://img-blog.csdn.net/20180327055755263" alt=""></p>
+<p>现在运行一下程序，最终效果如下图所示：</p>
+<p><img src="https://img-blog.csdn.net/20180327055821938" alt=""></p>
+<h2 id="ConstraintLayout约束布局的常用方法"><a href="#ConstraintLayout约束布局的常用方法" class="headerlink" title="ConstraintLayout约束布局的常用方法"></a>ConstraintLayout约束布局的常用方法</h2><pre><code>layout_constraintTop_toTopOf       // 将所需视图的顶部与另一个视图的顶部对齐。   
+
+layout_constraintTop_toBottomOf    // 将所需视图的顶部与另一个视图的底部对齐。   
+
+layout_constraintBottom_toTopOf    // 将所需视图的底部与另一个视图的顶部对齐。   
+
+layout_constraintBottom_toBottomOf // 将所需视图的底部与另一个视图的底部对齐。   
+
+layout_constraintLeft_toTopOf      // 将所需视图的左侧与另一个视图的顶部对齐。   
+
+layout_constraintLeft_toBottomOf   // 将所需视图的左侧与另一个视图的底部对齐。   
+
+layout_constraintLeft_toLeftOf     // 将所需视图的左边与另一个视图的左边对齐。   
+
+layout_constraintLeft_toRightOf    // 将所需视图的左边与另一个视图的右边对齐。   
+
+layout_constraintRight_toTopOf     // 将所需视图的右对齐到另一个视图的顶部。  
+
+layout_constraintRight_toBottomOf  // 将所需视图的右对齐到另一个的底部。  
+
+layout_constraintRight_toLeftOf    // 将所需视图的右边与另一个视图的左边对齐。  
+
+layout_constraintRight_toRightOf   // 将所需视图的右边与另一个视图的右边对齐。  
+</code></pre><p>当控件刚拖进布局时候，有如下两行代码。通常是没有添加约束的后果，添加约束熟悉后，可以考虑删除以下意义不大的两条</p>
+<pre><code>tools:layout_editor_absoluteX=&quot;8dp&quot;  
+tools:layout_editor_absoluteY=&quot;8dp&quot; 
+</code></pre><p>我们来看一下以下代码</p>
+<p><img src="https://img-blog.csdn.net/20180327062233252?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p>我们会问，为什么Button 是居中显示的？因为在上面的布局中有两个重要的属性没有写出来，但是却有默认的属性值，那就是水平、垂直的偏移比例。</p>
+<p><img src="https://img-blog.csdn.net/20180327062651546?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p>我们通过设置偏移量，可以控制控件的偏移位置</p>
+<p>使用ConstraintLayout约束布局可以有效减少布局的嵌套层数，如下（观看效果请切换至横屏）：</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+    &lt;android.support.constraint.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:layout_editor_absoluteY=&quot;81dp&quot;  
+    tools:layout_editor_absoluteX=&quot;0dp&quot;&gt;  
+
+    &lt;android.support.constraint.Guideline  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:id=&quot;@+id/guideline2&quot;  
+        android:orientation=&quot;horizontal&quot;  
+        app:layout_constraintGuide_percent=&quot;0.67&quot; /&gt;  
+
+    &lt;android.support.constraint.Guideline  
+        android:id=&quot;@+id/guideline3&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;horizontal&quot;  
+        app:layout_constraintGuide_percent=&quot;0.34&quot; /&gt;  
+
+    &lt;android.support.constraint.Guideline  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:id=&quot;@+id/guideline4&quot;  
+        android:orientation=&quot;vertical&quot;  
+        app:layout_constraintGuide_percent=&quot;0.75&quot; /&gt;  
+
+    &lt;android.support.constraint.Guideline  
+        android:id=&quot;@+id/guideline5&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;vertical&quot;  
+        app:layout_constraintGuide_percent=&quot;0.58&quot; /&gt;  
+
+    &lt;android.support.constraint.Guideline  
+        android:id=&quot;@+id/guideline7&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;vertical&quot;  
+        app:layout_constraintGuide_percent=&quot;0.41&quot; /&gt;  
+
+    &lt;android.support.constraint.Guideline  
+        android:id=&quot;@+id/guideline6&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;vertical&quot;  
+        app:layout_constraintGuide_percent=&quot;0.25&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:layout_constraintTop_toTopOf=&quot;parent&quot;  
+        app:layout_constraintBottom_toTopOf=&quot;@+id/imageView6&quot;  
+        app:layout_constraintLeft_toRightOf=&quot;@+id/imageView2&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/imageView10&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView10&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;0dp&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toTopOf=&quot;@+id/guideline3&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;@+id/guideline4&quot;  
+        app:layout_constraintRight_toRightOf=&quot;parent&quot;  
+        app:layout_constraintTop_toTopOf=&quot;parent&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView9&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;0dp&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toTopOf=&quot;@+id/imageView8&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;@+id/guideline4&quot;  
+        app:layout_constraintRight_toRightOf=&quot;parent&quot;  
+        app:layout_constraintTop_toTopOf=&quot;@+id/guideline3&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView8&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;0dp&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;@+id/guideline4&quot;  
+        app:layout_constraintRight_toRightOf=&quot;parent&quot;  
+        app:layout_constraintTop_toBottomOf=&quot;@+id/imageView3&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView7&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toRightOf=&quot;@+id/imageView6&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/guideline4&quot;  
+        app:layout_constraintTop_toBottomOf=&quot;@+id/imageView3&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView6&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;@+id/guideline7&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/guideline5&quot;  
+        app:layout_constraintTop_toBottomOf=&quot;@+id/imageView3&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView5&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginRight=&quot;2dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toRightOf=&quot;@+id/imageView4&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/guideline7&quot;  
+        app:layout_constraintTop_toBottomOf=&quot;@+id/imageView3&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView4&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginRight=&quot;0dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/guideline6&quot;  
+        app:layout_constraintTop_toBottomOf=&quot;@+id/imageView3&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView3&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginRight=&quot;0dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toTopOf=&quot;@+id/guideline2&quot;  
+        app:layout_constraintHorizontal_bias=&quot;0.0&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/guideline6&quot;  
+        app:layout_constraintTop_toBottomOf=&quot;@+id/imageView2&quot;  
+        app:layout_constraintVertical_bias=&quot;0.0&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/imageView2&quot;  
+        android:layout_width=&quot;0dp&quot;  
+        android:layout_height=&quot;0dp&quot;  
+        android:layout_marginBottom=&quot;2dp&quot;  
+        android:layout_marginLeft=&quot;2dp&quot;  
+        android:layout_marginRight=&quot;0dp&quot;  
+        android:layout_marginTop=&quot;2dp&quot;  
+        app:layout_constraintBottom_toTopOf=&quot;@+id/guideline3&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;  
+        app:layout_constraintRight_toLeftOf=&quot;@+id/guideline6&quot;  
+        app:layout_constraintTop_toTopOf=&quot;parent&quot;  
+        app:srcCompat=&quot;@color/colorAccent&quot; /&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+    &lt;!--app:layout_constraintHorizontal_bias  水平偏移量，取值0~1  ,默认0.5  
+        app:layout_constraintVertical_bias   竖直偏移量  
+        app:layout_contraint本源_to目标=&quot;目标id&quot;  
+     --&gt;  
+</code></pre><p>运行效果如下：</p>
+<p><img src="https://img-blog.csdn.net/20180327093038635?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaW1laWc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Android新特性ConstraintLayout约束布局读书笔记'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/06/ToggleButton/">ToggleButton开关按钮</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/20/AbstractClass/">抽象类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/05/22/OnClickListener/">Android中onClick按钮单击事件的四种常用写法读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2017/03/27/ConstraintLayout/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2017/03/27/ConstraintLayout/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2017/03/27/ConstraintLayout/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 10.865505623373197px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 19.94633251670663px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
