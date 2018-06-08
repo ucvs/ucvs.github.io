@@ -274,6 +274,22 @@
 <p>   <img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/about/4.jpg" alt=""></p>
 <p>   大学期间和北大清华，美国公立三巨头UIUC，新加坡SUTD，香港、台湾，等多地名校的国际性比赛中获得过五十多个奖，主持了几个科研项目获得广东省财政厅自然科学类科研经费扶持。</p>
 <p>   <img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/about/5.jpg" alt=""></p>
+<p>   项目一、</p>
+<p>   Special Funds for the Cultivation of Guangdong College Students’ Scientific and Technological Innovation.（“Climbing Program” Special Funds.）,The Natural Science Fund Project<br>   Scientific Research Project，Project Name：A Smartphone-based Research of Colloidal-gold Strip Quantitative Detector，Project Number: pdjh2016b0831   1.5万元</p>
+<p>   起止年月：2016 年 3 月 — 2016 年 12 月），项目已于 2016 年 12 月顺利完成和科研结题。</p>
+<p>   该项目借助了常见的硬件设备，如智能手机摄像头，进行图片数据采集，然后将采集回来的数据转化为灰度图，再通过阈值化、形态学操作、提取轮廓等一系列操作，进行图像分割（遗传算法的快速模糊 C-均值聚类算法），得到特征值，计算 RIOD，最后得到相应的浓度值，并通过相应的程序代码，转化为可视化界面。<br>   奖项成果:2016年广东大学生科技创新专项培育资金科研立项，2017年挑战杯科技竞赛一等奖、2016年数媒科技竞赛全国二等奖及中国“互联网+”大学生创新创业大赛优胜奖(可通过项目名称百度检索到政府公示文件)。另发第一作者/独立发表有三篇科研论文。且大赛是由教育部、团中央等等部门推动进行，科研项目基金是由省财政厅出资资助，全国所有985/211名校均参与，含金量极高，而不是那些普通的一级学会或公司资助的普通比赛所能比拟。在团队中，以能者多劳作为分工依据。项目中，本人既是科研基金项目负责人、基金申报文件的撰写者，又是项目研发人，科研成果展示人及论文成果撰稿人。 </p>
+<p>   实现原理：该项目借助了常见的硬件设备，如智能手机摄像头，进行图片数据采集，然后将采集回来的数据转化为灰度图，再通过阈值化、形态学操作、提取轮廓等一系列操作，进行图像分割（遗传 FCM 聚类算法），得到特征值，计算 RIOD，最后得到相应的浓度值，并通过相应的程序代码，转化为可视化界面。<br>   核心技术：<br>   1、图形图像处理技术对金标试纸的数据采集。<br>   2、JNI接口调用C++编写的图像处理算法对试纸条图片进行图像处理<br>   3、图像处理算法中采用遗传快速FCM聚类算法进行图像分割<br>   4、灰度值的特性到特征值的转换。<br>   5、RIOD值、浓度值的计算。<br>   应用领域：在医学方面可以检测瘦肉精、乙肝病毒、禽流感、甲型流感、鼠疫、寄生虫、艾滋病等；在农业方面，可以检测水质的酸碱度、土壤与肥料、农药残留物等；在工业方面，水质污染的检测，内置接地回路PH值检测，抗氢氟酸PH电极检测等，应用的场景也非常多，如:化工、纺织、冶金等领域的化学反应中，均需要对PH值进行随时的抽样检测。 </p>
+<p>   项目二、</p>
+<p>   （1）Special Funds for the Cultivation of Guangdong College Students’ Scientific and Technological Innovation.（“Climbing Program” Special Funds.）,The Natural Science Fund Project<br>   Scientific Research Project，Project Name：A Gesture Recognition and K-means Calculation-Based Design of the Safety Companion Application for Elderly People，Project Number: pdjh2017b0838  </p>
+<p>   起止年月：2017 年 4 月 — 2017 年 12 月），项目已于 2017 年 12 月顺利完成和科研结题。</p>
+<p>   （2）2016年广东大学生创新创业计划训练项目立项，项目编号：201612574003，1万元。</p>
+<p>   起止年月：2016 年 4 月 — 2016 年 12 月），项目已于 2016 年 12 月顺利完成和科研结题。</p>
+<p>   基于姿态识别与k-means聚类算法的老年人安全伴侣是一款关爱老年人产品，它具有心率、血压、收音机、老人跌倒姿态识别、障碍物距离检测、手电筒、定时提醒等多种多样老年人常用功能，为老年人用户带来了一份快乐的同时，也为年轻人带来了一份安心。</p>
+<p>   实现原理：以项目的其中一个功能为例，对X、Y、Z方向的三轴加速度传感器采集的数据进行预处理（去噪），再通过加速度数值方向分量校正、加窗、小波分解、特征值提取融合，得到特征值，并根据特征选择搜索特征子集，经过学习算法中选择出好的特征子集，放入SVM分类器，最后识别出结果。其中出现不好的特征子集，程序会重新返回到特征选择搜索模块，特征评价模块对特征选择搜索模块做出特征值的性能评价，学习算法则运用数学上的思想，类似于二分法，不断的向特征评价提出“假设”，通过不断的迭代运算，使得结果越来越逼近于最优解。在特征提取融合模块中，程序会分别做两件事，一是进行特征提取融合，二是生成每个类的类模板，计算训练类模板和所有样本间的距离，训练SVM分类器并反馈检测数据给检测分析库。而检测分析库的数据，则与华南理工大学整理的SCUT-NAA数据库定期内不断做对比优化，完善服务器端的人体动作数据库 </p>
+<p>   奖项成果：2017年广东大学生科技创新专项培育资金科研立项，2016年广东大学生创新创业计划训练项目立项资助(可通过项目名称百度检索到政府公示文件)。另第一作者发有科研论文两篇，一篇被首届中文核心期刊收录，一篇被国家双奖期刊收录。且大赛是由教育部、团中央等等部门推动进行，科研项目基金是由省财政厅出资资助，全国所有985/211名校均参与，含金量极高，而不是那些普通的一级学会或公司资助的普通比赛所能比拟。该科研成果（第一作者）所发论文一篇是首届中文核心期刊，该期刊收录的文章具备评比教授的高级职称资格（不是所有期刊的论文都可以评比高级（教授）职称资格），另一篇科研论文（第一作者）发表在国家双奖期刊（即在国家重点期刊里再评出来的双奖），且可在中国知网查验真伪。在团队中，以能者多劳作为分工依据。项目中，本人既是科研基金项目负责人、基金申报文件的撰写者，又是项目研发人，科研成果展示人及论文成果撰稿人。 </p>
+<p>   核心技术：<br>   1、姿态识别数据采集及检测模块的设计与实现。<br>   2、小波分解加窗数据及特征值提取模块的编写与实现。<br>   3、特征值选择和学习算法的分析选择模块编写。<br>   4、手机端应用程序开发。<br>   5、人机交互界面的优化。 </p>
+<p>   项目三、<br>   “知心睡眠”——大学生睡眠检测APP<br>   2017年广东大学生创新创业计划训练项目立项，项目编号：201712574011，1万元。<br>   起止年月：2017 年 4 月 — 2017 年 12 月），项目已于 2017 年 12 月顺利完成和科研结题。<br>   项目介绍：一款通过传感器检测和分析睡眠情况并给出专业建议以及定制化推送符合心理学音乐的安卓应用。</p>
+<p>   项目四、<br>   《唯美酷跑》手游已上线苹果商店（Apple Store应用描述里留了作者简介与联系方式），该手游目前通过由教育部高等教育司、苹果公司主办的移动应用创新赛选拔，获得2017年苹果公司出资提供的苹果夏令营项目辅导资格。<br>   大赛是由中国教育部、苹果公司主办，国内985/211名校均有参与，且美国UIUC（美国公立三巨头）、新加坡SUTD、香港理工大学等名校均投来了参赛作品，国际性的赛事，含金量极高，而不是那些普通的一级学会或公司资助的普通比赛所能比拟。<br>   项目中，本人既是参赛项目负责人、比赛申报文件的撰写者，又是项目研发人，项目成果展示人。<br>   唯美酷跑的程序实现注重高内聚低耦合的开发思想，其功能类主要分为：<br>   1、物理标识类：利用二进制的位或比较，判断物理环境与角色的碰撞效果。<br>   2、角色类：遍历图片，实现角色奔跑的四段动画（四组动画图）的切换。<br>   3、道具生成工厂类：利用IOS特有的定时器，控制道具出现时间，随机数控制道具出现数量，使得道具在屏幕间不规则出现。<br>   4、游戏背景类：使用三个可拼接的背景图片，使其在x坐标规律性递减，通过背景的移动使得人物感觉是在从左往右跑，同时当第一张图片超出屏幕区域时，第二张图片正处于屏幕之中，此时，消除第一张图片所占用的栈内存空间，从而在栈内存里分配一个新的图片存储空间，即第三张图片，通过图片的销毁与生成，如此循环，使得背景实现无缝连接效果。<br>   5、游戏场景类：利用物理标识类判断角色与场景的关系，从而实现游戏的特色效果。<br>   6、平台类：随机数产生左中右三部分拼接部分，利用坐标关系实现平台缝接。<br>   7、平台工厂类：平台类的x坐标产生以及内存的创建与销毁，在这个类完成。<br>   8、物理碰撞系统：场景的物理标识间进行位或运算得到的值，与角色和平台之间进行位或运算得到的值进行比较，从而确定物体间是否有碰撞，并且在游戏场景类中，对碰撞事件进行分析，以及做出代码上的处理。<br>   责任描述：<br>   独立完成整个IOS项目开发，所有类的编写（使用swift语言，基于Xcode开发）</p>
 <p>感谢生命中能够遇到你们:</p>
 <p>   感谢生命中能够遇到你们，在成长，探索的路上，一直在默默的给唯美指点迷津和提供帮助。腾讯《王者荣耀》技术总监邓君，微软（中国）技术经理、泰课在线老板张文，游戏蛮牛黄钧任，将Unity引进中国的Unity中国负责人、中国第一本《Unity3D游戏开发》作者宣雨松，亚马逊游戏开发畅销书排行榜第一名《使用C#和Unity开发多平台游戏》作者蔡俊鸿，中华英才网、领英HR雅静，指导中国代表队浙大校队拿下ACM国际程序设计大赛全球总决赛第一名的浙江大学计算机学院院长陈越女神，浙江大学计算机学院主任张克俊教授。佛山日报刘慧莹，佛山电视台严梓菁、湛江日报李莉、中央电视台撒贝宁、清华大学贾荣宽、ACM亚洲区域赛冠军杨思翔、邓丝雨。</p>
 
@@ -442,7 +458,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                    <a href="/2016/05/12/AndroidTextView/">Android中TextView的常见属性</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
                 </span>
             </li>
             
@@ -454,31 +476,25 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2015/04/23/Multithreading/">多线程</a>
+                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
                 </span>
             </li>
             
@@ -490,7 +506,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/06/ToggleButton/">ToggleButton开关按钮</a>
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
                 </span>
             </li>
             
@@ -515,9 +531,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 12.341956236395648px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 9.582384837038482px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 14.575826396592298px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 12.128664734353581px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
