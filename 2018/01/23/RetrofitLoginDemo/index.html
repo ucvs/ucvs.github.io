@@ -905,6 +905,41 @@ public class MyApplication extends Application {
     }  
 }  
 </code></pre><p>别忘了调用MyApplication继承Application类的时候，为了MyApplication类能生效，在AndroidManifest.xml的application标签的name属性处设置值为name=”.MyApplication”,如图：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/1.png" alt=""></p>
+<p>A页面跳B页面传值</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/2.png" alt=""></p>
+<p>定义一个类，继承Application，这个类在App启动时启动，结束时结束</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/3.png" alt=""></p>
+<p>如果把body放在MyApplication里，则app销毁之前都在</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/4.png" alt=""></p>
+<p>该类内的值要确保不会有空指针，外部调用</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/5.png" alt=""></p>
+<p>其他类用</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/6.png" alt=""></p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/7.png" alt=""></p>
+<p>数据存取的方法</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/8.png" alt=""></p>
+<p>进一步提取公共部分</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/9.png" alt=""></p>
+<p>提取后调用发生了变化</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/10.png" alt=""></p>
+<p>如果十几个类都调用了userInfo，修改时候非常麻烦，提取公共部分，写个类Constant.java,修饰成静态的final</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/11.png" alt=""></p>
+<p>外部调用</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/12.png" alt=""></p>
+<p>这样就写活了</p>
+<p>那我每次都要 </p>
+<pre><code>String userInfo = MyApplication.sSpUtil.getString(Constant.USERINFO);  
+User u = MyApplication.sGson.fromJson(userInfo,User.class);  
+</code></pre><p>这样写非常麻烦</p>
+<p>我们可以吧这个方法写在application里</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/13.png" alt=""></p>
+<p>用的时候</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/14.png" alt=""></p>
+<p>万一你还要存 银行卡信息 或者别的信息</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RetrofitLoginDemo/15.png" alt=""></p>
+<p>项目Demo：</p>
+<p><a href="https://download.csdn.net/download/weimeig/10423816" target="_blank" rel="noopener">https://download.csdn.net/download/weimeig/10423816</a></p>
 
     </div>
 </article>
@@ -1030,19 +1065,19 @@ public class MyApplication extends Application {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/09/23/Gson/">Gson数据解析</a>
+                    <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
                 </span>
             </li>
             
@@ -1064,13 +1099,7 @@ public class MyApplication extends Application {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/05/12/AndroidTextView/">Android中TextView的常见属性</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2015/04/20/Interface/">接口</a>
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
                 </span>
             </li>
             
@@ -1088,13 +1117,13 @@ public class MyApplication extends Application {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
                 </span>
             </li>
             
@@ -1106,19 +1135,25 @@ public class MyApplication extends Application {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/01/TableLayout/">TableLayout表格布局</a>
+                    <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
                 </span>
             </li>
             
@@ -1143,9 +1178,9 @@ public class MyApplication extends Application {
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 12.630544142884057px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 9.431169253520293px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 15.833823417057406px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 8.900802723084244px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

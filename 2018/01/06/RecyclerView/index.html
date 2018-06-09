@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习） | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-01-06
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-01-06
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、添加依赖</p>
+<pre><code>    dependencies {  
+    compile &apos;com.android.support:recyclerview-v7:26.1.0&apos;  
+}  
+</code></pre><p>点击右上角Sync Now</p>
+<p>不会添加依赖或添加依赖出现错误，请见这篇文章</p>
+<p><a href="https://blog.csdn.net/weimeig/article/details/80244059" target="_blank" rel="noopener">https://blog.csdn.net/weimeig/article/details/80244059</a></p>
+<p>二、列表效果实现</p>
+<p>(一)、为RecyclerView添加填错数据的item</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RecyclerView/1.png" alt=""></p>
+<p>1、  cardElevation:设置阴影的大小</p>
+<p>2、  cardBackgroundColor:卡片布局的背景颜色</p>
+<p>3、  cardCornerRadius：卡片布局的圆角的大小</p>
+<p>4、  conentPadding：卡片布局和内容之间的距离</p>
+<p>5、android:clickable=”true”</p>
+<p>6、android:foreground=”?android:attr/selectableItemBackground”设置点击的水波纹效果</p>
+<p>7、cardUseCompatPadding:是否设置内边距</p>
+<p>item_view.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.v7.widget.CardView  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;  
+
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:layout_gravity=&quot;center&quot;  
+
+    app:cardBackgroundColor=&quot;#eee&quot;  
+    app:cardCornerRadius=&quot;10dp&quot;  
+    app:contentPadding=&quot;10dp&quot;  
+    app:cardElevation=&quot;10dp&quot;  
+    app:cardUseCompatPadding=&quot;true&quot;&gt;  
+
+
+    &lt;ImageView  
+        android:id=&quot;@+id/img_icon&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:src=&quot;@mipmap/ic_launcher&quot;  
+        android:layout_gravity=&quot;center&quot;/&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/tv_name&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;地中海&quot;  
+        android:textSize=&quot;20sp&quot;  
+        android:textColor=&quot;#716f80&quot;  
+        android:layout_gravity=&quot;center_horizontal&quot;  
+        /&gt;  
+
+&lt;/android.support.v7.widget.CardView&gt;  
+</code></pre><p>(二)、创建使用RecyclerView的布局xml</p>
+<p>activitity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:context=&quot;com.administrator.cardvieweaxmple.MainActivity&quot;&gt;  
+
+    &lt;android.support.v7.widget.RecyclerView  
+        android:id=&quot;@+id/recyclerview&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;/android.support.v7.widget.RecyclerView&gt;  
+
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>(三)、创建数据的实体类</p>
+<p>CityEntity.java</p>
+<pre><code>package com.administrator.cardvieweaxmple;  
+
+/** 
+ * Created by Administrator on 2018/5/12. 
+ */  
+
+public class CityEntity {  
+    int iconId;  
+    String name;  
+
+    public CityEntity(int iconId, String name) {  
+        this.iconId = iconId;  
+        this.name = name;  
+    }  
+
+    public int getIconId() {  
+        return iconId;  
+    }  
+
+    public void setIconId(int iconId) {  
+        this.iconId = iconId;  
+    }  
+
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+}  
+</code></pre><p>(四)、创建生成模拟数据的工具类</p>
+<p>DataUtil.java</p>
+<pre><code>package com.administrator.cardvieweaxmple;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/12. 
+ * 定义数据源 
+ */  
+
+public class DataUtil {  
+    public static List&lt;CityEntity&gt; getData(){  
+        List&lt;CityEntity&gt; cityEntities = new ArrayList&lt;&gt;();  
+        for(int i = 0 ;i&lt;10;i++){  
+            CityEntity city = new CityEntity(R.mipmap.ic_launcher,&quot;地中海&quot;);  
+            cityEntities.add(city);  
+            CityEntity city2 = new CityEntity(R.mipmap.ic_launcher,&quot;日韩线&quot;);  
+            cityEntities.add(city2);  
+            CityEntity city3 = new CityEntity(R.mipmap.ic_launcher,&quot;旅游热线&quot;);  
+            cityEntities.add(city3);  
+        }  
+        return cityEntities;  
+    }  
+}  
+</code></pre><p>(五)、界面引用处设置RecyclerView的适配器和调用</p>
+<p>MainActivity.java</p>
+<pre><code>package com.administrator.cardvieweaxmple;  
+
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.support.v7.widget.LinearLayoutManager;  
+import android.support.v7.widget.RecyclerView;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.ImageView;  
+import android.widget.TextView;  
+
+import java.util.List;  
+
+public class MainActivity extends AppCompatActivity {  
+
+
+    private RecyclerView mRecyclerView;  
+    private List&lt;CityEntity&gt; cities;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview);  
+        cities  = DataUtil.getData();  
+        //设置RecyclerView布局的样式 new LinearLayoutManager()列表 new GridLayoutManager()网格 new StaggeredGridLayoutManager()瀑布流  
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));  
+        //将适配器设置给控件  
+        mRecyclerView.setAdapter(new XueXiAdapter());  
+    }  
+    class XueXiAdapter extends RecyclerView.Adapter&lt;XueXiViewHolder&gt;{//这里的泛型使用刚才定义的XueXiViewHolder即可实现接收  
+
+        @Override  
+        public XueXiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {  
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_view,null);  
+            return new XueXiViewHolder(view);  
+        }  
+
+        @Override  
+         public void onBindViewHolder(XueXiViewHolder holder, int position) {//这里的holder使用刚才定义的XueXiViewHolder即可实现接收  
+            CityEntity city = cities.get(position);  
+            holder.mImgIcon.setImageResource(city.getIconId());  
+            holder.mTvName.setText(city.getName());  
+        }  
+
+        @Override  
+        public int getItemCount() {  
+            return cities.size();  
+        }  
+    }  
+
+    class XueXiViewHolder extends RecyclerView.ViewHolder{  
+
+        ImageView mImgIcon;  
+        TextView mTvName;  
+        public XueXiViewHolder(View itemView) {  
+            super(itemView);  
+            mImgIcon = (ImageView)itemView.findViewById(R.id.img_icon);  
+            mTvName = (TextView)itemView.findViewById(R.id.tv_name);  
+        }  
+    }  
+}  
+</code></pre><p>三、瀑布流效果实现</p>
+<p>直接在调用的页面，如本Demo中调用的页面MainActivity.java中的onCreate()方法里面增加</p>
+<pre><code>mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));//瀑布流 参数1：列数。参数2：方向  
+</code></pre><p>即可实现瀑布流效果</p>
+<p>但是，这个瀑布流过于规则了，那么，要怎么打乱瀑布流的出现效果实现不规则呢？</p>
+<p>创建瀑布流分割方法XueXiItemDecoation()，继承RecyclerView.ItemDecoration();</p>
+<pre><code>/** 
+     * 设置分割线的效果 
+     */  
+    class XueXiItemDecoation extends RecyclerView.ItemDecoration{  
+        int space;  
+        public XueXiItemDecoation(int space){  
+            this.space = space;  
+        }  
+        @Override  
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {  
+            super.getItemOffsets(outRect, view, parent, state);  
+
+            /** 
+             * 设置交错的效果 
+             */  
+            //获取子条目View的位置  
+            if(parent.getChildAdapterPosition(view)%2==0){//如果view是第2条  
+                outRect.top=50;  
+            }else{  
+                outRect.top = space;  
+            }  
+            //设置分割线四个方向的距离  
+//            outRect.top = space;  
+            outRect.bottom = space;  
+            outRect.left = space;  
+            outRect.right = space;  
+        }  
+    }  
+</code></pre><p>onCreate方法中调用</p>
+<pre><code>//添加一个子条目的分割线  
+        mRecyclerView.addItemDecoration(new XueXiItemDecoation(20));  
+</code></pre><p>完整代码如下：MainActivity.java</p>
+<pre><code>package com.administrator.cardvieweaxmple;  
+
+import android.graphics.Rect;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.support.v7.widget.LinearLayoutManager;  
+import android.support.v7.widget.RecyclerView;  
+import android.support.v7.widget.StaggeredGridLayoutManager;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.ImageView;  
+import android.widget.TextView;  
+
+import java.util.List;  
+
+public class MainActivity extends AppCompatActivity {  
+
+
+    private RecyclerView mRecyclerView;  
+    private List&lt;CityEntity&gt; cities;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview);  
+        cities  = DataUtil.getData();  
+        //设置RecyclerView布局的样式 new LinearLayoutManager()列表 new GridLayoutManager()网格 new StaggeredGridLayoutManager()瀑布流  
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));//瀑布流 参数1：列数。参数2：方向  
+        //添加一个子条目的分割线  
+        mRecyclerView.addItemDecoration(new XueXiItemDecoation(20));  
+        //将适配器设置给控件  
+        mRecyclerView.setAdapter(new XueXiAdapter());  
+    }  
+
+    /** 
+     * 设置分割线的效果 
+     */  
+    class XueXiItemDecoation extends RecyclerView.ItemDecoration{  
+        int space;  
+        public XueXiItemDecoation(int space){  
+            this.space = space;  
+        }  
+        @Override  
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {  
+            super.getItemOffsets(outRect, view, parent, state);  
+
+            /** 
+             * 设置交错的效果 
+             */  
+            //获取子条目View的位置  
+            if(parent.getChildAdapterPosition(view)%2==0){//如果view是第2条  
+                outRect.top=50;  
+            }else{  
+                outRect.top = space;  
+            }  
+            //设置分割线四个方向的距离  
+//            outRect.top = space;  
+            outRect.bottom = space;  
+            outRect.left = space;  
+            outRect.right = space;  
+        }  
+    }  
+    class XueXiAdapter extends RecyclerView.Adapter&lt;XueXiViewHolder&gt;{//这里的泛型使用刚才定义的XueXiViewHolder即可实现接收  
+
+        @Override  
+        public XueXiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {  
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_view,null);  
+            return new XueXiViewHolder(view);  
+        }  
+
+        @Override  
+         public void onBindViewHolder(XueXiViewHolder holder, int position) {//这里的holder使用刚才定义的XueXiViewHolder即可实现接收  
+            CityEntity city = cities.get(position);  
+            holder.mImgIcon.setImageResource(city.getIconId());  
+            holder.mTvName.setText(city.getName());  
+        }  
+
+        @Override  
+        public int getItemCount() {  
+            return cities.size();  
+        }  
+    }  
+
+    class XueXiViewHolder extends RecyclerView.ViewHolder{  
+
+        ImageView mImgIcon;  
+        TextView mTvName;  
+        public XueXiViewHolder(View itemView) {  
+            super(itemView);  
+            mImgIcon = (ImageView)itemView.findViewById(R.id.img_icon);  
+            mTvName = (TextView)itemView.findViewById(R.id.tv_name);  
+        }  
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/16/CardView/">CardView实现列表效果（含圆角阴影等效果）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2018/01/06/RecyclerView/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/06/RecyclerView/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/06/RecyclerView/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 10.562107255953247px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.356967003104367px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>OrmLite数据库操作框架 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>OrmLite数据库操作框架</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-01-02
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-01-02
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、运行前配置</p>
+<p>在<a href="http://ormlite.com/releases/下载两个jar包" target="_blank" rel="noopener">http://ormlite.com/releases/下载两个jar包</a></p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/OrmLite/1.png" alt=""></p>
+<p>打开AndroidStudio，选择</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/OrmLite/2.png" alt=""></p>
+<p>ctrl+v将jar包复制进libs文件夹下</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/OrmLite/3.png" alt=""></p>
+<p>点击ctrl键，鼠标左键选择两个jar包后，鼠标右键，选择</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/OrmLite/4.png" alt=""></p>
+<p>二、编写实体类</p>
+<p>Student.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import com.j256.ormlite.field.DataType;  
+import com.j256.ormlite.field.DatabaseField;  
+import com.j256.ormlite.table.DatabaseTable;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+
+@DatabaseTable(tableName = &quot;tb_student&quot;)//tableName可以不写，不写默认表名是类名即Student，写了是改写表名  
+public class Student {  
+    @DatabaseField(generatedId = true)//字段              generatedId = true自动增长标识列  
+    private int id;  
+    @DatabaseField(columnName = &quot;name&quot;,dataType = DataType.STRING,canBeNull = false)//列名      canBeNull = false不能为空  
+    private String name;  
+    @DatabaseField  //使用默认属性  
+    private int age;  
+    @DatabaseField  
+    private String phone;  
+
+    public Student() {  
+    }  
+
+    public Student(String name, int age, String phone) {  
+        this.name = name;  
+        this.age = age;  
+        this.phone = phone;  
+    }  
+
+    public int getId() {  
+        return id;  
+    }  
+
+    public void setId(int id) {  
+        this.id = id;  
+    }  
+
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+
+    public int getAge() {  
+        return age;  
+    }  
+
+    public void setAge(int age) {  
+        this.age = age;  
+    }  
+
+    public String getPhone() {  
+        return phone;  
+    }  
+
+    public void setPhone(String phone) {  
+        this.phone = phone;  
+    }  
+
+    @Override  
+    public String toString() {  
+        return &quot;Student{&quot; +  
+                &quot;id=&quot; + id +  
+                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +  
+                &quot;, age=&quot; + age +  
+                &quot;, phone=&apos;&quot; + phone + &apos;\&apos;&apos; +  
+                &apos;}&apos;;  
+    }  
+}  
+</code></pre><p>三、实现数据库帮助类</p>
+<p>DatabaseHelper.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import android.content.Context;  
+import android.database.sqlite.SQLiteDatabase;  
+
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;  
+import com.j256.ormlite.support.ConnectionSource;  
+import com.j256.ormlite.table.TableUtils;  
+
+import java.sql.SQLException;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+
+public class DatabaseHelper extends OrmLiteSqliteOpenHelper {  
+    private DatabaseHelper(Context context){  
+        super(context,&quot;test.db&quot;,null,1);//当版本值变化时， onUpgrade方法会被调用  
+    }  
+    private static DatabaseHelper sHelper = null;  
+
+    public static synchronized DatabaseHelper getInstance(Context context){  
+        if (sHelper == null){  
+            sHelper = new DatabaseHelper(context);  
+        }  
+        return sHelper;  
+    }  
+    @Override  
+    public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {  
+        try {  
+            /** 
+             * 建表 
+             */  
+            TableUtils.clearTable(connectionSource,Student.class);//    connectionSource连接源，传入的实体类建表  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+
+    @Override  
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {  
+        try {  
+            TableUtils.dropTable(connectionSource,Student.class,true);//参数3：是否忽略错误  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+}  
+</code></pre><p>四、增删改查测试</p>
+<p>建立单元测试用例类</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/OrmLite/5.png" alt=""></p>
+<p>OrmLiteTest.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import android.test.InstrumentationTestCase;  
+import android.util.Log;  
+
+import com.j256.ormlite.dao.Dao;  
+import com.j256.ormlite.stmt.UpdateBuilder;  
+
+import java.sql.SQLException;  
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+
+public class OrmLiteTest extends InstrumentationTestCase {  
+
+    public DatabaseHelper getHelper(){  
+        return DatabaseHelper.getInstance(this.getInstrumentation().getTargetContext());//this.getInstrumentation().getTargetContext()获取测试对象的上下文  
+    }  
+
+    public Dao&lt;Student,Integer&gt; getStudentDao() throws SQLException {//参数1：对象类型，参数2：ID类型  
+        return getHelper().getDao(Student.class);//创建学生表的Dao数据访问对象  
+    }  
+
+    /** 
+     * 添加 
+     * @throws SQLException 
+     */  
+    public void testInsert() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+        Student stu1 = new Student(&quot;测试1&quot;,21,&quot;8888888888&quot;);  
+        Student stu2 = new Student(&quot;测试2&quot;,22,&quot;1111111111&quot;);  
+        Student stu3 = new Student(&quot;测试3&quot;,23,&quot;2222222222&quot;);  
+        stuDao.create(stu1);  
+        stuDao.create(stu2);  
+        stuDao.create(stu3);  
+//        stuDao.createOrUpdate(stu1);//创建或更新  
+    }  
+    /** 
+     * 查询 
+     */  
+    public void testQuery() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+
+        List&lt;Student&gt; students = stuDao.queryForAll();  
+        for (Student stu:students){  
+            Log.i(&quot;test&quot;,stu.toString());  
+        }  
+
+//        Student stu1 = stuDao.queryForId(3);//根据ID查询  
+//        Log.i(&quot;test&quot;,&quot;ForId&quot;+stu1.toString());  
+//  
+//        List&lt;Student&gt; students1 = stuDao.queryForEq(&quot;name&quot;,&quot;测试2&quot;);  
+//        for(Student stu : students1){  
+//            Log.i(&quot;test&quot;,&quot;stu1:&quot;+stu.toString());  
+//        }  
+    }  
+
+    /** 
+     * 更新 
+     */  
+    public void testUpdate() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+        UpdateBuilder update = stuDao.updateBuilder();  
+        update.setWhere(update.where().eq(&quot;phone&quot;,&quot;8888888888&quot;).and().gt(&quot;age&quot;,22));//大于多少gt，小于多少lt  
+        update.updateColumnValue(&quot;name&quot;,&quot;测试更新&quot;);  
+        update.updateColumnValue(&quot;phone&quot;,&quot;100&quot;);  
+        update.update();  
+
+//        stuDao.updateRaw(&quot;update tb_student set name=&apos;测试更新2&apos;,phone = &apos;119&apos; where id=?&quot;,&quot;1&quot;);  
+    }  
+
+    /** 
+     * 删除 
+     */  
+    public void testDelete() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+        stuDao.deleteById(1);//删除Id为1的元素  
+    }  
+
+}  
+</code></pre><p>四、一对多的关系</p>
+<p>(一)、DatabaseHelper.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import android.content.Context;  
+import android.database.sqlite.SQLiteDatabase;  
+
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;  
+import com.j256.ormlite.support.ConnectionSource;  
+import com.j256.ormlite.table.TableUtils;  
+
+import java.sql.SQLException;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+
+public class DatabaseHelper extends OrmLiteSqliteOpenHelper {  
+    private DatabaseHelper(Context context){  
+        super(context,&quot;test.db&quot;,null,5);//当版本值变化时， onUpgrade方法会被调用  
+    }  
+    private static DatabaseHelper sHelper = null;  
+
+    public static synchronized DatabaseHelper getInstance(Context context){  
+        if (sHelper == null){  
+            sHelper = new DatabaseHelper(context);  
+        }  
+        return sHelper;  
+    }  
+    @Override  
+    public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {  
+        try {  
+            /** 
+             * 建表 
+             */  
+            TableUtils.clearTable(connectionSource,Student.class);//    connectionSource连接源，传入的实体类建表  
+            TableUtils.clearTable(connectionSource,School.class);  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+
+    @Override  
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {  
+        try {  
+            TableUtils.dropTable(connectionSource,Student.class,true);//参数3：是否忽略错误  
+            TableUtils.dropTable(connectionSource,School.class,true);  
+        } catch (SQLException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+}  
+</code></pre><p>(二)、School.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import com.j256.ormlite.field.DataType;  
+import com.j256.ormlite.field.DatabaseField;  
+import com.j256.ormlite.field.ForeignCollectionField;  
+import com.j256.ormlite.table.DatabaseTable;  
+
+import java.util.Collection;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+@DatabaseTable(tableName = &quot;tb_school&quot;)  
+public class School {  
+    @DatabaseField(generatedId = true)  
+    private int id;  
+    @DatabaseField  
+    private String name;  
+    @DatabaseField  
+    private String iocation;  
+    @ForeignCollectionField//外键集合  
+    private Collection&lt;Student&gt; students;  
+
+    public School(String name, String iocation) {  
+        this.name = name;  
+        this.iocation = iocation;  
+    }  
+    public School() {}//习惯性增加无参构造方法，不然可能有错  
+    public int getId() {  
+        return id;  
+    }  
+
+    public void setId(int id) {  
+        this.id = id;  
+    }  
+
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+
+    public String getIocation() {  
+        return iocation;  
+    }  
+
+    public void setIocation(String iocation) {  
+        this.iocation = iocation;  
+    }  
+
+    public Collection&lt;Student&gt; getStudents() {  
+        return students;  
+    }  
+
+    public void setStudents(Collection&lt;Student&gt; students) {  
+        this.students = students;  
+    }  
+
+    @Override  
+    public String toString() {  
+        return &quot;School{&quot; +  
+                &quot;id=&quot; + id +  
+                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +  
+                &quot;, iocation=&apos;&quot; + iocation + &apos;\&apos;&apos; +  
+                &quot;, students=&quot; + students +  
+                &apos;}&apos;;  
+    }  
+}  
+</code></pre><p>(三)、Student.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import com.j256.ormlite.field.DataType;  
+import com.j256.ormlite.field.DatabaseField;  
+import com.j256.ormlite.table.DatabaseTable;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+
+@DatabaseTable(tableName = &quot;tb_student&quot;)//tableName可以不写，不写默认表名是类名即Student，写了是改写表名  
+public class Student {  
+    @DatabaseField(generatedId = true)//字段              generatedId = true自动增长标识列  
+    private int id;  
+    @DatabaseField(columnName = &quot;name&quot;,dataType = DataType.STRING,canBeNull = false)//列名      canBeNull = false不能为空  
+    private String name;  
+    @DatabaseField  //使用默认属性  
+    private int age;  
+    @DatabaseField  
+    private String phone;  
+
+    @DatabaseField(columnName = &quot;school_id&quot;,foreign = true,foreignAutoRefresh = true)//foreign = true外键 foreignAutoRefresh刷新查询学生时顺带把学校信息填充  
+    private School school;  
+
+    public Student() {//习惯性增加无参构造方法，不然可能有错  
+    }  
+
+    public Student(String name, int age, String phone ,School school) {  
+        this.name = name;  
+        this.age = age;  
+        this.phone = phone;  
+        this.school = school;  
+    }  
+
+    public int getId() {  
+        return id;  
+    }  
+
+    public void setId(int id) {  
+        this.id = id;  
+    }  
+
+    public School getSchool() {  
+        return school;  
+    }  
+
+    public void setSchool(School school) {  
+        this.school = school;  
+    }  
+
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+
+    public int getAge() {  
+        return age;  
+    }  
+
+    public void setAge(int age) {  
+        this.age = age;  
+    }  
+
+    public String getPhone() {  
+        return phone;  
+    }  
+
+    public void setPhone(String phone) {  
+        this.phone = phone;  
+    }  
+
+    @Override  
+    public String toString() {  
+        return &quot;Student{&quot; +  
+                &quot;id=&quot; + id +  
+                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +  
+                &quot;, age=&quot; + age +  
+                &quot;, phone=&apos;&quot; + phone + &apos;\&apos;&apos; +  
+                &apos;}&apos;;  
+    }  
+}  
+</code></pre><p>(四)、OrmLiteTest.java</p>
+<pre><code>package com.administrator.ormlitedemo;  
+
+import android.test.InstrumentationTestCase;  
+import android.util.Log;  
+
+import com.j256.ormlite.dao.Dao;  
+import com.j256.ormlite.stmt.UpdateBuilder;  
+
+import java.sql.SQLException;  
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/16. 
+ */  
+
+public class OrmLiteTest extends InstrumentationTestCase {  
+
+    public DatabaseHelper getHelper(){  
+        return DatabaseHelper.getInstance(this.getInstrumentation().getTargetContext());//this.getInstrumentation().getTargetContext()获取测试对象的上下文  
+    }  
+
+    public Dao&lt;Student,Integer&gt; getStudentDao() throws SQLException {//参数1：对象类型，参数2：ID类型  
+        return getHelper().getDao(Student.class);//创建学生表的Dao数据访问对象  
+    }  
+
+    /** 
+     * 添加 
+     * @throws SQLException 
+     */  
+    public void testInsert() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+        Dao&lt;School,Integer&gt; schDao = getShoolDao();  
+        School school = new School(&quot;北京大学&quot;,&quot;北京&quot;);  
+        Student stu1 = new Student(&quot;测试1&quot;,21,&quot;8888888888&quot;,school);  
+        Student stu2 = new Student(&quot;测试2&quot;,22,&quot;1111111111&quot;,school);  
+        Student stu3 = new Student(&quot;测试3&quot;,23,&quot;2222222222&quot;,school);  
+        schDao.create(school);  
+        stuDao.create(stu1);  
+        stuDao.create(stu2);  
+        stuDao.create(stu3);  
+//        stuDao.createOrUpdate(stu1);//创建或更新  
+    }  
+    public Dao&lt;School,Integer&gt; getShoolDao() throws SQLException {  
+        return getHelper().getDao(School.class);  
+    }  
+    /** 
+     * 查询 
+     */  
+    public void testQuery() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+
+        List&lt;Student&gt; students = stuDao.queryForAll();  
+        for (Student stu:students){  
+            Log.i(&quot;test&quot;,stu.toString()+stu.getSchool());  
+        }  
+
+        Dao&lt;School,Integer&gt; schDao = getShoolDao();  
+        List&lt;School&gt; schools = schDao.queryForAll();  
+        for (School s:schools){  
+            Log.i(&quot;test&quot;,s.toString());  
+            for(Student stu:s.getStudents()){  
+                Log.i(&quot;test&quot;,&quot;school stu:&quot;+stu);  
+            }  
+        }  
+//        Student stu1 = stuDao.queryForId(3);//根据ID查询  
+//        Log.i(&quot;test&quot;,&quot;ForId&quot;+stu1.toString());  
+//  
+//        List&lt;Student&gt; students1 = stuDao.queryForEq(&quot;name&quot;,&quot;测试2&quot;);  
+//        for(Student stu : students1){  
+//            Log.i(&quot;test&quot;,&quot;stu1:&quot;+stu.toString());  
+//        }  
+    }  
+
+    /** 
+     * 更新 
+     */  
+    public void testUpdate() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+        UpdateBuilder update = stuDao.updateBuilder();  
+        update.setWhere(update.where().eq(&quot;phone&quot;,&quot;8888888888&quot;).and().gt(&quot;age&quot;,22));//大于多少gt，小于多少lt  
+        update.updateColumnValue(&quot;name&quot;,&quot;测试更新&quot;);  
+        update.updateColumnValue(&quot;phone&quot;,&quot;100&quot;);  
+        update.update();  
+
+//        stuDao.updateRaw(&quot;update tb_student set name=&apos;测试更新2&apos;,phone = &apos;119&apos; where id=?&quot;,&quot;1&quot;);  
+    }  
+
+    /** 
+     * 删除 
+     */  
+    public void testDelete() throws SQLException {  
+        Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+        stuDao.deleteById(1);//删除Id为1的元素  
+    }  
+
+}  
+</code></pre><p>五、事务操作，批量操作</p>
+<pre><code> /** 
+     * 事务操作、批量操作 
+     * 保证事务的整体性，一旦出现异常，所有语句都不成功，只有全部都成功，才成功 
+     * @throws SQLException 
+     */  
+public void testTransaction() throws SQLException {  
+    final Dao&lt;Student,Integer&gt; stuDao = getStudentDao();  
+    final Student stu = new Student(&quot;测试事务&quot;,20,&quot;100&quot;,new School(&quot;清华大学&quot;,&quot;北京&quot;));  
+    TransactionManager.callInTransaction(getHelper().getConnectionSource(),  
+            new Callable&lt;Void&gt;() {  
+                @Override  
+                public Void call() throws Exception {  
+                    for(int i = 0 ;i&lt;20;i++){  
+                        stuDao.create(stu);  
+//                            if(i==10){  
+//                                throw  new SQLException(&quot;test....&quot;);  
+//                            }  
+                    }  
+                    return null;  
+                }  
+            });  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'OrmLite数据库操作框架'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/23/Multithreading/">多线程</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/01/TableLayout/">TableLayout表格布局</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/29/Java-MemInterCls/">成员内部类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/27/ExpandableListView/">ExpandableListView实现手风琴特效及其点击事件</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2018/01/02/OrmLite/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/02/OrmLite/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/02/OrmLite/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 13.633027049511767px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.924512418416077px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

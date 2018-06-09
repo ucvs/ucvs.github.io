@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>ExpandableListView实现手风琴特效及其点击事件 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>ExpandableListView实现手风琴特效及其点击事件</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/06/27/ExpandableListView/">ExpandableListView实现手风琴特效及其点击事件</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-06-27
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/06/27/ExpandableListView/">ExpandableListView实现手风琴特效及其点击事件</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-06-27
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>组条目布局</p>
+<p>item_elv_group.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/txt_group_data&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:textSize=&quot;28sp&quot;  
+        android:text=&quot;学习&quot;  
+        android:textColor=&quot;#423f4d&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>子条目布局</p>
+<p>item_elv_child.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/txt_child_data&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:textSize=&quot;20sp&quot;  
+        android:text=&quot;Activity生命周期&quot;  
+        android:textColor=&quot;#d69842&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>主布局</p>
+<p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:context=&quot;com.administrator.shoufengqindemo.MainActivity&quot;&gt;  
+
+    &lt;ExpandableListView  
+        android:id=&quot;@+id/elv_local_data&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:groupIndicator=&quot;@null&quot;&gt;  
+    &lt;/ExpandableListView&gt;  
+
+&lt;/RelativeLayout&gt;  
+</code></pre><p>设置groupIndicator属性去掉ExpandableListView 默认的箭头 </p>
+<p>用到ExpandableListView时有个箭头图标系统自带的在你自定义布局也不能去掉只要设置一个属性即可，如下：<br>settingLists.setGroupIndicator(null); 此处就是设置自定义的箭头图标的。置空则没有了。<br>也可以自定义但是位置还是在那个地方（不推荐）如下： </p>
+<p>首先，自定义一个expandablelistviewselector.xml文件：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;     
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;     
+     &lt;item android:state_expanded=&quot;true&quot; android:drawable=&quot;@drawable/expandablelistviewindicatordown&quot; /&gt;     
+      &lt;item android:drawable=&quot;@drawable/expandablelistviewindicator&quot; /&gt;    
+ &lt;/selector&gt;   &lt;span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;   
+an&gt;&lt;/span&gt;  
+</code></pre><p>在Java中设置</p>
+<pre><code>settingLists.setGroupIndicator(this.getResources().getDrawable(R.layout.expandablelistviewselector));     
+</code></pre><p>或xml设置</p>
+<pre><code>android:groupIndicator=&quot;@drawable/groupIndicator_selector&quot;    
+</code></pre><p>本地数据源</p>
+<p>LacalData,java</p>
+<pre><code>package com.administrator.shoufengqindemo;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/15. 
+ */  
+
+public class LocalData {  
+    /** 
+     * 获取列表组数据 
+     * @return 
+     */  
+    public static List&lt;String&gt; getGroupData(){  
+        List&lt;String&gt; groups = new ArrayList&lt;String&gt;();  
+        groups.add(&quot;学习&quot;);  
+        groups.add(&quot;看书&quot;);  
+        return groups;  
+    }  
+
+    /** 
+     * 获取子条目 
+     * @return 
+     */  
+    public static List&lt;List&lt;String&gt;&gt; getChildData(){  
+        List&lt;List&lt;String&gt;&gt; childs = new ArrayList&lt;List&lt;String&gt;&gt;();  
+        List&lt;String&gt; item1 = new ArrayList&lt;String&gt;();  
+        item1.add(&quot;Android属性动画&quot;);  
+        item1.add(&quot;Android Activity生命周期&quot;);  
+        childs.add(item1);  
+        List&lt;String&gt; item2 = new ArrayList&lt;String&gt;();  
+        item2.add(&quot;面向对象&quot;);  
+        item2.add(&quot;接口&quot;);  
+        item2.add(&quot;集合&quot;);  
+        childs.add(item2);  
+        return childs;  
+    }  
+}  
+</code></pre><p>装载数据适配器</p>
+<p>LocalAdapter.java</p>
+<pre><code>package com.administrator.shoufengqindemo;  
+
+/** 
+ * Created by Administrator on 2018/5/15. 
+ */  
+
+import android.content.Context;  
+import android.view.View;  
+import android.widget.TextView;  
+/* 
+本地数据适配器 
+ */  
+class LocalAdapter extends MyBaseAdapter {  
+
+    public LocalAdapter(Context context) {  
+        super(context);  
+    }  
+
+    @Override  
+    public View MyGroupView(int groupPosition, View groupView) {  
+        View view = minInflater.inflate(R.layout.item_elv_group, null);  
+        TextView txtTitle = (TextView) view.findViewById(R.id.txt_group_data);  
+        txtTitle.setText(getGroup(groupPosition));  
+        txtTitle.setPadding(30, 0, 0, 0);  
+        return view;  
+    }  
+
+    @Override  
+    public View MyChildView(int groupPosition, int childPosition, View childView) {  
+        View cView = minInflater.inflate(R.layout.item_elv_child, null);  
+        TextView txtContent = (TextView) cView.findViewById(R.id.txt_child_data);  
+        txtContent.setText(getChild(groupPosition,childPosition));  
+        txtContent.setPadding(30, 0, 0, 0);  
+        return cView;  
+    }  
+
+
+}  
+</code></pre><p>视图适配器</p>
+<p>MyBaseAdapter.java</p>
+<pre><code>package com.administrator.shoufengqindemo;  
+
+import android.content.Context;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.BaseExpandableListAdapter;  
+
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/15. 
+ */  
+
+public abstract class MyBaseAdapter extends BaseExpandableListAdapter {  
+    Context mContext;  
+    LayoutInflater minInflater;  
+    private List&lt;String&gt; groups;  
+    private List&lt;List&lt;String&gt;&gt; childs;  
+    public MyBaseAdapter(Context context){  
+        mContext=context;  
+        minInflater = LayoutInflater.from(mContext);  
+    }  
+
+    public void addNewData(List&lt;String&gt; groups,List&lt;List&lt;String&gt;&gt; childs){  
+        this.groups = groups;  
+        this.childs = childs;  
+    }  
+    /** 
+     *获取组的数量 
+     */  
+    @Override  
+    public int getGroupCount() {  
+        return groups.size();  
+    }  
+
+    /** 
+     * 获取组的具体内容 
+     */  
+    @Override  
+    public String getGroup(int groupPosition) {  
+        return groups.get(groupPosition);  
+    }  
+
+    /** 
+     * 获取组的id 
+     */  
+    @Override  
+    public long getGroupId(int groupPosition) {  
+        return 0;  
+    }  
+
+    /** 
+     * 获取组的视图 
+     */  
+    @Override  
+    public View getGroupView(int groupPosition, boolean isExpanded, View groupView, ViewGroup parent) {  
+        return MyGroupView(groupPosition,groupView);  
+    }  
+
+    /** 
+     * 获取子条目数量 
+     */  
+    @Override  
+    public int getChildrenCount(int groupPosition) {  
+        return childs.get(groupPosition).size();  
+    }  
+
+    /** 
+     * 获取具体的子条目 
+     */  
+    @Override  
+    public String getChild(int groupPosition, int childPosition) {  
+        return childs.get(groupPosition).get(childPosition);  
+    }  
+
+    /** 
+     * 获取子条目的视图 
+     */  
+    @Override  
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {  
+        return MyChildView(groupPosition,childPosition,convertView);  
+    }  
+
+    public abstract View MyGroupView(int groupPosition,  View grounpView);  
+    public abstract View MyChildView(int groupPosition, int childPosition , View childView);  
+
+    /** 
+     * 获取子条目的id 
+     */  
+    @Override  
+    public long getChildId(int groupPosition, int childPosition) {  
+        return 0;  
+    }  
+
+    @Override  
+    public boolean hasStableIds() {  
+        return false;  
+    }  
+
+    /** 
+     * 子集是否可选，true为可选，如子条目需要设置点击事件，则返回值应为true 
+     * @param groupPosition 
+     * @param childPosition 
+     * @return 
+     */  
+    @Override  
+    public boolean isChildSelectable(int groupPosition, int childPosition) {  
+        return true;  
+    }  
+}  
+</code></pre><p>主调用界面</p>
+<p>MainActivity.java</p>
+<pre><code>package com.administrator.shoufengqindemo;  
+
+import android.app.Activity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.ExpandableListView;  
+import android.widget.Toast;  
+
+public class MainActivity extends Activity {  
+
+    private ExpandableListView mElv;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        mElv = (ExpandableListView) this.findViewById(R.id.elv_local_data);  
+
+        //第二种方式获取对象  
+        //MainActivity继承ExpandableListActivity  
+//        mElv = this.getExpandableListView();  
+        loadLocal();  
+
+
+        /** 
+         *设置组的点击事件 
+         */  
+        mElv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {  
+            @Override  
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {  
+                Toast.makeText(MainActivity.this,&quot;您点击的是：&quot;+LocalData.getGroupData().get(groupPosition),Toast.LENGTH_SHORT).show();  
+                return false;  
+            }  
+        });  
+
+        /** 
+         * 设置子条目的点击事件 
+         * 注意，设置子条目点击事件时，应到适配器MyBaseAdapter中观察 
+         * isChildSelectable()方法设置的子集是否可选，可选应返回true 
+         */  
+        mElv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {  
+            @Override  
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {  
+                Toast.makeText(MainActivity.this, &quot;您点击的是：&quot; + LocalData.getChildData().get(groupPosition).get(childPosition), Toast.LENGTH_SHORT).show();  
+                return false;  
+            }  
+        });  
+    }  
+
+    /** 
+     *   加载本地数据 
+     */  
+    public void loadLocal(){  
+        LocalAdapter adapter = new LocalAdapter(this);  
+        //添加数据  
+        adapter.addNewData(LocalData.getGroupData(),LocalData.getChildData());  
+
+        mElv.setAdapter(adapter);  
+    }  
+}  
+</code></pre><p>效果如图：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ExpandableListView/1.gif" alt=""></p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'ExpandableListView实现手风琴特效及其点击事件'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/27/Java-AbstractParame/">抽象类名作为形式参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/02/RelLayoutAttri/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/13/ViewPagerOne/">【ViewPager学习1】ViewPager实现广告轮播图</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/16/CardView/">CardView实现列表效果（含圆角阴影等效果）</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2017/06/27/ExpandableListView/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2017/06/27/ExpandableListView/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2017/06/27/ExpandableListView/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 16.063621436619776px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 12.440249846736762px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
