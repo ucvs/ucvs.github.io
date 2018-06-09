@@ -260,6 +260,668 @@
         <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
 <p>Android仿今日头条首页的顶部标签栏和底部导航栏<br>先是底部导航栏TextView+ImageView+Fragment:</p>
 <p>效果图:</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/TodayHeadlineDemo/1.png" alt=""></p>
+<p>activity_main.xml布局:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot; android:orientation=&quot;vertical&quot;
+tools:context=&quot;com.myapplication.activity.MainActivity&quot;&gt;
+&lt;FrameLayout
+    android:id=&quot;@+id/fl_fragment_content&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:background=&quot;#bababa&quot;
+    android:layout_weight=&quot;1&quot;&gt;
+    &lt;!-- 存放四个Fragment--&gt;
+&lt;/FrameLayout&gt;
+
+&lt;!-- 底部的四个选项菜单--&gt;
+&lt;LinearLayout
+    android:background=&quot;#ffffff&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;49dp&quot;&gt;
+    &lt;!--四个部分都一样：ImageView + TextView--&gt;
+    &lt;RelativeLayout
+        android:id=&quot;@+id/rl_first_layout&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:gravity=&quot;center&quot;&gt;
+        &lt;ImageView
+            android:id=&quot;@+id/iv_first_home&quot;
+            android:src=&quot;@drawable/icon_homepage_selector&quot;
+            android:layout_width=&quot;24dp&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_height=&quot;24dp&quot; /&gt;
+        &lt;TextView
+            android:id=&quot;@+id/tv_first_home&quot;
+            android:textColor=&quot;@drawable/text_selector_color&quot;
+            android:text=&quot;首页&quot;
+            android:layout_below=&quot;@+id/iv_first_home&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_gravity=&quot;center_horizontal&quot;/&gt;
+    &lt;/RelativeLayout&gt;
+
+    &lt;RelativeLayout
+        android:id=&quot;@+id/rl_second_layout&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:gravity=&quot;center&quot;&gt;
+        &lt;ImageView
+            android:id=&quot;@+id/iv_second_match&quot;
+            android:src=&quot;@drawable/icon_matchpage_selector&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_width=&quot;24dp&quot;
+            android:layout_height=&quot;24dp&quot; /&gt;
+        &lt;TextView
+            android:id=&quot;@+id/tv_second_match&quot;
+            android:textColor=&quot;@drawable/text_selector_color&quot;
+            android:text=&quot;赛程&quot;
+            android:layout_below=&quot;@+id/iv_second_match&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_gravity=&quot;center_horizontal&quot;/&gt;
+    &lt;/RelativeLayout&gt;
+
+    &lt;RelativeLayout
+        android:id=&quot;@+id/rl_third_layout&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:gravity=&quot;center&quot;&gt;
+        &lt;ImageView
+            android:id=&quot;@+id/iv_third_recommend&quot;
+            android:src=&quot;@drawable/icon_recommendpage_selector&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_width=&quot;24dp&quot;
+            android:layout_height=&quot;24dp&quot; /&gt;
+        &lt;TextView
+            android:id=&quot;@+id/tv_third_recommend&quot;
+            android:textColor=&quot;@drawable/text_selector_color&quot;
+            android:text=&quot;推荐&quot;
+            android:layout_below=&quot;@+id/iv_third_recommend&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_gravity=&quot;center_horizontal&quot;/&gt;
+    &lt;/RelativeLayout&gt;
+
+    &lt;RelativeLayout
+        android:id=&quot;@+id/rl_four_layout&quot;
+        android:layout_width=&quot;0dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:gravity=&quot;center&quot;&gt;
+        &lt;ImageView
+            android:id=&quot;@+id/iv_four_mine&quot;
+            android:src=&quot;@drawable/icon_minepage_selector&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_width=&quot;24dp&quot;
+            android:layout_height=&quot;24dp&quot; /&gt;
+        &lt;TextView
+            android:id=&quot;@+id/tv_four_mine&quot;
+            android:textColor=&quot;@drawable/text_selector_color&quot;
+            android:text=&quot;我的&quot;
+            android:layout_below=&quot;@+id/iv_four_mine&quot;
+            android:layout_centerHorizontal=&quot;true&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_gravity=&quot;center_horizontal&quot;/&gt;
+    &lt;/RelativeLayout&gt;
+
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>activity_main.xml效果图:</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/TodayHeadlineDemo/2.png" alt=""></p>
+<p>图标选择器:<br>(icon_homepage_selector.xml)</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+&lt;item android:drawable=&quot;@drawable/home1&quot; android:state_selected=&quot;true&quot; /&gt;
+&lt;item android:drawable=&quot;@drawable/home11&quot; /&gt;
+&lt;/selector&gt;
+</code></pre><p>文字选择器:<br>(text_selector_color.xml)</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+&lt;item android:color =&quot;#d81e06&quot; android:state_selected=&quot;true&quot;/&gt;
+&lt;item android:color =&quot;#323232&quot; /&gt;
+&lt;/selector&gt;
+</code></pre><p>写个通用的带标题,图片的标题栏布局:<br>(base_top_title_page.xml)<br>(有些页面需要标题,有些不需要标题,所以第一个TextView的标题gone了)</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+&lt;!--包含标题栏:图标+文字--&gt;
+&lt;RelativeLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:background=&quot;#d81e06&quot;
+    android:layout_height=&quot;50dp&quot;&gt;
+    &lt;ImageView
+        android:layout_marginLeft=&quot;10dp&quot;
+        android:id=&quot;@+id/iv_logo_page&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_centerVertical=&quot;true&quot;
+        android:layout_height=&quot;wrap_content&quot; /&gt;
+    &lt;TextView
+        android:id=&quot;@+id/tv_title_page&quot;
+        android:visibility=&quot;gone&quot;
+        android:text=&quot;我是标题&quot;
+        android:textSize=&quot;20sp&quot;
+        android:textColor=&quot;#FFFFFF&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_centerInParent=&quot;true&quot;
+        android:layout_height=&quot;wrap_content&quot; /&gt;
+    &lt;TextView
+        android:id=&quot;@+id/tv_paypal_page&quot;
+        android:text=&quot;充值&quot;
+        android:textSize=&quot;20sp&quot;
+        android:textColor=&quot;#FFFFFF&quot;
+        android:layout_alignParentRight=&quot;true&quot;
+        android:layout_centerVertical=&quot;true&quot;
+        android:layout_marginRight=&quot;15dp&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot; /&gt;
+&lt;/RelativeLayout&gt;
+&lt;FrameLayout
+    android:id=&quot;@+id/fl_title_content_page&quot;
+    android:background=&quot;#AEAEAE&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot;&gt;
+    &lt;!--此入放置一个布局的原因:首页(Textview),赛程(内容),推荐... 使用方法addView(contentView)--&gt;
+&lt;/FrameLayout&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>通用布局的java代码:<br>(BasePageTitleFragent)</p>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/17.
+ * 通用 图片 充值的Fragment的基类
+ */
+
+public abstract class BasePageTitleFragent extends Fragment {
+private View mFragmentView;//父控件(由父控件找到子控件)
+private ImageView mIvLogoPage;
+private TextView mTvTitlePage;
+private TextView mTvPaypalPage;
+private FrameLayout mFlTitleContentPage;
+
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+}
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    mFragmentView = inflater.inflate(R.layout.base_top_title_page, container, false);   //通用布局(图片 充值)
+    mIvLogoPage = (ImageView) mFragmentView.findViewById(R.id.iv_logo_page);
+    mTvTitlePage = (TextView) mFragmentView.findViewById(R.id.tv_title_page);
+    mTvPaypalPage = (TextView) mFragmentView.findViewById(R.id.tv_paypal_page);
+    mFlTitleContentPage = (FrameLayout) mFragmentView.findViewById(R.id.fl_title_content_page);
+    View view = initView();
+    mFlTitleContentPage.addView(view);
+    return mFragmentView;
+}
+
+public void setTitleIcon(String msg, boolean show) {    //设置标题和图标
+    mTvTitlePage.setText(msg);  //设置标题
+    mTvTitlePage.setVisibility(show ? View.VISIBLE : View.GONE);     //设置标题显示  true就是显示  false就是不显示
+}
+
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    initData();
+}
+
+protected abstract View initView();
+protected abstract void initData();
+}
+</code></pre><p>创建4个Fragment:<br>(HomePageFragment…)</p>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/18.
+* 首页片段
+ */
+
+public class HomePageFragment extends BasePageTitleFragent {
+
+@Override
+protected View initView() {
+    setTitleIcon(&quot;&quot;,false); //设置第一个首页不显示标题
+    View homeFragment = View.inflate(getContext(), R.layout.fg_homepage, null);
+    return homeFragment ;
+}
+
+@Override
+protected void initData() {
+
+}
+}
+</code></pre><hr>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/18.
+ * 赛程片段
+ */
+
+public class MatchPageFragment extends BasePageTitleFragent {
+@Override
+public View initView() {
+    setTitleIcon(&quot;赛程&quot;,true);
+    View matchFragment = View.inflate(getContext(), R.layout.fg_matchpage, null);
+    return matchFragment;
+}
+
+@Override
+public void initData() {
+
+}
+}
+</code></pre><hr>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/18.
+ * 推荐片段
+ */
+
+public class RecommendPageFragment extends BasePageTitleFragent {
+@Override
+public View initView() {
+    setTitleIcon(&quot;推荐&quot;,true);
+    View recommendFragment = View.inflate(getContext(), R.layout.fg_recommendpage, null);
+    return recommendFragment;
+}
+
+@Override
+public void initData() {
+
+}
+}
+</code></pre><hr>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/18.
+ * 我的片段
+ */
+
+public class MinePageFragment extends BasePageTitleFragent {
+@Override
+public View initView() {
+    setTitleIcon(&quot;个人中心&quot;,true);
+    View mineFragment = View.inflate(getContext(), R.layout.fg_minepage, null);
+    return mineFragment;
+}
+
+@Override
+public void initData() {
+
+}
+}
+</code></pre><p>Fragment的xml布局:<br>(fg_homepage.xml)<br>(复制3个)</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;TextView
+android:id=&quot;@+id/tv_homepage_content&quot;
+android:text=&quot;首页片段xml&quot;
+android:textSize=&quot;29sp&quot;
+android:layout_centerInParent=&quot;true&quot;
+android:layout_width=&quot;wrap_content&quot;
+android:layout_height=&quot;wrap_content&quot; /&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>MainActivity:</p>
+<pre><code>//主页
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+//初始化fragment
+private HomePageFragment mHomePageFragment;
+private MatchPageFragment mMatchPageFragment;
+private RecommendPageFragment mRecommendPageFragment;
+private MinePageFragment mMinePageFragment;
+
+//片段类容
+private FrameLayout mFlFragmentContent;
+//底部4个按钮
+private RelativeLayout mRlFirstLayout;
+private RelativeLayout mRlSecondLayout;
+private RelativeLayout mRlThirdLayout;
+private RelativeLayout mRlFourLayout;
+
+private ImageView mIvFirstHome;
+private TextView mTvFirstHome;
+private ImageView mIvSecondMatch;
+private TextView mTvSecondMatch;
+private ImageView mIvThirdRecommend;
+private TextView mTvThirdRecommend;
+private ImageView mIvFourMine;
+private TextView mTvFourMine;
+private FragmentManager mFragmentManager;
+private FragmentTransaction mTransaction;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    mFragmentManager = getSupportFragmentManager();
+
+    //=============================沉侵式状态栏S================================
+    //设置状态栏颜色,必须在setContentView之后使用
+    //第一个参数:当前页面;第二个参数:颜色;第三个参数:透明度;
+    StatusBarUtil.setColor(this, getResources().getColor(R.color.colorStatusBar), 0);
+    //=============================沉侵式状态栏E================================
+
+    initView();     //初始化视图
+}
+
+//此方法可以让app启动页像微信一样,第一次(启动页运行),第二次(无启动页,直接进入主界面)
+//    @Override
+//    public void onBackPressed() {
+//        //super.onBackPressed();    不要调用父类
+//        Intent intent = new Intent(Intent.ACTION_MAIN);     //ACTION_MAIN主活动
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);     //标志活动新任务
+//        intent.addCategory(Intent.CATEGORY_HOME);           //类型
+//        startActivity(intent);
+//    }
+
+private void initView() {
+    mFlFragmentContent = (FrameLayout) findViewById(R.id.fl_fragment_content);
+    mRlFirstLayout = (RelativeLayout) findViewById(R.id.rl_first_layout);
+    mIvFirstHome = (ImageView) findViewById(R.id.iv_first_home);
+    mTvFirstHome = (TextView) findViewById(R.id.tv_first_home);
+    mRlSecondLayout = (RelativeLayout) findViewById(R.id.rl_second_layout);
+    mIvSecondMatch = (ImageView) findViewById(R.id.iv_second_match);
+    mTvSecondMatch = (TextView) findViewById(R.id.tv_second_match);
+    mRlThirdLayout = (RelativeLayout) findViewById(R.id.rl_third_layout);
+    mIvThirdRecommend = (ImageView) findViewById(R.id.iv_third_recommend);
+    mTvThirdRecommend = (TextView) findViewById(R.id.tv_third_recommend);
+    mRlFourLayout = (RelativeLayout) findViewById(R.id.rl_four_layout);
+    mIvFourMine = (ImageView) findViewById(R.id.iv_four_mine);
+    mTvFourMine = (TextView) findViewById(R.id.tv_four_mine);
+    //给五个按钮设置监听器
+    mRlFirstLayout.setOnClickListener(this);
+    mRlSecondLayout.setOnClickListener(this);
+    mRlThirdLayout.setOnClickListener(this);
+    mRlFourLayout.setOnClickListener(this);
+    //默认第一个首页被选中高亮显示
+    mRlFirstLayout.setSelected(true);
+    mTransaction = mFragmentManager.beginTransaction();
+    mTransaction.replace(R.id.fl_fragment_content, new HomePageFragment());
+    mTransaction.commit();
+}
+
+@Override
+public void onClick(View v) {
+    mTransaction = mFragmentManager.beginTransaction(); //开启事务
+    hideAllFragment(mTransaction);
+    switch (v.getId()){
+        //首页
+        case R.id.rl_first_layout:
+        seleted();
+        mRlFirstLayout.setSelected(true);
+            if (mHomePageFragment == null) {
+                mHomePageFragment = new HomePageFragment();
+                mTransaction.add(R.id.fl_fragment_content,mHomePageFragment);    //通过事务将内容添加到内容页
+            }else{
+                mTransaction.show(mHomePageFragment);
+            }
+            break;
+        //赛程
+        case R.id.rl_second_layout:
+            seleted();
+            mRlSecondLayout.setSelected(true);
+            if (mMatchPageFragment == null) {
+                mMatchPageFragment = new MatchPageFragment();
+                mTransaction.add(R.id.fl_fragment_content,mMatchPageFragment);    //通过事务将内容添加到内容页
+            }else{
+                mTransaction.show(mMatchPageFragment);
+            }
+            break;
+        //推荐
+        case R.id.rl_third_layout:
+            seleted();
+            mRlThirdLayout.setSelected(true);
+            if (mRecommendPageFragment == null) {
+                mRecommendPageFragment = new RecommendPageFragment();
+                mTransaction.add(R.id.fl_fragment_content,mRecommendPageFragment);    //通过事务将内容添加到内容页
+            }else{
+                mTransaction.show(mRecommendPageFragment);
+            }
+            break;
+        //个人中心
+        case R.id.rl_four_layout:
+            seleted();
+            mRlFourLayout.setSelected(true);
+            if (mMinePageFragment == null) {
+                mMinePageFragment = new MinePageFragment();
+                mTransaction.add(R.id.fl_fragment_content,mMinePageFragment);    //通过事务将内容添加到内容页
+            }else{
+                mTransaction.show(mMinePageFragment);
+            }
+            break;
+    }
+    mTransaction.commit();
+}
+
+//设置所有按钮都是默认都不选中
+private void seleted() {
+    mRlFirstLayout.setSelected(false);
+    mRlSecondLayout.setSelected(false);
+    mRlThirdLayout.setSelected(false);
+    mRlFourLayout.setSelected(false);
+}
+
+//删除所有fragmtne
+private void hideAllFragment(FragmentTransaction transaction) {
+    if (mHomePageFragment != null) {
+        transaction.hide(mHomePageFragment);
+    }
+    if (mMatchPageFragment != null) {
+        transaction.hide(mMatchPageFragment);
+    }
+    if (mRecommendPageFragment != null) {
+        transaction.hide(mRecommendPageFragment);
+    }
+    if (mMinePageFragment != null) {
+        transaction.hide(mMinePageFragment);
+    }
+}
+}
+</code></pre><p>最后效果图:</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/TodayHeadlineDemo/3.gif" alt=""></p>
+<h1 id=""><a href="#" class="headerlink" title="====================================================================="></a>=====================================================================</h1><p>顶部标签栏TabLayout+ViewPager+Fragment<br>底部和顶部联合效果图:</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/TodayHeadlineDemo/4.png" alt=""></p>
+<p>(需要在首页Fragment嵌套Fragment;使用TabLayout+ViewPager+Fragment)<br>先从首页fg布局里fg_homepage.xml开始写:<br>(需要添加design包)</p>
+<p>添加依赖</p>
+<pre><code>dependencies {  
+    compile &apos;com.jaeger.statusbarutil:library:1.4.0&apos;  
+}  
+</code></pre><hr>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot;
+xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+
+&lt;android.support.design.widget.TabLayout
+    android:id=&quot;@+id/tablayout_top_tab&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;36dp&quot;
+    app:tabMode=&quot;fixed&quot;
+    app:tabIndicatorHeight=&quot;0dp&quot;
+    app:tabSelectedTextColor=&quot;@color/colorRedUserNameCash&quot;
+    app:tabTextColor=&quot;@color/colorGray&quot;&gt;
+
+&lt;/android.support.design.widget.TabLayout&gt;
+&lt;android.support.v4.view.ViewPager
+    android:background=&quot;#dadada&quot;
+    android:id=&quot;@+id/vp_homepage_tab_content&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot;&gt;
+
+&lt;/android.support.v4.view.ViewPager&gt;
+
+&lt;!--&lt;TextView--&gt;
+    &lt;!--android:id=&quot;@+id/tv_homepage_content&quot;--&gt;
+    &lt;!--android:text=&quot;首页片段xml&quot;--&gt;
+    &lt;!--android:textSize=&quot;29sp&quot;--&gt;
+    &lt;!--android:layout_centerInParent=&quot;true&quot;--&gt;
+    &lt;!--android:layout_width=&quot;wrap_content&quot;--&gt;
+    &lt;!--android:layout_height=&quot;wrap_content&quot; /&gt;--&gt;
+
+&lt;!--&lt;FrameLayout--&gt;
+    &lt;!--android:layout_width=&quot;match_parent&quot;--&gt;
+    &lt;!--android:layout_height=&quot;match_parent&quot;&gt;--&gt;
+    &lt;!--&amp;lt;!&amp;ndash;实单,推荐,足球,篮球,竞彩,电竞,综合的片段内容&amp;ndash;&amp;gt;--&gt;
+&lt;!--&lt;/FrameLayout&gt;--&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>然后回到首页HomePageFragment找控件,适配器,绑定</p>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/18.
+ * 首页片段
+ */
+
+public class HomePageFragment extends BasePageTitleFragent {
+private TabLayout mTablayoutTopTab;
+private ViewPager mVpHomepageTabContent;
+
+
+@Override
+protected View initView() {
+    setTitleIcon(&quot;&quot;,false); //设置第一个首页不显示标题
+    View homeFragment = View.inflate(getContext(), R.layout.fg_homepage, null);
+    mTablayoutTopTab = (TabLayout) homeFragment.findViewById(R.id.tablayout_top_tab);
+    mVpHomepageTabContent = (ViewPager) homeFragment.findViewById(R.id.vp_homepage_tab_content);
+    return homeFragment ;
+}
+
+@Override
+protected void initData() {
+
+    //=======================显示首页顶部标签栏S==========================
+    String[] mTitles =getResources().getStringArray(R.array.homepage_top_tab);
+    //MyTabPageAdapter()里的参数不能用getFragmentManager,否则滑动出去,再滑回来会没数据
+    mVpHomepageTabContent.setAdapter(new MyTabPageAdapter(getChildFragmentManager(),mTitles));
+    mTablayoutTopTab.setupWithViewPager(mVpHomepageTabContent);
+    //=======================显示首页顶部标签栏E==========================
+
+
+    //====================点击充值跳转充值页S===============
+    mTvHomePagePaypal.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(getContext(), TestActivity.class));
+        }
+    });
+    //====================点击充值跳转充值页E===============
+
+}
+}
+</code></pre><p>String[]下的代码</p>
+<pre><code>&lt;string-array name=&quot;homepage_top_tab&quot;&gt;
+&lt;item&gt;实单&lt;/item&gt;
+&lt;item&gt;推荐&lt;/item&gt;
+&lt;item&gt;足球&lt;/item&gt;
+&lt;item&gt;篮球&lt;/item&gt;
+&lt;item&gt;竞彩&lt;/item&gt;
+&lt;item&gt;电竞&lt;/item&gt;
+&lt;item&gt;综合&lt;/item&gt;
+&lt;/string-array&gt;
+</code></pre><p>MyTabPageAdapter:</p>
+<pre><code>/**
+ * Created by qq910 on 2018/1/23.
+ */
+
+public class MyTabPageAdapter extends FragmentPagerAdapter {
+private final String[] mTitlees;
+
+public MyTabPageAdapter(FragmentManager fm, String[] titlees) {
+    super(fm);
+    this.mTitlees = titlees;
+}
+
+@Override
+public Fragment getItem(int position) {
+    if (position == 0) {
+        return new RealSimpleFragment1();
+    } else if (position == 1) {
+        return new RecommendFragment2();
+    } else if (position == 2) {
+        return new FootballFragment3();
+    } else if (position == 3) {
+        return new BasketballFragment4();
+    } else if (position == 4) {
+        return new LotteryFragment5();
+    } else if (position == 5) {
+        return new CompetitionFragment6();
+    }
+    return new SynthesizeFragment7();
+}
+
+@Override
+public int getCount() {
+    return mTitlees.length;
+}
+
+@Override
+public CharSequence getPageTitle(int position) {
+    return mTitlees[position];
+}
+}
+</code></pre><p>标签栏的fg RealSimpleFragment1:</p>
+<pre><code>/**
+ * Created by liuzihao on 2018/1/23.
+ * 实单fg
+ */
+
+public class RealSimpleFragment1 extends Fragment {
+
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+}
+
+@Nullable
+@Override
+public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View realSimpleView = inflater.inflate(R.layout.fg_tab_realsimple, container, false);
+    return realSimpleView;
+}
+
+@Override
+public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+}
+
+}
+</code></pre><p>fg_tab_realsimple.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:orientation=&quot;vertical&quot;&gt;
+&lt;TextView
+android:id=&quot;@+id/tv_tab_realsimple&quot;
+android:text=&quot;实单xml&quot;
+android:textSize=&quot;26sp&quot;
+android:textColor=&quot;#000&quot;
+android:layout_centerInParent=&quot;true&quot;
+android:layout_width=&quot;wrap_content&quot;
+android:layout_height=&quot;wrap_content&quot; /&gt;
+
+
+&lt;/LinearLayout&gt;
+</code></pre><p>其他页面一样</p>
+<p>效果图</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/TodayHeadlineDemo/5.gif" alt=""></p>
 
     </div>
 </article>
@@ -419,61 +1081,61 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                    <a href="/2015/03/20/AbstractClass/">抽象类</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                    <a href="/2015/04/23/Multithreading/">多线程</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/01/ActivityLifecycle/">Activity生命周期详解</a>
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/01/Java-AnoInterview/">匿名内部类面试题</a>
+                    <a href="/2017/03/13/ViewPagerOne/">【ViewPager学习1】ViewPager实现广告轮播图</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/01/Java-AnonCall/">匿名内部类的方法调用</a>
+                    <a href="/2017/03/07/PointNinePic/">安卓.9图适配</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                    <a href="/2018/03/02/TodayHeadlineDemo/">Android仿今日头条首页的顶部标签栏和底部导航栏</a>
                 </span>
             </li>
             
@@ -498,9 +1160,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 13.693771376476622px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 18.309357878342606px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 11.192718614757496px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 9.479006613461351px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
