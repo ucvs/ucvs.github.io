@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>GridView实现图片加载 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>GridView实现图片加载</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-07-27
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-07-27
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、简单写法</p>
+<p>activity_example.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;&gt;  
+
+    &lt;GridView  
+        android:id=&quot;@+id/gridview&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:columnWidth=&quot;90dp&quot;  
+        android:numColumns=&quot;auto_fit&quot;  
+        android:verticalSpacing=&quot;10dp&quot;  
+        android:horizontalSpacing=&quot;10dp&quot;  
+        android:stretchMode=&quot;columnWidth&quot;  
+        android:gravity=&quot;center&quot;  
+        &gt;&lt;/GridView&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>ExampleActivity.java</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+
+import android.app.Activity;  
+import android.os.Bundle;  
+import android.widget.ArrayAdapter;  
+import android.widget.GridView;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+/** 
+ * GridView展示文字 
+ */  
+
+public class ExampleActivity extends Activity {  
+
+    private GridView gridView;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_example);  
+        gridView= (GridView) findViewById(R.id.gridview);  
+        List&lt;String&gt; strList=new ArrayList&lt;String&gt;();  
+        for(int i=0;i&lt;9;i++)  
+        {  
+            strList.add(&quot;haha&quot;+i);  
+        }  
+        //最简单的适配器，数组适配器  
+        ArrayAdapter&lt;String&gt;arrayAdapter=new ArrayAdapter&lt;String&gt;(this,android.R.layout.simple_expandable_list_item_1,strList);  
+        gridView.setAdapter(arrayAdapter);  
+    }  
+}  
+</code></pre><p>二、用GridView展示已安装的应用</p>
+<p>(一)、首先需要GridView展示的单条条目布局：</p>
+<p>item_grid_view.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/img_appIcon&quot;  
+        android:layout_width=&quot;50dp&quot;  
+        android:layout_height=&quot;50dp&quot;  
+        android:scaleType=&quot;centerCrop&quot;/&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/tv_appName&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_marginLeft=&quot;5dp&quot;  
+        android:text=&quot;测试&quot;  
+        android:layout_marginTop=&quot;5dp&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>(二)、然后需要把在主要引用的页面中，创建GridView用于加载条目的布局位置</p>
+<p>activity_example2.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;GridView  
+        android:id=&quot;@+id/gridview&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:columnWidth=&quot;90dp&quot;  
+        android:numColumns=&quot;3&quot;  
+        android:verticalSpacing=&quot;10dp&quot;  
+        android:horizontalSpacing=&quot;10dp&quot;  
+        android:stretchMode=&quot;columnWidth&quot;  
+        android:gravity=&quot;center&quot;  
+        /&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>(三)、需要为GridView增加用于接收数据的实体类</p>
+<p>AppInfo.class</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+import android.graphics.drawable.Drawable;  
+
+/** 
+ * Created by Administrator on 2018/5/11. 
+ */  
+
+public class AppInfo {  
+    /** 
+     * 应用名称 
+     */  
+    private String appName;  
+    /** 
+     * 应用包名 
+     */  
+    private String pacjageName;  
+    /** 
+     * 版本名称 
+     */  
+    private String versionName;  
+    /** 
+     * 版本号 
+     */  
+    private int versionCode;  
+    /** 
+     * 应用图标 
+     */  
+    private Drawable appIcon;  
+
+    public String getAppName() {  
+        return appName;  
+    }  
+
+    public void setAppName(String appName) {  
+        this.appName = appName;  
+    }  
+
+    public String getPacjageName() {  
+        return pacjageName;  
+    }  
+
+    public void setPacjageName(String pacjageName) {  
+        this.pacjageName = pacjageName;  
+    }  
+
+    public String getVersionName() {  
+        return versionName;  
+    }  
+
+    public void setVersionName(String versionName) {  
+        this.versionName = versionName;  
+    }  
+
+    public int getVersionCode() {  
+        return versionCode;  
+    }  
+
+    public void setVersionCode(int versionCode) {  
+        this.versionCode = versionCode;  
+    }  
+
+    public Drawable getAppIcon() {  
+        return appIcon;  
+    }  
+
+    public void setAppIcon(Drawable appIcon) {  
+        this.appIcon = appIcon;  
+    }  
+}  
+</code></pre><p>(四)、设置GridView的适配器</p>
+<p>GridViewAdapter.java</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+import android.content.Context;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.BaseAdapter;  
+import android.widget.ImageView;  
+import android.widget.TextView;  
+
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/11. 
+ */  
+
+public class GridViewAdapter extends BaseAdapter {  
+
+    private Context context;  
+    private List&lt;AppInfo&gt;appInfoList;  
+    public GridViewAdapter(Context context, List&lt;AppInfo&gt; appInfoList)  
+    {  
+        this.appInfoList=appInfoList;  
+        this.context=context;  
+    }  
+
+    @Override  
+    public int getCount() {  
+        return appInfoList.size();  
+    }  
+
+    @Override  
+    public Object getItem(int position) {  
+        return appInfoList.get(position);  
+    }  
+
+    @Override  
+    public long getItemId(int position) {  
+        return position;  
+    }  
+
+    @Override  
+    public View getView(int position, View convertView, ViewGroup parent) {  
+
+        ViewHolder holder;  
+        if(convertView==null)  
+        {  
+            convertView=View.inflate(context, R.layout.item_grid_view,null);  
+            holder=new ViewHolder();  
+            holder.img_appIcon= (ImageView) convertView.findViewById(R.id.img_appIcon);  
+            holder.tv_appName= (TextView) convertView.findViewById(R.id.tv_appName);  
+            convertView.setTag(holder);  
+        } else {  
+            holder= (ViewHolder) convertView.getTag();  
+        }  
+
+        AppInfo appInfo=appInfoList.get(position);  
+        holder.img_appIcon.setImageDrawable(appInfo.getAppIcon());  
+        holder.tv_appName.setText(appInfo.getAppName()+&quot; &quot;+appInfo.getVersionName());  
+
+        return convertView;  
+    }  
+
+    public class ViewHolder  
+    {  
+        ImageView img_appIcon;  
+        TextView tv_appName;  
+    }  
+}  
+</code></pre><p>(五)、创建的函数中调用</p>
+<p>ExampleActivity2.java</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+import android.content.pm.PackageInfo;  
+import android.content.pm.PackageManager;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.widget.GridView;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+/** 
+ * 获取应用列表展示 
+ */  
+public class ExampleActivity2 extends AppCompatActivity {  
+
+    private GridView gridView;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_example2);  
+        gridView = (GridView)findViewById(R.id.gridview);  
+        GridViewAdapter gridViewAdapter = new GridViewAdapter(this,getAppList());  
+        gridView.setAdapter(gridViewAdapter);  
+    }  
+    public List&lt;AppInfo&gt; getAppList() {  
+        List&lt;AppInfo&gt; appInfoList = new ArrayList&lt;AppInfo&gt;();  
+        PackageManager packageManager = getPackageManager();  
+        List&lt;PackageInfo&gt; installedPackages = packageManager.getInstalledPackages(0);  
+        for (int i = 0; i &lt; installedPackages.size(); i++) {  
+            PackageInfo packageInfo = installedPackages.get(i);  
+            AppInfo appInfo = new AppInfo();  
+            appInfo.setAppName(packageInfo.applicationInfo.loadLabel(packageManager).toString());  
+            appInfo.setAppIcon(packageInfo.applicationInfo.loadIcon(packageManager));  
+            appInfo.setPacjageName(packageInfo.packageName);  
+            appInfo.setVersionCode(packageInfo.versionCode);  
+            appInfo.setVersionName(packageInfo.versionName);  
+
+//            if ((packageInfo.applicationInfo.flags&amp; ApplicationInfo.FLAG_SYSTEM)==0) {//过滤系统应用的判断  
+            appInfoList.add(appInfo);  
+//            }  
+        }  
+        return appInfoList;  
+    }  
+}  
+</code></pre><p>三、用GridView加载网络图片</p>
+<p>(一)、添加依赖</p>
+<p>build.gradle</p>
+<pre><code>dependencies {  
+    compile &apos;com.github.bumptech.glide:glide:3.7.0&apos;  
+}  
+</code></pre><p>点击右上角Sync Now</p>
+<p>(二)、首先需要GridView展示的单条条目布局：</p>
+<p>item_grid_view.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/img_appIcon&quot;  
+        android:layout_width=&quot;50dp&quot;  
+        android:layout_height=&quot;50dp&quot;  
+        android:scaleType=&quot;centerCrop&quot;/&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/tv_appName&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_marginLeft=&quot;5dp&quot;  
+        android:text=&quot;测试&quot;  
+        android:layout_marginTop=&quot;5dp&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>(三)、然后需要把在主要引用的页面中，创建GridView用于加载条目的布局位置</p>
+<p>activity_example.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;GridView  
+        android:id=&quot;@+id/gridview&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:columnWidth=&quot;90dp&quot;  
+        android:numColumns=&quot;3&quot;  
+        android:verticalSpacing=&quot;10dp&quot;  
+        android:horizontalSpacing=&quot;10dp&quot;  
+        android:stretchMode=&quot;columnWidth&quot;  
+        android:gravity=&quot;center&quot;  
+        /&gt;  
+
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>(四)、需要为GridView增加用于接收数据的实体类</p>
+<p>ImageInfo.java</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+import android.graphics.Bitmap;  
+
+/** 
+ * Created by Administrator on 2018/5/11. 
+ */  
+
+public class ImageInfo {  
+    private String imagePath;  
+    private Bitmap bitmap;  
+    private String text;  
+
+    public String getText() {  
+        return text;  
+    }  
+
+    public void setText(String text) {  
+        this.text = text;  
+    }  
+
+    public String getImagePath() {  
+        return imagePath;  
+    }  
+
+    public void setImagePath(String imagePath) {  
+        this.imagePath = imagePath;  
+    }  
+
+    public Bitmap getBitmap() {  
+        return bitmap;  
+    }  
+
+    public void setBitmap(Bitmap bitmap) {  
+        this.bitmap = bitmap;  
+    }  
+}  
+</code></pre><p>(五)、设置GridView的适配器</p>
+<p>GridViewAdapter.java</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+import android.content.Context;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.BaseAdapter;  
+import android.widget.ImageView;  
+import android.widget.TextView;  
+
+import com.bumptech.glide.Glide;  
+
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/11. 
+ */  
+
+public class GridViewAdapter extends BaseAdapter {  
+
+    private Context context;  
+    private List&lt;ImageInfo&gt;imageInfoList;  
+    public GridViewAdapter(Context context, List&lt;ImageInfo&gt; appImageInfoList)  
+    {  
+        this.imageInfoList=appImageInfoList;  
+        this.context=context;  
+    }  
+
+    @Override  
+    public int getCount() {  
+        return imageInfoList.size();  
+    }  
+
+    @Override  
+    public Object getItem(int position) {  
+        return imageInfoList.get(position);  
+    }  
+
+    @Override  
+    public long getItemId(int position) {  
+        return position;  
+    }  
+
+    @Override  
+    public View getView(int position, View convertView, ViewGroup parent) {  
+
+        ViewHolder holder;  
+        if(convertView==null)  
+        {  
+            convertView=View.inflate(context, R.layout.item_grid_view,null);  
+            holder=new ViewHolder();  
+            holder.imageView= (ImageView) convertView.findViewById(R.id.img_appIcon);  
+            holder.textView= (TextView) convertView.findViewById(R.id.tv_appName);  
+            convertView.setTag(holder);  
+        } else {  
+            holder= (ViewHolder) convertView.getTag();  
+        }  
+
+        ImageInfo imageInfo=imageInfoList.get(position);  
+
+        //placeholder()是图片的占位符，网络还没下载下来的时候占着位置  
+        //centerCrop()缓存  
+        Glide.with(context).load(imageInfo.getImagePath()).placeholder(R.mipmap.ic_launcher).centerCrop().into(holder.imageView);  
+
+//        /**  
+//         * 加载图片  
+//         */  
+//        if(imageInfo.getBitmap()==null){//如果网络还没下载好  
+//            holder.imageView.setImageResource(R.mipmap.ic_launcher);  
+//        }else {  
+//            holder.imageView.setImageBitmap(imageInfo.getBitmap());  
+//        }  
+        holder.textView.setText(imageInfo.getText());  
+
+        return convertView;  
+    }  
+
+    public class ViewHolder  
+    {  
+        ImageView imageView;  
+        TextView textView;  
+    }  
+}  
+</code></pre><p>(六)创建的函数中调用</p>
+<p>ExampleActivity.java</p>
+<pre><code>package com.administrator.gridviewdemo;  
+
+import android.content.Context;  
+import android.graphics.Bitmap;  
+import android.graphics.BitmapFactory;  
+import android.os.AsyncTask;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.widget.GridView;  
+
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.net.HttpURLConnection;  
+import java.net.MalformedURLException;  
+import java.net.URL;  
+import java.util.ArrayList;  
+import java.util.List;  
+
+public class ExampleActivity extends AppCompatActivity {  
+
+    private GridViewAdapter gridAdpter;  
+    private GridView gridView;  
+    private List&lt;String&gt; imgList;  
+    private List&lt;ImageInfo&gt; imageInfoList;  
+    private ImageLoadTask imageLoadTask;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_example);  
+        initUi();  
+        initData();  
+    }  
+
+    private void initData() {  
+        imgList=new ArrayList&lt;String&gt;();  
+        imgList.add(&quot;http://img5.duitang.com/uploads/item/201406/26/20140626164837_dzKds.jpeg&quot;);  
+        imgList.add(&quot;http://img2.imgtn.bdimg.com/it/u=3980629563,3881837630&amp;fm=21&amp;gp=0.jpg&quot;);  
+        imgList.add(&quot;http://img5q.duitang.com/uploads/item/201505/08/20150508155052_XJaNW.jpeg&quot;);  
+        imgList.add(&quot;http://img4.duitang.com/uploads/item/201407/02/20140702105736_FdN5P.jpeg&quot;);  
+        imgList.add(&quot;http://img2.imgtn.bdimg.com/it/u=2866652161,3841912673&amp;fm=21&amp;gp=0.jpg&quot;);  
+        imgList.add(&quot;http://img4.imgtn.bdimg.com/it/u=883757693,2063816225&amp;fm=21&amp;gp=0.jpg&quot;);  
+        imgList.add(&quot;http://cdn.duitang.com/uploads/item/201309/26/20130926110955_QtUdX.jpeg&quot;);  
+        imgList.add(&quot;http://zjimg.5054399.com/allimg/160815/14_160815161625_9.jpg&quot;);  
+        imgList.add(&quot;http://i-7.vcimg.com/trim/09ce7067d2467c54cf05bbd271ee3ec8430415/trim.jpg&quot;);  
+
+        imageInfoList = new ArrayList&lt;ImageInfo&gt;();  
+        for(int i = 0;i&lt;9;i++){  
+            ImageInfo imageInfo = new ImageInfo();  
+            imageInfo.setImagePath(imgList.get(i));  
+            imageInfo.setText(&quot;图片&quot;+);  
+            imageInfoList.add(imageInfo);  
+        }  
+        gridAdpter = new GridViewAdapter(this,imageInfoList);  
+        gridView.setAdapter(gridAdpter);  
+//        imageLoadTask = new ImageLoadTask(this,gridAdpter);  
+//        imageLoadTask.execute();//启动  
+    }  
+
+    private void initUi() {  
+        gridView = (GridView)findViewById(R.id.gridview);  
+    }  
+    public Bitmap getImagefromNetWork(String path){  
+        try {  
+            URL url = new URL(path);i  
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();  
+            urlConnection.setDoInput(true);  
+            urlConnection.setConnectTimeout(10*1000);  
+            urlConnection.connect();  
+            InputStream inputStream = urlConnection.getInputStream();  
+
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);  
+            inputStream.close();  
+            return bitmap;  
+        } catch (MalformedURLException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+        return null;  
+    }  
+    public class ImageLoadTask extends AsyncTask&lt;String,Void,Void&gt;{  
+
+        private GridViewAdapter gridViewAdapter;  
+        public ImageLoadTask(Context context,GridViewAdapter gridViewAdapter){  
+            this.gridViewAdapter=gridViewAdapter;  
+        }  
+        @Override  
+        protected void onPreExecute() {  
+            super.onPreExecute();  
+        }  
+
+        @Override  
+        protected Void doInBackground(String... strings) {  
+            for (int i = 0;i&lt;gridViewAdapter.getCount();i++){  
+                ImageInfo imageInfo = (ImageInfo) gridViewAdapter.getItem(i);  
+                String imagePath = imageInfo.getImagePath();  
+                Bitmap bitmap = getImagefromNetWork(imagePath);  
+                imageInfo.setBitmap(bitmap);  
+                publishProgress();  
+            }  
+            return null;  
+        }  
+
+        @Override  
+        protected void onProgressUpdate(Void... values) {  
+            super.onProgressUpdate(values);  
+            gridViewAdapter.notifyDataSetChanged();  
+        }  
+
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'GridView实现图片加载'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout - 副本/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/21/Java-AnonIntClsApp/">匿名内部类在开发中的应用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/09/27/Include/">Android布局优化之include标签详解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/29/Java-MemInterCls/">成员内部类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-clone/">Java中的clone</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/27/ListViewCase/">ListView基础入门(获取手机应用并快速打开功能Demo)</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2017/07/27/GridViewPicLoding/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2017/07/27/GridViewPicLoding/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2017/07/27/GridViewPicLoding/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 13.750173791388255px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 13.43094614964028px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

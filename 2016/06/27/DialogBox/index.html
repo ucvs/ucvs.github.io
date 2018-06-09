@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>Dialog自定义对话框 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Dialog自定义对话框</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2016/06/27/DialogBox/">Dialog自定义对话框</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2016-06-27
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2016/06/27/DialogBox/">Dialog自定义对话框</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2016-06-27
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、自定义对话框<br>实现步骤：</p>
+<p>1.自定义一个类，继承于Dialog类，在构造方法中调用setContentView(R.layout.xx)来设定对话框的布局 </p>
+<p>2.设定自定义对话框的风格(不显示标题栏，不显示背景)，由于继承了Dialog，默认添加了Dialog标题的一栏 </p>
+<p>3.找到res–&gt;values–&gt;styles.xml设置风格 </p>
+<p>4.调用含设定对话框风格参数的构造 </p>
+<p>5.对自定义对话框中的某些控件添加事件 </p>
+<p>6.实例化自定义的对话框，显示</p>
+<p>一、新建对话框的布局文件（即弹出的对话框的样子）</p>
+<p>layout.xml</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:gravity=&quot;center_horizontal&quot;  
+    android:background=&quot;#FFFF00&quot;  
+    android:padding=&quot;10dp&quot;&gt;  
+    &lt;TextView  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;提示&quot;  
+        android:textSize=&quot;34sp&quot;  
+        android:textStyle=&quot;bold&quot;  
+        android:layout_marginTop=&quot;30dp&quot;/&gt;  
+    &lt;View  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;2dp&quot;  
+        android:background=&quot;#ffffff&quot;  
+        android:layout_marginTop=&quot;10dp&quot;  
+        android:layout_marginBottom=&quot;10dp&quot;/&gt;  
+    &lt;TextView  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;您确定要退出当前程序么&quot;  
+        android:layout_marginTop=&quot;10dp&quot;  
+        android:textSize=&quot;20dp&quot;/&gt;  
+    &lt;LinearLayout  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;horizontal&quot;  
+        android:gravity=&quot;center_horizontal&quot;&gt;  
+        &lt;Button  
+            android:id=&quot;@+id/btn1&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:text=&quot;否&quot;  
+            android:onClick=&quot;onClick&quot;  
+            /&gt;  
+        &lt;Button  
+            android:id=&quot;@+id/btn2&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:text=&quot;是&quot;  
+            android:onClick=&quot;onClick&quot;  
+            /&gt;  
+    &lt;/LinearLayout&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>二、设置弹出对话框的点击按钮</p>
+<p>activity.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:padding="10dp">  </linearlayout></p>
+<pre><code>    &lt;Button  
+        android:id=&quot;@+id/btn1&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;自定义对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>三、设置对话框的风格样式</p>
+<p>在style.xml中添加如下代码<br>        <style name="mydialog" parent="android:style/Theme.Dialog"><br>        <item name="android:windowNoTitle">true</item><br>        <item name="android:windowBackground">@android:color/transparent</item><br>    </style><br>因为自定义的MyDialog是继承于Dialog，所以会默认添加了Dialog的标题这一栏非常不美观，因此使用重新自定义对话框的风格样式。name=”android:windowNoTitle”设置为true代表无窗口标题，android:windowBackground表示对话框背景，@android:color/transparent为使用透明色。</p>
+<p>完整的style文件在app–&gt;res–&gt;values–&gt;styles.xml，完整代码如下：</p>
+<p>styles.xml</p>
+<pre><code>    &lt;resources&gt;  
+    &lt;!-- Base application theme. --&gt;  
+    &lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.DarkActionBar&quot;&gt;  
+        &lt;!-- Customize your theme here. --&gt;  
+        &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;  
+        &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;  
+        &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;  
+    &lt;/style&gt;  
+    &lt;style name=&quot;mydialog&quot; parent=&quot;android:style/Theme.Dialog&quot;&gt;  
+        &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;  
+        &lt;item name=&quot;android:windowBackground&quot;&gt;@android:color/transparent&lt;/item&gt;  
+    &lt;/style&gt;  
+&lt;/resources&gt;  
+</code></pre><p>四、建立MyDialog类继承Dialog类实现对话框管理</p>
+<p>MyDialog.java<br>        package com.administrator.dialogtest;  </p>
+<pre><code>import android.app.Dialog;  
+import android.content.Context;  
+import android.support.annotation.NonNull;  
+import android.view.View;  
+import android.widget.Button;  
+
+/** 
+ * Created by Administrator on 2018/5/7. 
+ */  
+
+public class MyDialog extends Dialog {  
+    public MyDialog(@NonNull Context context) {  
+//        super(context);//父类的满足子参数形式的构造方法  
+        super(context,R.style.mydialog);//调用父类的含参构造方法，从而将风格设置到mydialog的样式上面  
+        setContentView(R.layout.layout);//设置对话框的  
+
+
+
+        //对自定义Dialog中的按钮添加点击事件  
+        Button yesButton = (Button)findViewById(R.id.btn2);  
+        Button noButton = (Button)findViewById(R.id.btn1);  
+
+        noButton.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                dismiss();//控制对话框消失  
+            }  
+        });  
+        yesButton.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                System.exit(0);  
+            }  
+        });  
+    }  
+//    //也可以直接重写含两个参数的构造方法，外部传入样式  
+//    public MyDialog(@NonNull Context context, int themeResId) {  
+//        super(context, themeResId);  
+//        setContentView(R.layout.layout);  
+//    }  
+    //外部调用时，MyDialog dialog = new MyDialog(this,R.style.mydialog);  
+    //dialog.show();  
+}  
+</code></pre><p>五、在MainActivity中调用</p>
+<p>MainActivity.java<br>    package com.administrator.dialogtest;  </p>
+<pre><code>import android.app.AlertDialog;  
+import android.app.ProgressDialog;  
+import android.content.DialogInterface;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.EditText;  
+import android.widget.ProgressBar;  
+import android.widget.Toast;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{  
+
+    private Button btn1;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        Button btn = findViewById(R.id.btn1);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()) {  
+            case R.id.btn1:  
+                //1.自定义一个类，继承于Dialog类，在构造方法中调用setContentView(R.layout.xx)来设定对话框的布局  
+                //2.设定自定义对话框的风格(不显示标题栏，不显示背景)，由于继承了Dialog，默认添加了Dialog标题的一栏  
+                //3.找到res--&gt;values--&gt;styles.xml设置风格  
+                //4.调用含设定对话框风格参数的构造  
+                //5.对自定义对话框中的某些控件添加事件  
+                //6.实例化自定义的对话框，显示  
+                MyDialog dialog = new MyDialog(this);  
+                dialog.show();  
+                break;  
+        }  
+    }  
+}  
+</code></pre><p>二、添加适配器案例</p>
+<p>新建一个布局array_item_layout.xml作为适配器所引用的资源数据源</p>
+<p>array_item_layout.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:orientation=&quot;horizontal&quot;  
+    android:padding=&quot;10dp&quot;  
+    android:gravity=&quot;center_vertical&quot;&gt;  
+
+    &lt;ImageView  
+        android:layout_width=&quot;40dp&quot;  
+        android:layout_height=&quot;40dp&quot;  
+        android:src=&quot;@mipmap/ic_launcher&quot;/&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/item_txt&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;测试&quot;  
+        android:layout_marginLeft=&quot;15dp&quot;/&gt;  
+&lt;/LinearLayout&gt;`  
+</code></pre><p>在activity_main.xml中添加触发对话框的点击按钮布局</p>
+<p>activity_main.xml</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:gravity=&quot;center_horizontal&quot;  
+    android:padding=&quot;10dp&quot;&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn2&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;适配器案例&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>Java文件中创建适配器并调用</p>
+<p>MainActivity.java</p>
+<pre><code>    package com.administrator.dialogtest;  
+
+import android.app.AlertDialog;  
+import android.app.ProgressDialog;  
+import android.content.DialogInterface;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.view.View;  
+import android.widget.ArrayAdapter;  
+import android.widget.Button;  
+import android.widget.EditText;  
+import android.widget.ProgressBar;  
+import android.widget.Toast;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{  
+
+    private Button btn2;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        Button btn2 = findViewById(R.id.btn1);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()) {  
+            case R.id.btn2:  
+                showArrayDialog();  
+                break;  
+        }  
+    }  
+
+    private void showArrayDialog() {  
+        final String[] items = {&quot;Java&quot;,&quot;Mysql&quot;,&quot;Android&quot;,&quot;Html&quot;,&quot;C&quot;,&quot;JavaScript&quot;};  
+        //数组适配器  
+        //参数1：环境  
+        //参数2：布局资源索引，指的是每一项数据所呈现的样式android.R.layout.xxx  
+        //参数3：数据源  
+//        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line,items);  
+
+        //参数4：数据源  
+        //参数3：int textViewId 指定文本数据源需要放在布局中对应id文本控制的位置  
+        //参数2：布局资源索引  
+        //参数1：环境  
+        ArrayAdapter adapter = new ArrayAdapter(this,R.layout.array_item_layout,R.id.item_txt,items);  
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)  
+                .setTitle(&quot;请选择：&quot;)  
+                //参数1：适配器对象(对数据显示样式的规则制定器)  
+                //参数2：监听器  
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {  
+                    @Override  
+                    public void onClick(DialogInterface dialog, int which) {  
+                        Toast.makeText(MainActivity.this,items[which],Toast.LENGTH_SHORT).show();  
+                        dialog.dismiss();//点击后，让对话框消失  
+                    }  
+                });  
+        builder.show();  
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Dialog自定义对话框'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout - 副本/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/20/Interface/">接口</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout - 副本/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2016/06/27/DialogBox/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2016/06/27/DialogBox/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2016/06/27/DialogBox/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 13.917772437566912px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.85906522731651px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

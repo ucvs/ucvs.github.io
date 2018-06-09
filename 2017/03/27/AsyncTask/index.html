@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>Android新特性ConstraintLayout约束布局读书笔记 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Android新特性ConstraintLayout约束布局读书笔记</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-03-27
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-03-27
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、简单理解Demo</p>
+<pre><code>    import android.app.Activity;  
+import android.os.AsyncTask;  
+import android.os.Bundle;  
+
+public class MainActivity extends Activity {  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        /* 
+         * 运行TestAsyncTask 
+         */  
+        new TestAsyncTask().execute();  
+    }  
+
+    private class TestAsyncTask extends AsyncTask{  
+
+        //一般用于初始化，首先运行  
+        @Override  
+        protected void onPreExecute() {  
+            // TODO Auto-generated method stub  
+            super.onPreExecute();  
+        }  
+        //一般处理耗时操作，第二运行,不要在这里面运行与ui控件有关的操作  
+        @Override  
+        protected Object doInBackground(Object... params) {  
+            return null;  
+        }  
+        /* 
+         * 一般用于处理UI界面变化，最后运行 
+         * result是上面doInBackground返回值 
+         */  
+        @Override  
+        protected void onPostExecute(Object result) {  
+            // TODO Auto-generated method stub  
+            super.onPostExecute(result);  
+        }  
+
+
+
+    }  
+
+
+}  
+</code></pre><p>二、实践熟悉Demo<br>activity_main.xml</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:layout_width=&quot;fill_parent&quot;  
+    android:layout_height=&quot;fill_parent&quot;  
+    &gt;  
+    &lt;TextView  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;Hello , Welcome to Andy&apos;s Blog!&quot;/&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/download&quot;  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;Download&quot;/&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/tv&quot;  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;当前进度显示&quot;/&gt;  
+    &lt;ProgressBar  
+        android:id=&quot;@+id/pb&quot;  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        style=&quot;?android:attr/progressBarStyleHorizontal&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>    import android.app.Activity;  
+import android.os.AsyncTask;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.ProgressBar;  
+import android.widget.TextView;  
+
+public class MainActivity extends Activity {  
+
+    Button download;  
+    ProgressBar pb;  
+    TextView tv;  
+
+    /** Called when the activity is first created. */  
+    @Override  
+    public void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        pb=(ProgressBar)findViewById(R.id.pb);  
+        tv=(TextView)findViewById(R.id.tv);  
+
+        download = (Button)findViewById(R.id.download);  
+        download.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                DownloadTask dTask = new DownloadTask();  
+                dTask.execute(100);  
+            }  
+        });  
+    }  
+
+    class DownloadTask extends AsyncTask&lt;Integer, Integer, String&gt;{  
+        //后面尖括号内分别是参数（例子里是线程休息时间），进度(publishProgress用到)，返回值 类型  
+
+        @Override  
+        protected void onPreExecute() {  
+            //第一个执行方法  
+            super.onPreExecute();  
+        }  
+
+        @Override  
+        protected String doInBackground(Integer... params) {  
+            //第二个执行方法,onPreExecute()执行完后执行  
+            for(int i=0;i&lt;=100;i++){  
+                pb.setProgress(i);  
+                publishProgress(i);  
+                try {  
+                    Thread.sleep(params[0]);  
+                } catch (InterruptedException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+            return &quot;执行完毕&quot;;  
+        }  
+
+        @Override  
+        protected void onProgressUpdate(Integer... progress) {  
+            //这个函数在doInBackground调用publishProgress时触发，虽然调用时只有一个参数  
+            //但是这里取到的是一个数组,所以要用progesss[0]来取值  
+            //第n个参数就用progress[n]来取值  
+            tv.setText(progress[0]+&quot;%&quot;);  
+            super.onProgressUpdate(progress);  
+        }  
+
+        @Override  
+        protected void onPostExecute(String result) {  
+            //doInBackground返回时触发，换句话说，就是doInBackground执行完后触发  
+            //这里的result就是上面doInBackground执行后的返回值，所以这里是&quot;执行完毕&quot;  
+            setTitle(result);  
+            super.onPostExecute(result);  
+        }  
+
+    }  
+}  
+</code></pre><p>三、简单学习Demo</p>
+<p>activity.xml使用系统默认即可，</p>
+<p>Java学习代码如下</p>
+<p>MainActivity.java</p>
+<pre><code>package com.administrator.asynctaskdemo;  
+
+import android.os.AsyncTask;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+
+public class MainActivity extends AppCompatActivity {  
+    private static final String TAG = &quot;MainActivity&quot;;//键盘在空白处输入logt，AndroidStudio会快速生成这行代码  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+//        new DownloadAsyncTask().execute(&quot;XueXi&quot;,&quot;KanShu&quot;);  
+        new DownloadAsyncTask().execute(&quot;XueXi&quot;);  
+    }  
+
+    public class DownloadAsyncTask extends AsyncTask&lt;String,Integer,Boolean&gt;{  
+        /** 
+         * 在异步任务之前，在主线程中 
+         */  
+        @Override  
+        protected void onPreExecute() {  
+            super.onPreExecute();  
+            //可操作UI  
+        }  
+
+        /** 
+         * 在另外一个线程中处理事件 
+         * @param params 入参 
+         * @return 结果 
+         */  
+        @Override  
+        protected Boolean doInBackground(String... params) {//String... strings表示长度是可变参数，  
+                                                            // 比如外部调用时，doInBackground(&quot;a&quot;）;doInBackground(&quot;a&quot;,&quot;b&quot;）;  
+                                                            // doInBackground(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;);等，参数的数量是可变的  
+            for (int i = 0;i&lt;10000;i++){  
+                Log.i(TAG,&quot;doInBackground:&quot;+params[0]);  
+                //抛出进度  
+                publishProgress(i);  
+            }  
+            try {  
+                Thread.sleep(1000);  
+            } catch (InterruptedException e) {  
+                e.printStackTrace();  
+            }  
+            return true;  
+        }  
+
+        @Override  
+        protected void onPostExecute(Boolean aBoolean) {  
+            super.onPostExecute(aBoolean);  
+            //也是在主线程中，执行结果处理  
+        }  
+
+        @Override  
+        protected void onProgressUpdate(Integer... values) {  
+            super.onProgressUpdate(values);  
+            //收到上面抛出的进度，然后处理：也是在UI线程中  
+        }  
+
+//        @Override  
+//        protected void onCancelled() {  
+//            super.onCancelled();  
+//        }  
+//  
+//        @Override  
+//        protected void onCancelled(Boolean aBoolean) {  
+//            super.onCancelled(aBoolean);  
+//        }  
+    }  
+}  
+</code></pre><p>四、AsyncTask实现异步下载<br>步骤<br>1.网络上请求数据：申请网络权限 读写存储权限<br>2.布局我们的layout<br>3.下载之前我们要做什么？  UI<br>4.下载中我们要做什么？  数据<br>5.下载后我们要做什么？ UI</p>
+<p>在MainManifest.xml中申请网络权限和读写权限</p>
+<pre><code>    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;  
+&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;  
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;  
+</code></pre><p>activity_main</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:id=&quot;@+id/activity_main&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:padding=&quot;10dp&quot;  
+    android:orientation=&quot;vertical&quot;  
+    tools:context=&quot;com.administrator.asynctaskdemo.MainActivity&quot;&gt;  
+
+
+    &lt;ProgressBar  
+        style=&quot;?android:attr/progressBarStyleHorizontal&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;15dp&quot;  
+        android:id=&quot;@+id/progressBar&quot;/&gt;  
+
+    &lt;Button  
+        android:text=&quot;点击下载&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:id=&quot;@+id/button&quot;/&gt;  
+
+    &lt;TextView  
+        android:text=&quot;Hello world! imooc.&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:id=&quot;@+id/textView&quot;/&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>    package com.administrator.asynctaskdemo;  
+
+import android.os.AsyncTask;  
+import android.os.Environment;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.ProgressBar;  
+import android.widget.TextView;  
+
+import org.w3c.dom.Text;  
+
+import java.io.File;  
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.io.OutputStream;  
+import java.net.URL;  
+import java.net.URLConnection;  
+
+/** 
+ * 1.网络上请求数据：申请网络权限 读写存储权限 
+ * 2.布局我们的layout 
+ * 3.下载之前我们要做什么？  UI 
+ * 4.下载中我们要做什么？  数据 
+ * 5.下载后我们要做什么？ UI 
+ */  
+public class MainActivity extends AppCompatActivity {  
+    private static final String TAG = &quot;MainActivity&quot;;//键盘在空白处输入logt，AndroidStudio会快速生成这行代码  
+    public static final String APK_URL = &quot;http://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk&quot;;  
+    private ProgressBar mProgressBar;  
+    private Button mDownloadButton;  
+    private TextView mResultTextView;  
+    private int INIT_PROGRESSBAR;  
+    private String FILE_NAME = &quot;XueXi.apk&quot;;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        //初始化视图  
+        initView();  
+        //设置点击监听  
+        setListener();  
+        //初始化UI数据  
+        setData();  
+
+    }  
+
+    private void setListener() {  
+        mDownloadButton.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                //TODO 18/5/10 下载任务  
+                DownloadAsyncTask asyncTask = new DownloadAsyncTask();  
+                asyncTask.execute(APK_URL);  
+            }  
+        });  
+    }  
+
+    private void setData() {  
+        mProgressBar.setProgress(INIT_PROGRESSBAR);  
+        mDownloadButton.setText(&quot;点击下载&quot;);  
+        mResultTextView.setText(&quot;准备下载&quot;);  
+    }  
+
+    /** 
+     * 初始化视图 
+     */  
+    private void initView() {  
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);  
+        mDownloadButton = (Button) findViewById(R.id.button);  
+        mResultTextView = (TextView) findViewById(R.id.textView);  
+    }  
+
+
+    /** 
+     * String 入参 
+     * Integer 进度 
+     * Boolean 返回值 
+     */  
+    public class DownloadAsyncTask extends AsyncTask&lt;String, Integer, Boolean&gt; {  
+        String mFilePath;  
+        /** 
+         * 在异步任务之前，在主线程中 
+         */  
+        @Override  
+        protected void onPreExecute() {  
+            super.onPreExecute();  
+            //可操作UI  类似淘米，之前的准备工作  
+            mDownloadButton.setText(&quot;下载中&quot;);  
+            mResultTextView.setText(&quot;下载中&quot;);  
+            mProgressBar.setProgress(INIT_PROGRESSBAR);  
+        }  
+
+        /** 
+         * 在另外一个线程中处理事件 
+         * 
+         * @param params 入参  煮米 
+         * @return 结果 
+         */  
+        @Override  
+        protected Boolean doInBackground(String... params) {//String... strings表示长度是可变参数，  
+            if(params != null&amp;¶ms.length&gt;0){  
+                String apkUrl = params[0];  
+                try {  
+                    //构造URL  
+                    URL url = new URL(apkUrl);  
+                    //构造连接，并打开  
+                    URLConnection urlConnection = url.openConnection();  
+                    InputStream inputStream =urlConnection.getInputStream();  
+                    //获取下载内容的总长度  
+                    int contentlength = urlConnection.getContentLength();  
+                    //下载地址准备  
+
+                    mFilePath = Environment.getExternalStorageDirectory()   //  File.separator是字符串/  
+                            + File.separator + FILE_NAME;  
+
+                    //对下载地址进行处理  
+                    File apkFile = new File(mFilePath);  
+                    if(apkFile.exists()){  
+                        boolean result = apkFile.delete();  
+                        if(!result){ //如果失败了  
+                            return false;  
+                        }  
+                    }  
+
+                    //已下载的大小  已下载大小/总长度*100等于下载进度  
+                    int downloadSize = 0;  
+
+                    //byte数组  
+                    byte[] bytes = new byte[1024];  
+                    int length;  
+
+                    //创建一个输入管道  
+                    OutputStream outputStream = new FileOutputStream(mFilePath);  
+                    length = inputStream.read(bytes);  
+
+                    //不断的一车一车挖土，直到挖不倒为止  
+                    while ((length = inputStream.read(bytes))!= -1){  
+                        //挖到的放到我们的文件管道里  
+                        outputStream.write(bytes,0,length);  
+                        //累加我们的大小  
+                        downloadSize += length;  
+                        //发送进度  
+                        publishProgress(downloadSize*100/contentlength);  
+                    }  
+                    inputStream.close();  
+                    outputStream.close();  
+
+                } catch (IOException e) {  
+                    e.printStackTrace();  
+                    return false;  
+                }  
+            }else{  
+                return false;  
+            }  
+
+            return true;  
+        }  
+
+        @Override  
+        protected void onPostExecute(Boolean result) {  
+            super.onPostExecute(result);  
+            //也是在主线程中，执行结果处理  
+            mDownloadButton.setText(result?&quot;下载完成&quot;+ mFilePath:&quot;下载失败&quot;);  
+            mResultTextView.setText(result?&quot;下载完成&quot;+ mFilePath:&quot;下载失败&quot;);  
+        }  
+
+        @Override  
+        protected void onProgressUpdate(Integer... values) {  
+            super.onProgressUpdate(values);  
+            //收到进度，然后处理：也是在UI线程中  
+            if(values!=null&amp;&amp;values.length&gt;0){}  
+            mProgressBar.setProgress(values[0]);  
+        }  
+    }  
+
+}  
+</code></pre><p>五、封装成工具类</p>
+<p>xml布局如上不变</p>
+<p>创建下载工具类</p>
+<p>DownloadHelper.java</p>
+<pre><code>    package com.administrator.asynctaskdemo;  
+
+import android.os.AsyncTask;  
+
+import java.io.File;  
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.io.OutputStream;  
+import java.net.URL;  
+import java.net.URLConnection;  
+
+/** 
+ * 1.download方法  url localPath listener 
+ * 2.listener :start success fail progress 
+ * 3.用asynctask封装 
+ * Created by Administrator on 2018/5/10. 
+ */  
+
+public class DownloadHelper {  
+    public static void download(String url,String localPath,OnDownloadListener listener) {  
+        DownloadAsyncTask task = new DownloadAsyncTask(url,localPath,listener);  
+        task.execute();  
+    }  
+        /** 
+         * String 入参 
+         * Integer 进度 
+         * Boolean 返回值 
+         */  
+        public static class DownloadAsyncTask extends AsyncTask&lt;String, Integer, Boolean&gt; {  
+            String mUrl;  
+            String mFilePath;  
+            OnDownloadListener mListener;  
+
+            public DownloadAsyncTask(String mUrl, String mFilePath, OnDownloadListener mListener) {  
+                this.mUrl = mUrl;  
+                this.mFilePath = mFilePath;  
+                this.mListener = mListener;  
+            }  
+
+            /** 
+             * 在异步任务之前，在主线程中 
+             */  
+            @Override  
+            protected void onPreExecute() {  
+                super.onPreExecute();  
+                //可操作UI  类似淘米，之前的准备工作  
+                if(mListener != null){  
+                    mListener.onStart();  
+                }  
+            }  
+
+            /** 
+             * 在另外一个线程中处理事件 
+             * 
+             * @param params 入参  煮米 
+             * @return 结果 
+             */  
+            @Override  
+            protected Boolean doInBackground(String... params) {//String... strings表示长度是可变参数，  
+                    String apkUrl = mUrl;  
+                    try {  
+                        //构造URL  
+                        URL url = new URL(apkUrl);  
+                        //构造连接，并打开  
+                        URLConnection urlConnection = url.openConnection();  
+                        InputStream inputStream =urlConnection.getInputStream();  
+                        //获取下载内容的总长度  
+                        int contentlength = urlConnection.getContentLength();  
+
+                        //对下载地址进行处理  
+                        File apkFile = new File(mFilePath);  
+                        if(apkFile.exists()){  
+                            boolean result = apkFile.delete();  
+                            if(!result){ //如果失败了  
+                                if(mListener != null){  
+                                    mListener.onFail(-1,apkFile,&quot;文件删除失败&quot;);  
+                                }  
+                                return false;  
+                            }  
+                        }  
+
+                        //已下载的大小  已下载大小/总长度*100等于下载进度  
+                        int downloadSize = 0;  
+
+                        //byte数组  
+                        byte[] bytes = new byte[1024];  
+                        int length;  
+
+                        //创建一个输入管道  
+                        OutputStream outputStream = new FileOutputStream(mFilePath);  
+                        length = inputStream.read(bytes);  
+
+                        //不断的一车一车挖土，直到挖不倒为止  
+                        while ((length = inputStream.read(bytes))!= -1){  
+                            //挖到的放到我们的文件管道里  
+                            outputStream.write(bytes,0,length);  
+                            //累加我们的大小  
+                            downloadSize += length;  
+                            //发送进度  
+                            publishProgress(downloadSize*100/contentlength);  
+                        }  
+                        inputStream.close();  
+                        outputStream.close();  
+
+                    } catch (IOException e) {  
+                        e.printStackTrace();  
+                        if(mListener != null){  
+                            mListener.onFail(-2,new File(mFilePath),e.getMessage());  
+                        }  
+                        return false;  
+                    }  
+
+                if(mListener != null){  
+                        mListener.onSuccess(0,new File(mFilePath));  
+                }  
+                return true;  
+            }  
+
+            @Override  
+            protected void onPostExecute(Boolean result) {  
+                super.onPostExecute(result);  
+                //也是在主线程中，执行结果处理  
+                if (mListener != null){  
+                    if(result){  
+                        mListener.onSuccess(0,new File(mFilePath));  
+                    }else {  
+                        mListener.onFail(-1,new File(mFilePath),&quot;下载失败&quot;);  
+                    }  
+                }  
+            }  
+
+            @Override  
+            protected void onProgressUpdate(Integer... values) {  
+                super.onProgressUpdate(values);  
+                //收到进度，然后处理：也是在UI线程中  
+                if(values!=null&amp;&amp;values.length&gt;0){  
+                    if(mListener != null){  
+                        mListener.onProgress(values[0]);  
+                    }  
+                }  
+            }  
+        }  
+
+
+    public interface OnDownloadListener{  
+        void onStart();  
+        void onSuccess(int code,File file);  
+        void onFail(int code,File file,String message);  
+        void onProgress(int progress);  
+
+        /** 
+         * 如果加写下面这个子类实现了OnDownloadListener的抽象方法，则外部创建该接口时，如通过 
+         * new DownloadHelper.OnDownloadListener.SimpleDownloadListener()调用该方法时， 
+         * 不需要每次都重写已在SimpleDownloadListener类中实现的onStart()和onProgress()这两个方法 
+         */  
+        abstract class SimpleDownloadListener implements OnDownloadListener{  
+            @Override  
+            public void onStart() {  
+
+            }  
+
+            @Override  
+            public void onProgress(int progress) {  
+
+            }  
+        }  
+    }  
+}  
+</code></pre><p>外部调用</p>
+<p>MainActivity.java</p>
+<pre><code>    package com.administrator.asynctaskdemo;  
+
+import android.os.AsyncTask;  
+import android.os.Environment;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.ProgressBar;  
+import android.widget.TextView;  
+
+import org.w3c.dom.Text;  
+
+import java.io.File;  
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.io.OutputStream;  
+import java.net.URL;  
+import java.net.URLConnection;  
+import java.time.LocalDate;  
+
+/** 
+ * 1.网络上请求数据：申请网络权限 读写存储权限 
+ * 2.布局我们的layout 
+ * 3.下载之前我们要做什么？  UI 
+ * 4.下载中我们要做什么？  数据 
+ * 5.下载后我们要做什么？ UI 
+ */  
+public class MainActivity extends AppCompatActivity {  
+    private static final String TAG = &quot;MainActivity&quot;;//键盘在空白处输入logt，AndroidStudio会快速生成这行代码  
+    public static final String APK_URL = &quot;http://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk&quot;;  
+    private ProgressBar mProgressBar;  
+    private Button mDownloadButton;  
+    private TextView mResultTextView;  
+    private int INIT_PROGRESSBAR;  
+    private String FILE_NAME = &quot;XueXi.apk&quot;;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        //初始化视图  
+        initView();  
+        //设置点击监听  
+        setListener();  
+        //初始化UI数据  
+        setData();  
+
+    }  
+
+    private void setListener() {  
+        mDownloadButton.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                //TODO 18/5/10 下载任务  
+                DownloadHelper.download(APK_URL,&quot; &quot;, new DownloadHelper.OnDownloadListener.SimpleDownloadListener() {  
+                    @Override  
+                    public void onSuccess(int code, File file) {  
+                        Log.e(&quot;TAG&quot;,String.valueOf(code));  
+                    }  
+
+                    @Override  
+                    public void onFail(int code, File file, String message) {  
+                        Log.e(&quot;TAG&quot;,String.valueOf(code));  
+                        Log.e(&quot;TAG&quot;,message);  
+                    }  
+                });  
+            }  
+        });  
+    }  
+
+    private void setData() {  
+        mProgressBar.setProgress(INIT_PROGRESSBAR);  
+        mDownloadButton.setText(&quot;点击下载&quot;);  
+        mResultTextView.setText(&quot;准备下载&quot;);  
+    }  
+
+    /** 
+     * 初始化视图 
+     */  
+    private void initView() {  
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);  
+        mDownloadButton = (Button) findViewById(R.id.button);  
+        mResultTextView = (TextView) findViewById(R.id.textView);  
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Android新特性ConstraintLayout约束布局读书笔记'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout - 副本/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/20/Interface/">接口</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/05/22/OnClickListener/">Android中onClick按钮单击事件的四种常用写法读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/01/Java-AnonCall/">匿名内部类的方法调用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/ObjTransfer/">类的对象传递</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2017/03/27/AsyncTask/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2017/03/27/AsyncTask/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2017/03/27/AsyncTask/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 9.491837442772582px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 19.524176347879095px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>Handler实践的三种效果及Handler内存泄漏 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Handler实践的三种效果及Handler内存泄漏</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-08-27
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-08-27
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、异步下载更新进度条</p>
+<p>activity_down_load.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;Button  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;New Button&quot;  
+        android:id=&quot;@+id/button&quot;/&gt;  
+
+    &lt;ProgressBar  
+        style=&quot;?android:attr/progressBarStyleHorizontal&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:id=&quot;@+id/progressBar&quot;  
+        android:max=&quot;100&quot;  
+        android:layout_gravity=&quot;center_horizontal&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>DownloadActivity.java</p>
+<pre><code>package com.administrator.handlerproject;  
+import android.app.Activity;  
+import android.os.Bundle;  
+import android.os.Environment;  
+import android.os.Handler;  
+import android.os.Message;  
+import android.view.View;  
+import android.widget.ProgressBar;  
+
+import java.io.File;  
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.io.OutputStream;  
+import java.net.MalformedURLException;  
+import java.net.URL;  
+import java.net.URLConnection;  
+
+public class DownloadActivity extends Activity {  
+
+    private Handler mHandler;  
+    public static final int DOWNLOAD_MESSAGE_CODE = 100001;  
+    public static final int DOWNLOAD_MESSAGE_FAIL_CODE = 100002;  
+
+    @Override  
+    public void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_down_load);  
+
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);  
+
+        /** 
+         * 主线程 --&gt;start 
+         * 点击按钮 | 
+         * 发起下载 | 
+         * 开启子线程做下载 | 
+         * 下载完成后通知主线程 | --&gt;主线程更新进度条 
+         */  
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                new Thread(new Runnable() {  
+                    @Override  
+                    public void run() {  
+                        download(&quot;http://download.sj.qq.com/upload/connAssitantDownload/upload/MobileAssistant_1.apk&quot;);  
+                    }  
+                }).start();  
+
+            }  
+        });  
+
+        mHandler =  new Handler(){  
+            @Override  
+            public void handleMessage(Message msg) {  
+                super.handleMessage(msg);  
+
+                switch (msg.what){  
+                    case DOWNLOAD_MESSAGE_CODE:  
+                        progressBar.setProgress((Integer) msg.obj);  
+                    case DOWNLOAD_MESSAGE_FAIL_CODE:  
+                }  
+            }  
+        };  
+    }  
+    private void download(String appUrl){  
+        try {  
+            URL url = new URL(appUrl);  
+            URLConnection urlConnection = url.openConnection();  
+
+            InputStream inputStream = urlConnection.getInputStream();  
+
+            /** 
+             * 获取文件的总长度 
+             */  
+            int contentLength = urlConnection.getContentLength();  
+
+            String downloadFolderName = Environment.getExternalStorageDirectory()  
+                    + File.separator+&quot;imooc&quot;+File.separator;  
+
+            File file = new File(downloadFolderName);  
+            if (!file.exists()){  
+                file.mkdir();  
+            }  
+
+            String fileName = downloadFolderName + &quot;imooc.apk&quot;;  
+
+            File apkFile = new File(fileName);  
+
+            if (apkFile.exists()){  
+                apkFile.delete();  
+            }  
+
+            int downloadSize = 0;  
+            byte[] bytes = new  byte[1024];  
+
+            int length = 0;  
+
+            OutputStream outputStream = new FileOutputStream(fileName);  
+            while ((length = inputStream.read(bytes)) != -1){  
+                outputStream.write(bytes,0,length);  
+                downloadSize += length;  
+                /** 
+                 * update UI 
+                 */  
+
+                Message message = Message.obtain();  
+                message.obj = downloadSize * 100 / contentLength;  
+                message.what = DOWNLOAD_MESSAGE_CODE;  
+                mHandler .sendMessage(message);  
+            }  
+            inputStream.close();  
+            outputStream.close();  
+
+
+
+
+
+        }catch (MalformedURLException e){  
+            notifyDownloadFaild();  
+            e.printStackTrace();  
+        }catch (IOException e){  
+            notifyDownloadFaild();  
+            e.printStackTrace();  
+        }  
+    }  
+
+    private  void  notifyDownloadFaild(){  
+        Message message = Message.obtain();  
+        message.what = DOWNLOAD_MESSAGE_FAIL_CODE;  
+        mHandler .sendMessage(message);  
+    }  
+}  
+</code></pre><p>二、倒计时效果（内存泄漏处理）</p>
+<p>当Activity被销毁的时候，被延时的消息会在被处理之前存在于主线程的消息队列中，而这个消息中又包含了Handler的引用，而Handler是一个匿名内部类的实例，其持有外面的MainActivity的引用。这些引用会一直保持到该消息被处理，从而阻止了MainActivity被垃圾回收器回收。因此这就导致了MainActivity无法被回收，进而导致MainActivity持有的很多资源都无法回收，这就是我们常说的内存泄漏。</p>
+<p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:context=&quot;com.administrator.handlerxuexi.MainActivity&quot;&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/countdownTimeTextView&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;@null&quot;  
+        app:layout_constraintBottom_toBottomOf=&quot;parent&quot;  
+        app:layout_constraintLeft_toLeftOf=&quot;parent&quot;  
+        app:layout_constraintRight_toRightOf=&quot;parent&quot;  
+        app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;  
+
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>package com.administrator.handlerxuexi;  
+
+import android.os.Handler;  
+import android.os.Message;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.widget.TextView;  
+
+import java.lang.ref.WeakReference;  
+
+public class MainActivity extends AppCompatActivity {  
+
+    /** 
+     * 倒计时标记handle code 
+     */  
+    public  static  final  int COUNTDOWN_TIME_CODE = 100001;  
+    /** 
+     * 倒计时间隔 
+     */  
+    public  static  final  int  DELAY_MILLIS = 1000;  
+    /** 
+     * 倒计时最大值 
+     */  
+    public  static  final  int  MAX_COUNT = 10;  
+
+
+    private TextView mCountdownTimeTextView;  
+
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+
+        //得到控件  
+        mCountdownTimeTextView= (TextView)findViewById(R.id.countdownTimeTextView);  
+
+        //创建了一个handler  
+        CountdownTimeHandler handler = new CountdownTimeHandler(this);  
+
+//        Handler handler = new Handler(){}强引用会出现内存泄漏，  
+        //新建了一个message  
+        Message message = Message.obtain();  
+        message.what = COUNTDOWN_TIME_CODE;  
+        message.arg1 = MAX_COUNT;  
+
+        //第一次发送这个message  
+        handler.sendMessageDelayed(message,DELAY_MILLIS);  
+
+    }  
+
+    /** 
+     * 创建弱引用的CountdownTimeHandler类继承Handler 
+     *  
+     */  
+    public  static  class  CountdownTimeHandler extends Handler{  
+        static  final  int  MIN_COUNT = 0;  
+        final WeakReference&lt;MainActivity&gt; mWeakReference;//括号内参数是当前Activity对象  
+
+        CountdownTimeHandler(MainActivity activity){//括号内参数是当前Activity对象  
+            mWeakReference = new WeakReference&lt;&gt; (activity );  
+        }  
+
+        @Override  
+        public void handleMessage(Message msg) {  
+            super.handleMessage(msg);  
+            //创建一个当前的Activity接收  
+            MainActivity activity =mWeakReference.get();//获得上面CountdownTimeHandler内定义的mWeakReference对象  
+
+            switch (msg.what){  
+                case COUNTDOWN_TIME_CODE:  
+                    int value = msg.arg1;  
+                    activity.mCountdownTimeTextView.setText(String.valueOf(value --));  
+
+                    //循环发的消息控制  
+                    if (value &gt;= MIN_COUNT) {  
+                        Message message = Message.obtain();  
+                        message.what = COUNTDOWN_TIME_CODE;  
+                        message.arg1 = value;  
+                        sendMessageDelayed(message, DELAY_MILLIS);  
+                    }  
+
+                    break;  
+            }  
+        }  
+    }  
+}  
+</code></pre><p>三、用Handler实现打地鼠游戏</p>
+<p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:background=&quot;#FFFFFF&quot;&gt;  
+
+    &lt;ImageView  
+        android:id=&quot;@+id/image_view&quot;  
+        android:layout_width=&quot;80dp&quot;  
+        android:layout_height=&quot;80dp&quot;  
+        android:src=&quot;@mipmap/ic_launcher&quot;  
+        android:visibility=&quot;gone&quot;/&gt;  
+
+    &lt;Button  
+        android:id=&quot;@+id/start_button&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_alignParentBottom=&quot;true&quot;  
+        android:layout_centerHorizontal=&quot;true&quot;  
+        android:text=&quot;点击开始&quot;/&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/text_view&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_centerHorizontal=&quot;true&quot;  
+        android:layout_centerVertical=&quot;true&quot;  
+        android:textAppearance=&quot;?android:attr/textAppearanceLarge&quot;/&gt;  
+
+&lt;/RelativeLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>package com.administrator.diglett;  
+
+import android.app.Activity;  
+import android.content.DialogInterface;  
+import android.os.Handler;  
+import android.os.Message;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.MotionEvent;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.ImageView;  
+import android.widget.TextView;  
+import android.widget.Toast;  
+
+import java.lang.ref.WeakReference;  
+import java.util.Random;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,View.OnTouchListener{  
+
+
+    public static final int CODE = 123;  
+    private TextView mResultTextView;  
+    private ImageView mDiglettImageView;  
+    private Button mStarrButton;  
+
+    public int[][] mPosition = new  int[][]{  
+            {342,180},{432,880},  
+            {521,256},{429,780},  
+            {456,976},{145,665},  
+            {123,678},{564,567},  
+    };  
+
+    private  int mTotalCount;  
+    private  int mSuccessCount;  
+
+    public static final int MAX_COUNT = 10;  
+
+    private DialettHandler mHandler = new DialettHandler(this);  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        initView();  
+
+        setTitle(&quot;打地鼠&quot;);  
+    }  
+
+    private void initView(){  
+        mResultTextView = (TextView)findViewById(R.id.text_view);  
+        mDiglettImageView = (ImageView)findViewById(R.id.image_view);  
+        mStarrButton = (Button)findViewById(R.id.start_button);  
+
+        mStarrButton.setOnClickListener(this);  
+        mDiglettImageView.setOnTouchListener(this);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()){  
+            case R.id.start_button:  
+            start();  
+            break;  
+        }  
+    }  
+
+    private void start() {  
+        //发送消息 handler.sendmessagedelayer  
+        mResultTextView.setText(&quot;开始啦&quot;);  
+        mStarrButton.setText(&quot;游戏中.....&quot;);  
+        mStarrButton.setEnabled(false);  
+        next(0);  
+    }  
+    private void next(int delayTime){  
+        //让地鼠每次都会有下一个  
+        int position = new Random().nextInt(mPosition.length);  
+
+        Message message = Message.obtain();  
+
+        message.what = CODE;  
+        message.arg1 = position;  
+
+        mHandler.sendMessageDelayed(message,delayTime);  
+        mTotalCount ++;  
+    }  
+
+    @Override  
+    public boolean onTouch(View v, MotionEvent event) {  
+        v.setVisibility(View.GONE);  
+        mSuccessCount ++;  
+        mResultTextView.setText(&quot;打到了&quot;+mSuccessCount + &quot;只，共&quot; +(MAX_COUNT-1) + &quot;只&quot;);  
+        return false;  
+    }  
+
+    /** 
+     * 创建弱引用的CountdownTimeHandler类继承Handler来处理Handler的内存泄漏问题 
+     */  
+    public static class DialettHandler extends Handler{  
+        public static final int RANDOM_NUBER = 500;  
+        public final WeakReference&lt;MainActivity&gt; mWeakReference;//括号内参数是当前Activity对象  
+
+        public DialettHandler(MainActivity activity) {//括号内参数是当前Activity对象  
+            mWeakReference = new WeakReference&lt;&gt;(activity);  
+        }  
+
+        @Override  
+        public void handleMessage(Message msg) {  
+            super.handleMessage(msg);  
+            //创建一个当前的Activity接收  
+            MainActivity activity = mWeakReference.get();//拿到上面的Activity  
+            switch (msg.what){  
+                case CODE:  
+                    if(activity.mTotalCount&gt;MAX_COUNT){  
+                        activity.clear();  
+                        Toast.makeText(activity,&quot;地鼠打完了！&quot;,Toast.LENGTH_LONG).show();  
+                        return;  
+                    }  
+                    int position =msg.arg1;  
+                    activity.mDiglettImageView.setX(activity.mPosition[position][0]);  
+                    activity.mDiglettImageView.setY(activity.mPosition[position][1]);  
+                    activity.mDiglettImageView.setVisibility(View.VISIBLE);  
+
+                    int randomTime = new Random().nextInt(RANDOM_NUBER) + RANDOM_NUBER;  
+                    activity.next(randomTime);  
+
+                    break;  
+            }  
+        }  
+    }  
+
+    private void clear() {  
+        mTotalCount = 0;  
+        mSuccessCount = 0;  
+        mDiglettImageView.setVisibility(View.GONE);  
+        mStarrButton.setText(&quot;点击开始&quot;);  
+        mStarrButton.setEnabled(true);  
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Handler实践的三种效果及Handler内存泄漏'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout - 副本/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/05/12/AndroidTextView/">Android中TextView的常见属性</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/05/22/OnClickListener/">Android中onClick按钮单击事件的四种常用写法读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/27/DialogBox/">Dialog自定义对话框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-clone/">Java中的clone</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2017/08/27/HandlerDemo/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2017/08/27/HandlerDemo/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2017/08/27/HandlerDemo/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 9.51085725658276px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 8.262686089729524px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
