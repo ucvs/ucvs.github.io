@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>Dialog八种基础对话框 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Dialog八种基础对话框</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2016/06/01/Dialog/">Dialog八种基础对话框</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2016-06-01
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2016/06/01/Dialog/">Dialog八种基础对话框</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2016-06-01
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、简单的入门对话框</p>
+<p>activity_main.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="普通对话框1" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="普通对话框2" android:onclick="onClick"><br>    </button></linearlayout>  </p>
+<p>MainActivity.java<br> `    package com.administrator.dialogtest;  </p>
+<pre><code>import android.app.AlertDialog;  
+import android.content.DialogInterface;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.Toast;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{  
+
+    private Button btn1;  
+    private Button btn2;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        Button btn = findViewById(R.id.btn1);  
+        Button btn2 = findViewById(R.id.btn2);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()) {  
+            case R.id.btn1:  
+                showNormalDialog();  
+                break;  
+            case R.id.btn2:  
+                showNormalDialog2();  
+        }  
+    }  
+
+    private void showNormalDialog2() {  
+        AlertDialog dialog = new AlertDialog.Builder(this).create();  
+        dialog.setTitle(&quot;提示&quot;);//这个是无返回值方法，所以不能像第一个按钮那样一直.set下去  
+        dialog.setMessage(&quot;请为本次课堂打分&quot;);  
+        //5 3 1  
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, &quot;1分&quot;, new DialogInterface.OnClickListener() {  
+            @Override  
+            public void onClick(DialogInterface dialog, int which) {  
+                Toast.makeText(MainActivity.this,&quot;您选择了：5分&quot;,Toast.LENGTH_SHORT).show();  
+            }  
+        });  
+        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, &quot;5分&quot;, new DialogInterface.OnClickListener() {//这个不能传null，因为null不知道是空的Message对象还是空的OnClickListener对象  
+            @Override  
+            public void onClick(DialogInterface dialog, int which) {  
+
+            }  
+        });  
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, &quot;3分&quot;, new DialogInterface.OnClickListener() {  
+            @Override  
+            public void onClick(DialogInterface dialog, int which) {  
+
+            }  
+        });  
+        //一定要调用show方法，否则对话框不展示  
+        dialog.show();  
+    }  
+
+    private void showNormalDialog() {  
+        //AlertDialog  
+        //AlerDialog的构造方法是被修饰为protected  
+        //因此包外是无法访问的，所以我们利用构造器  
+//        AlertDialog dialog = new AlertDialog(this);//因为方法定义时候定义了受保护的，因此要使用构造器  
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);  
+//        builder.setTitle(&quot;提示&quot;).setMessage(&quot;你好&quot;).setPositiveButton()//因为每个方法的返回值都是一个builder，所以可以这样写  
+        //设置对话框的标题  
+        builder.setTitle(&quot;提示&quot;);  
+        //设置内容  
+        builder.setMessage(&quot;你是否确定退出当前程序&quot;);  
+        //设置按钮  
+        builder.setPositiveButton(&quot;确定&quot;, new DialogInterface.OnClickListener() {  
+            @Override  
+            public void onClick(DialogInterface dialog, int which) {  
+                //退出当前程序  
+                MainActivity.this.finish();  
+            }  
+        });  
+        builder.setNegativeButton(&quot;取消&quot;,null);//可以像上面确定按钮这样传点击事件，什么都不给为null  
+//        builder.setNeutralButton();  
+        //创建对话框  
+//        builder.create();  
+        //对话框的展示方法  
+        builder.show();//show()方法里面写了create()方法，因此不需要额外多写一次  
+    }  
+}  
+</code></pre><p>二、列表对话框和单选对话框</p>
+<p>activity_main.xml<br>`    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="列表对话框" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="单选对话框" android:onclick="onClick"><br>    </button></linearlayout>  </p>
+<p>MainActivity.java<br>        package com.administrator.dialogtest;  </p>
+<pre><code>import android.app.AlertDialog;  
+import android.content.DialogInterface;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.Toast;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{  
+
+    private Button btn1;  
+    private Button btn2;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        Button btn = findViewById(R.id.btn1);  
+        Button btn2 = findViewById(R.id.btn2);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()) {  
+            case R.id.btn1:  
+                showListDialog();  
+                break;  
+            case R.id.btn2:  
+                showSingleDialog();  
+        }  
+    }  
+
+    /** 
+     * 单选对话框 
+     */  
+//    int idx = 0;  
+    private void showSingleDialog() {  
+        final String[] stars={&quot;老周&quot;,&quot;老牛&quot;,&quot;老孙&quot;,&quot;老&quot;,&quot;写不下去了&quot;};  
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)  
+                .setTitle(&quot;请选择你喜欢的明星&quot;)  
+                //参数1：选项  
+                //参数2：默认被选项，传某个选项的索引  
+                //参数3：被选中时的事件  
+                .setSingleChoiceItems(stars, 0, new DialogInterface.OnClickListener() {  
+                    @Override  
+                    public void onClick(DialogInterface dialog, int which) {  
+//                        idx = which;  
+                        Toast.makeText(MainActivity.this,&quot;您最喜欢的明星是：&quot;+ stars[which],Toast.LENGTH_SHORT).show();  
+                    }  
+//                }).setPositiveButton(&quot;确定&quot;,null);//如果需要点击某个按钮后消失，这样设置  
+//                }).setPositiveButton(&quot;确定&quot;, new DialogInterface.OnClickListener() {  
+//                    @Override  
+//                    public void onClick(DialogInterface dialog, int which) {//这里的which和上面的不是同一个，所以要解决上面的传递下来的问题，定义一个全局变量  
+//                        Toast.makeText(MainActivity.this, &quot;您选择了：&quot; + stars[idx], Toast.LENGTH_SHORT).show();  
+//                    }  
+//                });  
+                });  
+        builder.show();  
+    }  
+
+    /** 
+     * 列表对话框 
+     */  
+    private void showListDialog() {  
+        final String[] items = {&quot;我是1&quot;,&quot;我是2&quot;,&quot;我是3&quot;,&quot;我是4&quot;};  
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)  
+                .setTitle(&quot;请选择：&quot;)  
+                //设置列表项  
+                .setItems(items, new DialogInterface.OnClickListener() {  
+                    @Override  
+                    public void onClick(DialogInterface dialog, int which) {//参数2：被点击项的索引  
+                        Toast.makeText(MainActivity.this, &quot;您选择了：&quot; + items[which], Toast.LENGTH_SHORT).show();  
+                    }  
+                });  
+        builder.show();  
+    }  
+}  
+</code></pre><p>三、多选对话框和等待对话框</p>
+<p>activity_main.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="多选对话框" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="等待对话框" android:onclick="onClick"><br>    </button></linearlayout><br>MainActivity.java<br>        package com.administrator.dialogtest;  </p>
+<pre><code>import android.app.AlertDialog;  
+import android.app.ProgressDialog;  
+import android.content.DialogInterface;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.ProgressBar;  
+import android.widget.Toast;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{  
+
+    private Button btn1;  
+    private Button btn2;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        Button btn = findViewById(R.id.btn1);  
+        Button btn2 = findViewById(R.id.btn2);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()) {  
+            case R.id.btn1:  
+                showMultiDialog();  
+                break;  
+            case R.id.btn2:  
+                showWaitingDialog();  
+        }  
+    }  
+
+
+
+    /** 
+     * 多选对话框 
+     */  
+    private void showMultiDialog() {  
+        final String[] sports = {&quot;篮球&quot;,&quot;网球&quot;,&quot;乒乓球&quot;,&quot;曲棍球&quot;,&quot;滑板&quot;,&quot;游泳&quot;};  
+        final boolean[] checked = {true,false,true,true,false,false};  
+        AlertDialog.Builder builder =new AlertDialog.Builder(this)  
+                .setTitle(&quot;你最喜欢的运动&quot;)  
+                //参数1：选项  
+                //参数2：默认备选项(true:选中，false:未选择)  
+                //参数3：被选中时触发的事项  
+                .setMultiChoiceItems(sports,checked , new DialogInterface.OnMultiChoiceClickListener() {  
+                            @Override  
+                            //参数1：对话框本身  
+                            //参数2：按钮的索引  
+                            //参数3：标志按钮是否处于被选中true(选中)false(取消选中)  
+                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {  
+                                //无论是选中还是取消选择，都会触发onclick方法  
+                                //根据which数组下标，将isChecked的选中状态保存到数组checked  
+//                                checked[which]=isChecked;//这个方法默认把这步做了。所以不需要再写  
+                                Log.e(&quot;Log&quot;, sports[which]);  
+                            }  
+                        }).setPositiveButton(&quot;确定&quot;, new DialogInterface.OnClickListener() {  
+                            @Override  
+                            public void onClick(DialogInterface dialog, int which) {  
+                                String msg=&quot;你的爱好是：&quot;;  
+                                for (int i = 0;i&lt;checked.length;i++){  
+                                    if(checked[i]){  
+                                        msg += sports[i] + &quot; &quot;;//遍历刚才上面保存的选中状态的数组  
+                                    }  
+                                }  
+                                Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();  
+                            }  
+                });  
+//                });  
+        builder.show();  
+    }  
+
+    /** 
+     * 等待对话框 
+     */  
+    private void showWaitingDialog() {  
+        //进度对话框，默认样式就是转圈  
+        ProgressDialog dialog = new ProgressDialog(this);  
+        dialog.setTitle(&quot;我是一个等待对话框&quot;);  
+        dialog.setMessage(&quot;请等待...&quot;);  
+//        dialog.setCancelable(false);//设置是否也取消，默认是true可取消  
+//        dialog.dismiss();//设置对话框消失  
+        dialog.show();  
+    }  
+}  
+</code></pre><p>四、进度条对话框和输入对话框</p>
+<p>activity_main.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="进度条对话框" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="输入对话框" android:onclick="onClick"><br>    </button></linearlayout><br>MainActivity.java<br>        package com.administrator.dialogtest;  </p>
+<pre><code>import android.app.AlertDialog;  
+import android.app.ProgressDialog;  
+import android.content.DialogInterface;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.EditText;  
+import android.widget.ProgressBar;  
+import android.widget.Toast;  
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{  
+
+    private Button btn1;  
+    private Button btn2;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        Button btn = findViewById(R.id.btn1);  
+        Button btn2 = findViewById(R.id.btn2);  
+    }  
+
+    @Override  
+    public void onClick(View v) {  
+        switch (v.getId()) {  
+            case R.id.btn1:  
+                showProgressDialog();  
+                break;  
+            case R.id.btn2:  
+                showInputDialog();  
+        }  
+    }  
+
+    /** 
+     * 进度条对话框 
+     */  
+    private void showProgressDialog() {  
+        final ProgressDialog dialog = new ProgressDialog(this);  
+        dialog.setTitle(&quot;下载中...&quot;);  
+        dialog.setMessage(&quot;请等待&quot;);  
+        dialog.setIndeterminate(false);//设置进度条模糊，感觉进度条在动,true是循环动  
+        //设置对话框的样式为水平样式  
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
+//        dialog.setProgress(40);//设置进度  
+        new Thread(){  
+            public void run(){  
+                super.run();  
+                //让进度条从1到100运动  
+                for(int i =1;i&lt;=100;i++){  
+                    dialog.setProgress(i);  
+                    try {  
+                        Thread.sleep(50);  
+                    } catch (InterruptedException e) {  
+                        e.printStackTrace();  
+                    }  
+                }  
+                dialog.dismiss();  
+            }  
+        }.start();  
+        dialog.show();  
+    }  
+
+    /** 
+     * 输入对话框 
+     */  
+    private void showInputDialog() {  
+        final EditText editText = new EditText(this);  
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)  
+                .setTitle(&quot;提示&quot;)  
+                .setView(editText)//需要传一个布局或一个View视图，也可以在资源文件夹中新建一个布局引进来  
+                .setPositiveButton(&quot;确定&quot;, new DialogInterface.OnClickListener() {  
+                    @Override  
+                    public void onClick(DialogInterface dialog, int which) {  
+                        Toast.makeText(MainActivity.this,&quot;您输入的是：&quot;+editText.getText().toString(),Toast.LENGTH_SHORT).show();  
+                    }  
+                });  
+        builder.show();  
+    }  
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Dialog八种基础对话框'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/06/ToggleButton/">ToggleButton开关按钮</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/20/AbstractClass/">抽象类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-IntParameter/">接口作为形式参数</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2016/06/01/Dialog/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2016/06/01/Dialog/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2016/06/01/Dialog/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 14.833239373384515px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 13.32990084144291px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
