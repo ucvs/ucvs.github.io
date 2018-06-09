@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>RecyclerView基础写法简单实现 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>RecyclerView基础写法简单实现</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/01/06/RecyclerViewBasics/">RecyclerView基础写法简单实现</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-01-06
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/01/06/RecyclerViewBasics/">RecyclerView基础写法简单实现</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-01-06
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>转帖请注明本文出自weimeig的博客（<a href="https://blog.csdn.net/weimeig/article/details/80244059" target="_blank" rel="noopener">https://blog.csdn.net/weimeig/article/details/80244059</a>），请尊重他人的辛勤劳动成果，谢谢</p>
+<p>一、添加依赖</p>
+<pre><code>dependencies {  
+    compile &apos;com.android.support:recyclerview-v7:23.1.1&apos;  
+  }  
+</code></pre><p>点击右上角Sync Now，此时如果不报红，直接跳过下面步骤，可以开始编写RecyclerView控件了。</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RecyclerViewBasics/1.png" alt=""></p>
+<p>但，如果点击了右上角的Sync Now，却还是出现报红不用怕</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RecyclerViewBasics/2.png" alt=""></p>
+<p>修改后</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RecyclerViewBasics/3.png" alt=""></p>
+<p>点击右上角Sync Now</p>
+<p>二、定义本地数据源Menu类，为RecyclerView提供数据源。<br>Menu.java</p>
+<pre><code>package com.administrator.taolvyou.entity;  
+
+/** 
+ * 数据源 
+ * Created by Administrator on 2018/5/8. 
+ */  
+
+public class Menu {  
+    public int icon;  
+    public String menuName;  
+
+    public Menu(int icon, String menuName) {  
+        this.icon = icon;  
+        this.menuName = menuName;  
+    }  
+}  
+</code></pre><p>三、定义DataUtil工具类，将数据源转换成集合形式存储并返回该集合对象。</p>
+<p>DataUtil.java</p>
+<pre><code>package com.administrator.taolvyou.util;  
+
+
+import com.administrator.taolvyou.entity.Menu;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+/** 
+ * 数据源 
+ * Created by Administrator on 2018/5/8. 
+ */  
+public class DataUtil {  
+
+        /** 
+        *  主菜单 
+        * @param icons 
+        * @param names 
+        * @return 
+        */  
+        public static List&lt;Menu&gt; getMainMenus(int icons[],String names[]){//导包导入我们刚才建立的实体类的包  
+            List&lt;Menu&gt; menus = new ArrayList&lt;&gt;();  
+            for(int i=0;i&lt;icons.length;i++){  
+                Menu menu = new Menu(icons[i],names[i]);  
+                menus.add(menu);  
+            }  
+            return menus;  
+        }  
+}  
+</code></pre><p>四、在strings文件中定义数组数据</p>
+<pre><code>&lt;resources&gt;  
+    &lt;string name=&quot;app_name&quot;&gt;TaoLvYou&lt;/string&gt;  
+    &lt;string-array name=&quot;main_menu&quot;&gt;  
+        &lt;item&gt;飞机票&lt;/item&gt;  
+        &lt;item&gt;住酒店&lt;/item&gt;  
+        &lt;item&gt;去旅游&lt;/item&gt;  
+        &lt;item&gt;周边游&lt;/item&gt;  
+        &lt;item&gt;买门票&lt;/item&gt;  
+        &lt;item&gt;火车票&lt;/item&gt;  
+        &lt;item&gt;汽车票&lt;/item&gt;  
+        &lt;item&gt;领里程&lt;/item&gt;  
+    &lt;/string-array&gt;  
+&lt;/resources&gt;  
+</code></pre><p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RecyclerViewBasics/4.png" alt=""></p>
+<p>五、在fragment_main中引入该RecyelerView控件</p>
+<p>fragment.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    &gt;  
+            &lt;android.support.v7.widget.RecyclerView  
+                android:id=&quot;@+id/recycleview_main_menu&quot;  
+                android:layout_width=&quot;match_parent&quot;  
+                android:layout_height=&quot;wrap_content&quot;&gt;  
+            &lt;/android.support.v7.widget.RecyclerView&gt;  
+&lt;/RelativeLayout&gt;  
+</code></pre><p>六、为数据与视图之间定义适配器MainMenuAdapter</p>
+<p>MainMenuAdapter.java</p>
+<pre><code>package com.administrator.taolvyou.adapter;  
+
+import android.content.Context;  
+import android.support.v7.widget.RecyclerView;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.ImageView;  
+import android.widget.TextView;  
+
+import com.administrator.taolvyou.R;  
+import com.administrator.taolvyou.entity.Menu;  
+
+import java.util.List;  
+
+/** 
+ * Created by Administrator on 2018/5/8. 
+ */  
+
+public class MainMenuAdapter extends RecyclerView.Adapter&lt;MainMenuAdapter.MainMenuViewHolder&gt; {  
+    protected Context context;  
+    protected List&lt;Menu&gt; menus;  
+
+    class MainMenuViewHolder extends RecyclerView.ViewHolder{  
+        public ImageView mImgMenuIcon;  
+        public TextView mTxtMenuName;  
+        public MainMenuViewHolder(View itemView) {  
+            super(itemView);  
+            mImgMenuIcon=(ImageView) itemView.findViewById(R.id.img_menu_icon);  
+            mTxtMenuName=(TextView) itemView.findViewById(R.id.txt_menu_name);  
+
+        }  
+    }  
+    public MainMenuAdapter(Context context, List&lt;Menu&gt; menus){  
+        this.context=context;  
+        this.menus=menus;  
+    }  
+    @Override  
+    public MainMenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {  
+        return new MainMenuViewHolder(LayoutInflater.from(context).inflate(R.layout.item_main_menu,null));//将布局渲染成一个视图的形式  
+    }  
+
+    @Override  
+    public void onBindViewHolder(MainMenuViewHolder holder, int position) {  
+        Menu menu=menus.get(position);//返还每一个菜单的对象  
+        holder.mImgMenuIcon.setImageResource(menu.icon);  
+        holder.mTxtMenuName.setText(menu.menuName);  
+    }  
+
+    @Override  
+    public int getItemCount() {  
+        return null!=menus?menus.size():0;  
+    }  
+}  
+</code></pre><p>七、在主界面视图中使用该布局</p>
+<p>MainFragment.java</p>
+<pre><code>package com.administrator.taolvyou.fragment;  
+import android.os.Bundle;  
+import android.support.annotation.Nullable;  
+import android.support.v4.app.Fragment;  
+import android.support.v7.widget.GridLayoutManager;  
+import android.support.v7.widget.RecyclerView;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+
+import com.administrator.taolvyou.R;  
+import com.administrator.taolvyou.adapter.MainMenuAdapter;  
+import com.administrator.taolvyou.util.DataUtil;  
+
+/** 
+ * 主界面视图 
+ */  
+public class MainFragment extends Fragment{  
+
+    protected RecyclerView mRecyclerViewMenu;  
+    //菜单图标  
+    protected  int [] menuIons={R.mipmap.menu_airport,R.mipmap.menu_car  
+            ,R.mipmap.menu_course,R.mipmap.menu_hatol,  
+            R.mipmap.menu_nearby, R.mipmap.menu_ticket,  
+            R.mipmap.menu_train,R.mipmap.menu_trav};  
+    String[] menus;  
+
+    @Nullable  
+    @Override  
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {  
+        return inflater.inflate(R.layout.fragment_main,container,false);  
+    }  
+
+    @Override  
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {  
+        super.onActivityCreated(savedInstanceState);  
+        menus=this.getActivity().getResources().getStringArray(R.array.main_menu);//从string文件中，将数组数据拿出来  
+        mRecyclerViewMenu = (RecyclerView) getView().findViewById(R.id.recycleview_main_menu);  
+        //设置RecyclerView布局的样式  
+        mRecyclerViewMenu.setLayoutManager(new GridLayoutManager(getActivity(),4));//第一个参数是context对象，第二个参数是列数  
+        //另有线性布局写法可另行百度  
+         //菜单  
+        MainMenuAdapter mainMenuAdapter = new MainMenuAdapter(getActivity(), DataUtil.getMainMenus(menuIons,menus));  
+        mRecyclerViewMenu.setAdapter(mainMenuAdapter);  
+    }  
+}  
+</code></pre><p>运行效果：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/RecyclerViewBasics/5.png" alt=""></p>
+<p>项目Demo下载：</p>
+<p><a href="https://download.csdn.net/download/weimeig/10401154" target="_blank" rel="noopener">https://download.csdn.net/download/weimeig/10401154</a></p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'RecyclerView基础写法简单实现'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/02/TodayHeadlineDemo/">Android仿今日头条首页的顶部标签栏和底部导航栏</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/09/ListViewAdvanced/">ListView进阶提升（实现列表数据与聊天对话框）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/21/Java-AnonIntClsApp/">匿名内部类在开发中的应用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/09/27/Include/">Android布局优化之include标签详解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/23/Gson/">Gson数据解析</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/16/CardView/">CardView实现列表效果（含圆角阴影等效果）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/27/ExpandableListView/">ExpandableListView实现手风琴特效及其点击事件</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/06/RecyclerViewBasics/">RecyclerView基础写法简单实现</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2018/01/06/RecyclerViewBasics/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/06/RecyclerViewBasics/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/06/RecyclerViewBasics/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 10.700956954940576px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.858613283836252px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
