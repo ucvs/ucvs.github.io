@@ -260,9 +260,35 @@
         <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
 <p>应朋友们反馈的JAVA基础薄弱的问题，决定出一套完整的JAVA基础教程，帮助大家复习，巩固JAVA基础。</p>
 <p>图书馆类</p>
-<p>1、被克隆的类需要实现Cloneable接口，重写Object的clone方法。<br>        public class TuShuGuan implements Cloneable{<br>        private String shuming;<br>        private String time;<br>        public TuShuGuan(String shuming, String time) {<br>            super();<br>            this.shuming = shuming;<br>            this.time = time;<br>        }<br>        public void setShuming(String shuming) {<br>            this.shuming = shuming;<br>        }<br>        public void setTime(String time) {<br>            this.time = time;<br>        }<br>        public String getShuming() {<br>            return shuming;<br>        }<br>        public String getTime() {<br>            return time;<br>        }<br>        public Object clone() throws CloneNotSupportedException {<br>            return super.clone();<br>        }<br>    }<br>主函数</p>
-<p>主函数需要抛CloneNotSupportedException异常<br>        /** </p>
-<pre><code> * Java中的clone 
+<p>1、被克隆的类需要实现Cloneable接口，重写Object的clone方法。</p>
+<pre><code>    public class TuShuGuan implements Cloneable{  
+    private String shuming;  
+    private String time;  
+    public TuShuGuan(String shuming, String time) {  
+        super();  
+        this.shuming = shuming;  
+        this.time = time;  
+    }  
+    public void setShuming(String shuming) {  
+        this.shuming = shuming;  
+    }  
+    public void setTime(String time) {  
+        this.time = time;  
+    }  
+    public String getShuming() {  
+        return shuming;  
+    }  
+    public String getTime() {  
+        return time;  
+    }  
+    public Object clone() throws CloneNotSupportedException {    
+        return super.clone();    
+    }    
+}  
+</code></pre><p>主函数</p>
+<p>主函数需要抛CloneNotSupportedException异常</p>
+<pre><code>    /** 
+ * Java中的clone 
  * @author Administrator 
  * 
  */  
@@ -439,61 +465,61 @@ public class CloneTest {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                    <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                    <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                    <a href="/2016/06/02/FrameLayout/">FrameLayout帧布局</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                    <a href="/2015/06/03/Java-IntParameter/">接口作为形式参数</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/27/DialogBox/">Dialog自定义对话框</a>
+                    <a href="/2016/06/01/TableLayout/">TableLayout表格布局</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/05/29/Java-MemInterCls/">成员内部类</a>
+                    <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/13/ViewPagerOne/">【ViewPager学习1】ViewPager实现广告轮播图</a>
+                    <a href="/2017/08/27/FragmentStaLoading/">Fragment的静态加载</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/13/ViewPagerThree/">【ViewPager学习3】Fragment配合ViewPager</a>
+                    <a href="/2017/08/27/SharedPreferences/">SharedPreferences数据存储及内外部存储空间的读写方式</a>
                 </span>
             </li>
             
@@ -518,9 +544,9 @@ public class CloneTest {
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 18.922532608859555px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 15.272026208766107px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 18.320704420531758px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 11.200799703043524px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

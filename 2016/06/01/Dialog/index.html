@@ -259,8 +259,30 @@
     <div class="content-article">
         <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
 <p>一、简单的入门对话框</p>
-<p>activity_main.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="普通对话框1" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="普通对话框2" android:onclick="onClick"><br>    </button></linearlayout>  </p>
-<p>MainActivity.java<br> `    package com.administrator.dialogtest;  </p>
+<p>activity_main.xml</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:padding=&quot;10dp&quot;&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn1&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;普通对话框1&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn2&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;普通对话框2&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<p> `<br>    package com.administrator.dialogtest;  </p>
 <pre><code>import android.app.AlertDialog;  
 import android.content.DialogInterface;  
 import android.support.v7.app.AppCompatActivity;  
@@ -347,9 +369,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }  
 }  
 </code></pre><p>二、列表对话框和单选对话框</p>
-<p>activity_main.xml<br>`    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="列表对话框" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="单选对话框" android:onclick="onClick"><br>    </button></linearlayout>  </p>
-<p>MainActivity.java<br>        package com.administrator.dialogtest;  </p>
-<pre><code>import android.app.AlertDialog;  
+<p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:padding=&quot;10dp&quot;&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn1&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;列表对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn2&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;单选对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>    package com.administrator.dialogtest;  
+
+import android.app.AlertDialog;  
 import android.content.DialogInterface;  
 import android.support.v7.app.AppCompatActivity;  
 import android.os.Bundle;  
@@ -426,8 +471,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }  
 }  
 </code></pre><p>三、多选对话框和等待对话框</p>
-<p>activity_main.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="多选对话框" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="等待对话框" android:onclick="onClick"><br>    </button></linearlayout><br>MainActivity.java<br>        package com.administrator.dialogtest;  </p>
-<pre><code>import android.app.AlertDialog;  
+<p>activity_main.xml</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:padding=&quot;10dp&quot;&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn1&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;多选对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn2&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;等待对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>    package com.administrator.dialogtest;  
+
+import android.app.AlertDialog;  
 import android.app.ProgressDialog;  
 import android.content.DialogInterface;  
 import android.support.v7.app.AppCompatActivity;  
@@ -515,8 +584,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }  
 }  
 </code></pre><p>四、进度条对话框和输入对话框</p>
-<p>activity_main.xml<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp"><br>        <button android:id="@+id/btn1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="进度条对话框" android:onclick="onClick"><br>        </button><button android:id="@+id/btn2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="输入对话框" android:onclick="onClick"><br>    </button></linearlayout><br>MainActivity.java<br>        package com.administrator.dialogtest;  </p>
-<pre><code>import android.app.AlertDialog;  
+<p>activity_main.xml</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:padding=&quot;10dp&quot;&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn1&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;进度条对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/btn2&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;输入对话框&quot;  
+        android:onClick=&quot;onClick&quot;  
+        /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>MainActivity.java</p>
+<pre><code>    package com.administrator.dialogtest;  
+
+import android.app.AlertDialog;  
 import android.app.ProgressDialog;  
 import android.content.DialogInterface;  
 import android.support.v7.app.AppCompatActivity;  
@@ -756,13 +849,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
+                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
                 </span>
             </li>
             
@@ -774,7 +861,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
                 </span>
             </li>
             
@@ -786,31 +879,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                    <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/03/Java-IntParameter/">接口作为形式参数</a>
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/07/27/FragmentTab/">Fragment实现底部切换标签</a>
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/01/17/ScrollView/">高级控件之滚动视图(ScrollView)</a>
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
                 </span>
             </li>
             
@@ -835,9 +928,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 15.606165533788731px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 10.030020304811384px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 16.37264736513071px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 11.522832439665372px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

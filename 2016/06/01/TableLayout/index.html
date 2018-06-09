@@ -258,18 +258,27 @@
     </div>
     <div class="content-article">
         <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
-<p>表格布局<br>    `    &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <tablelayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:stretchcolumns="*"><br>        <!--android:shrinkColumns="1"设置可以收缩的列，比如某控件越来越长，以设置的这列  
-        为牺牲，来完成某控件的效果，如果需要所有列变动，用*号  
-        同理：  
-        android:collapseColumns="2" 设置可隐藏的列  
-        android:stretchColumns="1"设置可伸展的列  
-        --><br>        <!--android:如果直接在TableLayout中添加控件，那么控件将和父容器等宽  
-        如果想让控件出现在同一行，那么这些控件的外层一定要加一堆<TableRow>标签  
-        在TableRow中的控件，宽度都是默认wrao_content  
-        android:stretchColumns="0,1,2,3"该熟悉传入的数值是多少，则多少列变宽占满剩余空间  
-        如果需要所有变宽，用*号  
-        -->  </tablelayout></p>
-<pre><code>    &lt;EditText /&gt;  
+<p>表格布局</p>
+<pre><code>`    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;TableLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:stretchColumns=&quot;*&quot;  
+    &gt;  
+    &lt;!--android:shrinkColumns=&quot;1&quot;设置可以收缩的列，比如某控件越来越长，以设置的这列  
+    为牺牲，来完成某控件的效果，如果需要所有列变动，用*号  
+    同理：  
+    android:collapseColumns=&quot;2&quot; 设置可隐藏的列  
+    android:stretchColumns=&quot;1&quot;设置可伸展的列  
+    --&gt;  
+    &lt;!--android:如果直接在TableLayout中添加控件，那么控件将和父容器等宽  
+    如果想让控件出现在同一行，那么这些控件的外层一定要加一堆&lt;TableRow&gt;标签  
+    在TableRow中的控件，宽度都是默认wrao_content  
+    android:stretchColumns=&quot;0,1,2,3&quot;该熟悉传入的数值是多少，则多少列变宽占满剩余空间  
+    如果需要所有变宽，用*号  
+    --&gt;  
+
+    &lt;EditText /&gt;  
     &lt;TableRow&gt;  
         &lt;Button android:text=&quot;7&quot;/&gt;  
         &lt;Button android:text=&quot;8&quot;/&gt;  
@@ -455,61 +464,61 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2015/03/19/Java-toString/">toString方法</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                    <a href="/2015/04/23/Multithreading/">多线程</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/02/FrameLayout/">FrameLayout帧布局</a>
+                    <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                    <a href="/2016/07/06/ToggleButton/">ToggleButton开关按钮</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/16/CardView/">CardView实现列表效果（含圆角阴影等效果）</a>
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/01/09/Menu/">Menu菜单</a>
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/07/PointNinePic/">安卓.9图适配</a>
                 </span>
             </li>
             
@@ -534,9 +543,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 11.273052481921027px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 19.564647771242413px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 19.361860116709188px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 14.097465553434024px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
