@@ -270,8 +270,10 @@
 <p>（3）将ShareSDK.xml文件复制到项目下的app文件夹下的src下的main文件夹下的assets文件夹中，如果没有这个文件夹则创建一个。</p>
 <p>（4）将src文件夹内复制到项目下的app文件夹下的src下的main文件夹下的java文件夹中，与自己原包名项目并列。</p>
 <p>（5）更改AndroidManifest.xml文件内应用权限，照着官方文档填写即可，或者下载本文提供的demo，从demo中复制AndroidManifest.xml文件内权限到自己的项目</p>
-<p> ( 6 )AndroidManifest.xml文件内设置您从Mob开发者后台中得到的Appkey和AppSecret，如<br><img src="http://img.blog.csdn.net/20171216101226265?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<p>此时如果有地方报红，点击AndroidStudio上方工具栏里的BuiId下的Clean Project ，结束后点击RebuiId Project,然后再点击一下这个按钮，<br><img src="http://img.blog.csdn.net/20171216094453965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p> ( 6 )AndroidManifest.xml文件内设置您从Mob开发者后台中得到的Appkey和AppSecret，如</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/AndroidThirdLogin/1.png" alt=""></p>
+<p>此时如果有地方报红，点击AndroidStudio上方工具栏里的BuiId下的Clean Project ，结束后点击RebuiId Project,然后再点击一下这个按钮，</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/AndroidThirdLogin/2.png" alt=""></p>
 <p>原因是新引入的包需要同步一下，就不报红了。</p>
 <p>集成完成。</p>
 <p>二、第三方开发平台注册</p>
@@ -349,8 +351,11 @@ private void thirdLogin(String platformName,final String backType) {
 <pre><code>thirdLogin(SinaWeibo.NAME,&quot;Androidweibo&quot;);
 </code></pre><p>其中第一个参数的，如：QQ.NAME，是第三方规定的，不可随意更改，第二个参数，是来源，如果你后台的url不需要这个参数，直接删除即可，同时也在thirdLogin方法里面删除即可。</p>
 <p>附：查看应用签名的方法。</p>
-<p>用密钥打包apk，打包的时候，选择生成release版本，切记不要生成debug版本。<br><img src="http://img.blog.csdn.net/20171216094854974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>然后安装到手机中。</p>
-<p>同时安装下面提供的这个apk。打开这个apk，输入你的应用包名，点击生成，生成的这个就是你的安卓签名。<br><img src="http://img.blog.csdn.net/20171216095431251?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2VpbWVpZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>用密钥打包apk，打包的时候，选择生成release版本，切记不要生成debug版本。</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/AndroidThirdLogin/3.png" alt=""></p>
+<p>然后安装到手机中。</p>
+<p>同时安装下面提供的这个apk。打开这个apk，输入你的应用包名，点击生成，生成的这个就是你的安卓签名。</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/AndroidThirdLogin/4.png" alt=""></p>
 <p>注意这个是要用你发布app的那个密钥去生成apk，并且输入的包名和你发布的app的包名一致，满足这两个要求前提下，才能生成一致的安卓签名。</p>
 <p>安卓签名生成软件</p>
 <p><a href="http://download.csdn.net/download/weimeig/10161075" target="_blank" rel="noopener">http://download.csdn.net/download/weimeig/10161075</a></p>
@@ -515,19 +520,13 @@ private void thirdLogin(String platformName,final String backType) {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                    <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
                 </span>
             </li>
             
@@ -539,37 +538,43 @@ private void thirdLogin(String platformName,final String backType) {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/03/ObjTransfer/">类的对象传递</a>
+                    <a href="/2016/06/02/FrameLayout/">FrameLayout帧布局</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                    <a href="/2015/05/21/Java-AnonIntClsApp/">匿名内部类在开发中的应用</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/08/27/SharedPreferences/">SharedPreferences数据存储及内外部存储空间的读写方式</a>
+                    <a href="/2017/09/23/Gson/">Gson数据解析</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/13/ViewPagerTwo/">【ViewPager学习2】ViewPager入门以及实现APP引导页</a>
+                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/07/PointNinePic/">安卓.9图适配</a>
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/02/09/ListViewAdvanced/">ListView进阶提升（实现列表数据与聊天对话框）</a>
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
                 </span>
             </li>
             
@@ -594,9 +599,9 @@ private void thirdLogin(String platformName,final String backType) {
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 11.956977750696147px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 12.916942405238679px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 19.200384529886964px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 12.696250732460324px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
