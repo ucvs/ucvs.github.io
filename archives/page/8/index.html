@@ -12,7 +12,7 @@
     
     
     
-    <title>Fragment的静态加载 | 欢迎来到唯美的网站</title>
+    <title>archive_a | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -79,7 +79,7 @@
             <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
             <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
             
-            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            <a href="/archives/page/7/" class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
             
         </div>
         <audio id="audio" src="/imgs/oni.mp3"></audio>
@@ -123,7 +123,7 @@
                 
                 
                 
-                <li class="">
+                <li class="current">
                     <a href="/archives">
                         <i class="fa fa-archive"></i>归档
                     </a>
@@ -198,38 +198,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    
-<article class="article well article-body" id="article">
+                    <article class="article well article-body" id="article-archive">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>Fragment的静态加载</span>
+        <span>归档</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                <a href="/archives">归档</a>
             </h1>
-        </div>
-        <div class="tag-article">
-            
-            <span class="label label-gal">
-                <i class="fa fa-tags"></i>
-                
-                <a href="/tags/Android/">Android</a>
-                
-            </span>
-            
-            <span class="label label-gal">
-                <i class="fa fa-calendar"></i> 20176-08-27
-            </span>
-            
-            <span class="label label-gal">
-                <i class="fa fa-eye"></i>
-            </span>
-            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -237,184 +218,327 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                    <a href="/archives">归档</a>
                 </h4>
             </div>
-            <p>
-                <i class="fa fa-calendar"></i> 20176-08-27
-            </p>
-            <p>
-                
-                <i class="fa fa-tags"></i>
-                
-                <a href="/tags/Android/">Android</a>
-                
-                
-                
-                <i class="fa fa-eye"></i>
-                
-            </p>
         </center>
     </div>
-    <div class="content-article">
-        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
-<p>xml布局文件</p>
-<p>fragment_list.xml （控制fragment里面的内容）<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <relativelayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#ffff00"><br>        <textview android:id="@+id/textView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerinparent="true" android:text="TextView" android:textcolor="#000000" android:textsize="20sp"><br>    </textview></relativelayout><br>activity_static_load_fragment.xml   （控制fragment控件所处于Activity页面中的位置）<br>        &lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>    <relativelayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context="com.administrator.fragmentdemo.MainActivity">  </relativelayout></p>
-<pre><code>    &lt;fragment  
-        android:id=&quot;@+id/listFragment&quot;  
-        android:name=&quot;com.administrator.fragmentdemo.ListFragment&quot;  
-        android:layout_width=&quot;100dp&quot;  
-        android:layout_height=&quot;100dp&quot;/&gt;  
-    &lt;fragment  
-        android:id=&quot;@+id/listFragmentTow&quot;  
-        android:name=&quot;com.administrator.fragmentdemo.ListFragment&quot;  
-        android:layout_width=&quot;100dp&quot;  
-        android:layout_height=&quot;100dp&quot;  
-        android:layout_centerInParent=&quot;true&quot;/&gt;  
-
-&lt;/RelativeLayout&gt;  
-</code></pre><p>Fragment的Java代码管理类<br>        package com.administrator.fragmentdemo;  </p>
-<pre><code>import android.content.Context;  
-import android.os.Bundle;  
-import android.support.annotation.Nullable;  
-import android.support.v4.app.Fragment;  
-import android.view.LayoutInflater;  
-import android.view.View;  
-import android.view.ViewGroup;  
-import android.widget.TextView;  
-
-/** 
- * 列表fragment 
- */  
-public class ListFragment extends Fragment {  
-    //创建视图  
-    @Nullable  
-    @Override  
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {  
-        //new view  
-        View view = inflater.inflate(R.layout.fragment_list,container,false);  
-        TextView textView = view.findViewById(R.id.textView);//需要根据根视图view进行findViewById  
-        textView.setText(&quot;hi&quot;);  
-        return view;  
-    }  
-    @Override  
-    public void onAttach(Context context) {  
-        super.onAttach(context);  
-    }  
-
-    @Override  
-    public void onCreate(@Nullable Bundle savedInstanceState) {  
-        super.onCreate(savedInstanceState);  
-    }  
-
-    @Override  
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {  
-        super.onActivityCreated(savedInstanceState);  
-    }  
-
-    @Override  
-    public void onStart() {  
-        super.onStart();  
-    }  
-
-    @Override  
-    public void onPause() {  
-        super.onPause();  
-    }  
-
-    @Override  
-    public void onStop() {  
-        super.onStop();  
-    }  
-
-    @Override  
-    public void onDestroyView() {  
-        super.onDestroyView();  
-    }  
-
-    @Override  
-    public void onDestroy() {  
-        super.onDestroy();  
-    }  
-}  
-</code></pre><p>装载Fragment的Activity的Java代码<br>        package com.administrator.fragmentdemo;  </p>
-<pre><code>import android.content.Context;  
-import android.os.Bundle;  
-import android.support.annotation.Nullable;  
-import android.support.v4.app.Fragment;  
-import android.view.LayoutInflater;  
-import android.view.View;  
-import android.view.ViewGroup;  
-import android.widget.TextView;  
-
-/** 
- * 列表fragment 
- */  
-public class ListFragment extends Fragment {  
-    //创建视图  
-    @Nullable  
-    @Override  
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {  
-        //new view  
-        View view = inflater.inflate(R.layout.fragment_list,container,false);  
-        TextView textView = view.findViewById(R.id.textView);//需要根据根视图view进行findViewById  
-        textView.setText(&quot;hi&quot;);  
-        return view;  
-    }  
-    @Override  
-    public void onAttach(Context context) {  
-        super.onAttach(context);  
-    }  
-
-    @Override  
-    public void onCreate(@Nullable Bundle savedInstanceState) {  
-        super.onCreate(savedInstanceState);  
-    }  
-
-    @Override  
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {  
-        super.onActivityCreated(savedInstanceState);  
-    }  
-
-    @Override  
-    public void onStart() {  
-        super.onStart();  
-    }  
-
-    @Override  
-    public void onPause() {  
-        super.onPause();  
-    }  
-
-    @Override  
-    public void onStop() {  
-        super.onStop();  
-    }  
-
-    @Override  
-    public void onDestroyView() {  
-        super.onDestroyView();  
-    }  
-
-    @Override  
-    public void onDestroy() {  
-        super.onDestroy();  
-    }  
-}  
-</code></pre>
+    <div class="content-article" style="margin-top: 30px;">
+        
+        
+            <h1 style="font-size: 24px; margin-top: 40px;">2018年</h1>
+            
+        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+            
+             
+             
+                        <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                        <br>
+            
+             
+                        <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                        <br>
+            
+             
+                        <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                        <br>
+            
+             
+                        <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                        <br>
+            
+             
+                        <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                        <br>
+            
+             
+                        <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                        <br>
+            
+             
+                        <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                        <br>
+            
+             
+                        <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                        <br>
+            
+             
+                        </div>
+                    <h1 style="font-size: 24px; margin-top: 40px;">2017年</h1>
+                    <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+                 
+             
+                        <a href="/2017/09/23/Gson/">Gson数据解析</a>
+                        <br>
+            
+             
+                        <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                        <br>
+            
+             
+                        <a href="/2017/08/27/SharedPreferences/">SharedPreferences数据存储及内外部存储空间的读写方式</a>
+                        <br>
+            
+             
+                        <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                        <br>
+            
+             
+                        <a href="/2017/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                        <br>
+            
+             
+                        <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                        <br>
+            
+             
+                        <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                        <br>
+            
+             
+                        <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
+                        <br>
+            
+             
+                        <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2017/03/27/ConstraintLayout - 副本/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2017/03/13/ViewPagerThree/">【ViewPager学习3】Fragment配合ViewPager</a>
+                        <br>
+            
+             
+                        <a href="/2017/03/13/ViewPagerTwo/">【ViewPager学习2】ViewPager入门以及实现APP引导页</a>
+                        <br>
+            
+             
+                        <a href="/2017/03/13/ViewPagerOne/">【ViewPager学习1】ViewPager实现广告轮播图</a>
+                        <br>
+            
+             
+                        <a href="/2017/01/27/ListViewCase/">ListView基础入门(获取手机应用并快速打开功能Demo)</a>
+                        <br>
+            
+             
+                        </div>
+                    <h1 style="font-size: 24px; margin-top: 40px;">2016年</h1>
+                    <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+                 
+             
+                        <a href="/2016/09/27/Include/">Android布局优化之include标签详解</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/08/RadioGroupRadioBtn/">RadioGroup和RadioButton单选框</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/06/ToggleButton/">ToggleButton开关按钮</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/05/SeekRatingProBar/">SeekerBar、ProgressBar、RatingBar进度条的基本使用</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2016/07/01/DistanceUnit/">android布局中几个距离单位的区别：px、dp、sp</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/27/DialogBox/">Dialog自定义对话框</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/02/RelLayoutAttri/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/02/FrameLayout/">FrameLayout帧布局</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/01/TableLayout/">TableLayout表格布局</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/01/ActivityLifecycle/">Activity生命周期详解</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/01/Dialog/">Dialog八种基础对话框</a>
+                        <br>
+            
+             
+                        <a href="/2016/06/01/GridLayout/">GridLayout网格布局</a>
+                        <br>
+            
+             
+                        <a href="/2016/05/22/OnClickListener/">Android中onClick按钮单击事件的四种常用写法读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2016/05/12/AndroidTextView/">Android中TextView的常见属性</a>
+                        <br>
+            
+             
+                        <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
+                        <br>
+            
+             
+                        </div>
+                    <h1 style="font-size: 24px; margin-top: 40px;">2015年</h1>
+                    <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+                 
+             
+                        <a href="/2015/06/03/Java-IntParameter/">接口作为形式参数</a>
+                        <br>
+            
+             
+                        <a href="/2015/06/03/ObjTransfer/">类的对象传递</a>
+                        <br>
+            
+             
+                        <a href="/2015/06/03/Java-clone/">Java中的clone</a>
+                        <br>
+            
+             
+                        <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                        <br>
+            
+             
+                        <a href="/2015/06/01/Java-AnonCall/">匿名内部类的方法调用</a>
+                        <br>
+            
+             
+                        <a href="/2015/06/01/Java-AnoInterview/">匿名内部类面试题</a>
+                        <br>
+            
+             
+                        <a href="/2015/05/29/Java-MemInterCls/">成员内部类</a>
+                        <br>
+            
+             
+                        <a href="/2015/05/27/Java-AbstractParame/">抽象类名作为形式参数</a>
+                        <br>
+            
+             
+                        <a href="/2015/05/27/Java-HashSet - 副本/">抽象类名作为形式参数</a>
+                        <br>
+            
+             
+                        <a href="/2015/05/21/Java-AnonIntClsApp/">匿名内部类在开发中的应用</a>
+                        <br>
+            
+             
+                        <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/29/Java-Map-HashMap/">JAVA中的集合框架（Map&amp;HashMap）</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/28/Java-HashSet/">JAVA中的集合框架（Set）</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/27/MiltiCaseProduConsum/">多线程的经典案例(生产消费问题)</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/23/Multithreading/">多线程</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/20/Interface/">接口</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/16/MultiCaseTicket/">多线程的经典案例(卖票问题)</a>
+                        <br>
+            
+             
+                        <a href="/2015/04/13/Java-ArrayList/">JAVA中的集合框架（ArrayList）</a>
+                        <br>
+            
+             
+                        <a href="/2015/03/20/AbstractClass/">抽象类</a>
+                        <br>
+            
+             
+                        <a href="/2015/03/19/Java-toString/">toString方法</a>
+                        <br>
+            
+             
+                        <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                        <br>
+            
+             
+                        </div>
+                    <h1 style="font-size: 24px; margin-top: 40px;">2014年</h1>
+                    <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
+                 
+             
+                        <a href="/2014/12/11/WeChatAlipayPayIntegr/">微信支付及支付宝支付集成</a>
+                        <br>
+            
+             
+                        <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
+                        <br>
+            
+             
+                        <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                        <br>
+            
+             
+                        <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                        <br>
+            
+             
+                        <a href="/2014/03/18/AndroidThirdShare/">Android第三方分享集成</a>
+                        <br>
+            
+             
+                        <a href="/2014/03/17/AndroidThirdLogin/">Android第三方登录集成</a>
+                        <br>
+            
+                    </div>
+        
     </div>
 </article>
-
-
-<div id="comments-template"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script>
-	if(!window.commentConfig) {
-      window.commentConfig = {}
-      window.commentConfig.title = 'Fragment的静态加载'
-    }
-</script>
-
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -484,12 +608,6 @@ public class ListFragment extends Fragment {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/20176/08/27/FragmentStaLoading/">Fragment的静态加载</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
                 </span>
             </li>
@@ -521,6 +639,12 @@ public class ListFragment extends Fragment {
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
                 </span>
             </li>
             
@@ -560,25 +684,19 @@ public class ListFragment extends Fragment {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/03/20/AbstractClass/">抽象类</a>
+                    <a href="/2016/07/12/AndroidIntent/">Intent实现Android间的页面跳转</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2016/07/02/LinearLayout/">Android中LinearLayout布局的常用属性总结读书笔记</a>
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
                 </span>
             </li>
             
@@ -590,31 +708,37 @@ public class ListFragment extends Fragment {
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/02/FrameLayout/">FrameLayout帧布局</a>
+                    <a href="/2015/06/01/Java-AnonCall/">匿名内部类的方法调用</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/05/27/Java-AbstractParame/">抽象类名作为形式参数</a>
+                    <a href="/2017/06/05/FragmentDynLoading/">Fragment的动态加载</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2015/06/03/ObjTransfer/">类的对象传递</a>
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
+                    <a href="/2015/06/03/Java-clone/">Java中的clone</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/09/27/Include/">Android布局优化之include标签详解</a>
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/13/ViewPagerTwo/">【ViewPager学习2】ViewPager入门以及实现APP引导页</a>
                 </span>
             </li>
             
@@ -627,21 +751,21 @@ public class ListFragment extends Fragment {
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/20176/08/27/FragmentStaLoading/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/archives/page/8/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/20176/08/27/FragmentStaLoading/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/archives/page/8/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/20176/08/27/FragmentStaLoading/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/archives/page/8/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 14.367601690779395px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 19.757608429035432px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 10.396185224853628px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 11.010229064481067px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

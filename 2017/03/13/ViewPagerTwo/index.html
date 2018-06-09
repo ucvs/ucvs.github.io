@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>【ViewPager学习2】ViewPager入门以及实现APP引导页 | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>【ViewPager学习2】ViewPager入门以及实现APP引导页</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/03/13/ViewPagerTwo/">【ViewPager学习2】ViewPager入门以及实现APP引导页</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-03-13
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/03/13/ViewPagerTwo/">【ViewPager学习2】ViewPager入门以及实现APP引导页</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-03-13
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>一、最简单的ViewPager实现</p>
+<p>(一)、创建可左右滑动的三个布局</p>
+<p>view_first.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:layout_width=&quot;match_parent&quot;  
+android:layout_height=&quot;match_parent&quot;&gt;  
+
+&lt;TextView  
+    android:textSize=&quot;20sp&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:text=&quot;first&quot;/&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt; 
+</code></pre><p>view_second.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;TextView  
+        android:textSize=&quot;20sp&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:text=&quot;second&quot;/&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>view_thrid.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;TextView  
+        android:textSize=&quot;20sp&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:text=&quot;thrid&quot;/&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>(二)、activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:context=&quot;com.administrator.viewpagerproject.MainActivity&quot;&gt;  
+
+    &lt;android.support.v4.view.ViewPager  
+        android:id=&quot;@+id/view_papger&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;/android.support.v4.view.ViewPager&gt;  
+
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>(三)、MainActivity.java</p>
+<pre><code>package com.administrator.viewpagerproject;  
+
+import android.support.v4.view.PagerAdapter;  
+import android.support.v4.view.ViewPager;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.ImageView;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+public class MainActivity extends AppCompatActivity {  
+
+    private ViewPager mViewPager;  
+    private List&lt;View&gt; mViews;  
+
+    /** 
+     *一组视图 
+     */  
+    private int[] mLayoutIDs = {  
+            R.layout.view_first,  
+            R.layout.view_second,  
+            R.layout.view_thrid};  
+    private ImageView mImageView;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        ViewPager mViewPager = findViewById(R.id.view_papger);  
+        /** 
+         * 一组视图放在列表里 
+         */  
+        //初始化数据  
+        mViews = new ArrayList&lt;&gt;();  
+        for (int i = 0; i &lt; mLayoutIDs.length; i++) {  
+            View view = getLayoutInflater().inflate(mLayoutIDs[i], null);  
+            mViews.add(view);  
+//            mImageView = new ImageView(this);  
+//            mImageView.setImageResource(R.mipmap.ic_launcher);  
+//            mViews.add(mImageView);  
+        }  
+        mViewPager.setAdapter(mPagerAdapter);//给Adapter  
+    }  
+    //设置Adapter  
+    PagerAdapter mPagerAdapter = new PagerAdapter() {  
+        @Override  
+        public int getCount() {  
+            return mLayoutIDs.length;  
+        }  
+
+        @Override  
+        public boolean isViewFromObject(View view, Object object) {  
+            return view == object;  
+        }  
+
+        //按顺序给页  
+        @Override  
+        public Object instantiateItem(ViewGroup container, int position) {  
+            View child = mViews.get(position);  
+            container.addView(child);  
+            return child;  
+        }  
+
+        //按顺序销毁页  
+        @Override  
+        public void destroyItem(ViewGroup container, int position, Object object) {  
+            container.removeView(mViews.get(position));  
+        }  
+    };  
+}  
+</code></pre><p>二、使用ViewPager实现App引导页</p>
+<p>添加一张图片用于测试，图片名为diglett.png</p>
+<p>可鼠标右键另存为保存这张测试图片</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ViewPagerTwo/1.png" alt=""></p>
+<p>(一)、创建可左右滑动的三个布局</p>
+<p>view_first.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;TextView  
+        android:textSize=&quot;20sp&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:text=&quot;first&quot;/&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>view_second.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;TextView  
+        android:textSize=&quot;20sp&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:text=&quot;second&quot;/&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>view_thrid.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;android.support.constraint.ConstraintLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;TextView  
+        android:textSize=&quot;20sp&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:text=&quot;thrid&quot;/&gt;  
+&lt;/android.support.constraint.ConstraintLayout&gt;  
+</code></pre><p>(二)、activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;&gt;  
+
+    &lt;android.support.v4.view.ViewPager  
+        android:id=&quot;@+id/view_papger&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;/android.support.v4.view.ViewPager&gt;  
+    &lt;LinearLayout  
+        android:id=&quot;@+id/dot_layout&quot;  
+        android:layout_width=&quot;120dp&quot;  
+        android:layout_height=&quot;30dp&quot;  
+        android:layout_alignParentBottom=&quot;true&quot;  
+        android:layout_centerHorizontal=&quot;true&quot;  
+        android:layout_marginBottom=&quot;30dp&quot;  
+        android:gravity=&quot;center&quot;  
+        android:orientation=&quot;horizontal&quot;&gt;  
+
+    &lt;/LinearLayout&gt;  
+
+&lt;/RelativeLayout&gt;  
+</code></pre><p>(三)、MainActivity.java</p>
+<pre><code>package com.administrator.viewpagerproject;  
+
+import android.support.v4.view.PagerAdapter;  
+import android.support.v4.view.ViewPager;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.ImageView;  
+import android.widget.LinearLayout;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+public class MainActivity extends AppCompatActivity {  
+
+    private ViewPager mViewPager;  
+    private List&lt;View&gt; mViews;  
+
+    /** 
+     *一组视图 
+     */  
+    private int[] mLayoutIDs = {  
+            R.layout.view_first,  
+            R.layout.view_second,  
+            R.layout.view_thrid};  
+    private ImageView mImageView;  
+
+    private ViewGroup mDotViewGroup;  
+    private List&lt;ImageView&gt; mDotViews = new ArrayList&lt;&gt;();  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        mViewPager = findViewById(R.id.view_papger);  
+        mDotViewGroup = findViewById(R.id.dot_layout);  
+        /** 
+         * 一组视图放在列表里 
+         */  
+        //初始化数据  
+        mViews = new ArrayList&lt;&gt;();  
+        for (int i = 0; i &lt; mLayoutIDs.length; i++) {  
+            ImageView imageView = new ImageView(this);  
+            imageView.setImageResource(R.mipmap.ic_launcher);  
+            mViews.add(imageView);  
+
+            ImageView dot = new ImageView(this);  
+            dot.setImageResource(R.mipmap.ic_launcher);  
+            dot.setMaxWidth(100);  
+            dot.setMaxHeight(100);  
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(50,50);//相距50，50  
+            layoutParams.leftMargin = 20;//每个点距离左边点20  
+            dot.setLayoutParams(layoutParams);  
+            dot.setEnabled(false);  
+
+            mDotViewGroup.addView(dot);  
+            mDotViews.add(dot);  
+        }  
+        //设置Adapter  
+        mViewPager.setAdapter(mPagerAdapter);//给Adapter  
+        mViewPager.setOffscreenPageLimit(4);//屏上的至少有几个  
+        mViewPager.setCurrentItem(0);//控制最开始位置是第个布局，如：mViewPager.setCurrentItem(2);  
+        setDotViews(0);//控制最开始位置是第几个点，如setDotViews(2);  
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {  
+            @Override  
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {  
+                //当它被滚动的时候  
+            }  
+
+            @Override  
+            public void onPageSelected(int position) {  
+                //当它被选中的时候  
+                setDotViews(position);  
+
+            }  
+
+            @Override  
+            public void onPageScrollStateChanged(int state) {  
+                //当它滚动的状态变化的时候  
+            }  
+        });  
+
+    }  
+
+    public void setDotViews(int position) {  
+        for (int index = 0; index &lt; mDotViews.size() ; index++) {  
+            mDotViews.get(index).setImageResource(position == index ? R.mipmap.diglett:R.mipmap.ic_launcher);  
+        }  
+    }  
+    PagerAdapter mPagerAdapter = new PagerAdapter() {  
+        @Override  
+        public int getCount() {  
+            return mLayoutIDs.length;  
+        }  
+
+        @Override  
+        public boolean isViewFromObject(View view, Object object) {  
+            return view == object;  
+        }  
+
+        //按顺序给页  
+        @Override  
+        public Object instantiateItem(ViewGroup container, int position) {  
+            View child = mViews.get(position);  
+            container.addView(child);  
+            return child;  
+        }  
+
+        //按顺序销毁页  
+        @Override  
+        public void destroyItem(ViewGroup container, int position, Object object) {  
+            container.removeView(mViews.get(position));  
+        }  
+    };  
+}  
+</code></pre><p>简单效果图：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ViewPagerTwo/2.png" alt=""></p>
+<p>三、较好用的引导页效果，滑动结束后点击按钮跳转</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ViewPagerTwo/3.png" alt=""></p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ViewPagerTwo/4.png" alt=""></p>
+<p>activity_guide.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;RelativeLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:context=&quot;com.example.nanchen.guidepagedemo.GuideActivity&quot;&gt;  
+
+    &lt;android.support.v4.view.ViewPager  
+        android:id=&quot;@+id/guide_vp&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;/android.support.v4.view.ViewPager&gt;  
+
+    &lt;LinearLayout  
+        android:id=&quot;@+id/guide_ll_point&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;horizontal&quot;  
+        android:layout_alignParentBottom=&quot;true&quot;  
+        android:layout_marginBottom=&quot;40dp&quot;  
+        android:gravity=&quot;center_horizontal&quot;&gt;  
+    &lt;/LinearLayout&gt;  
+
+    &lt;ImageButton  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:id=&quot;@+id/guide_ib_start&quot;  
+        android:src=&quot;@mipmap/btn_start&quot;  
+        android:layout_centerHorizontal=&quot;true&quot;  
+        android:layout_above=&quot;@+id/guide_ll_point&quot;  
+        android:background=&quot;@null&quot;  
+        android:visibility=&quot;gone&quot;/&gt;  
+&lt;/RelativeLayout&gt;  
+</code></pre><p>GuidePagerAdapter.java</p>
+<pre><code>import android.support.v4.view.PagerAdapter;  
+import android.view.View;  
+import android.view.ViewGroup;  
+
+import java.util.List;  
+
+/** 
+ * Created by 南尘 on 2016/7/10. 
+ */  
+public class GuidePageAdapter extends PagerAdapter {  
+
+    private List&lt;View&gt; viewList;  
+
+    public GuidePageAdapter(List&lt;View&gt; viewList) {  
+        this.viewList = viewList;  
+    }  
+
+    /** 
+     * @return 返回页面的个数 
+     */  
+    @Override  
+    public int getCount() {  
+        if (viewList != null){  
+            return viewList.size();  
+        }  
+        return 0;  
+    }  
+
+    /** 
+     * 判断对象是否生成界面 
+     * @param view 
+     * @param object 
+     * @return 
+     */  
+    @Override  
+    public boolean isViewFromObject(View view, Object object) {  
+        return view == object;  
+    }  
+
+    /** 
+     * 初始化position位置的界面 
+     * @param container 
+     * @param position 
+     * @return 
+     */  
+    @Override  
+    public Object instantiateItem(ViewGroup container, int position) {  
+        container.addView(viewList.get(position));  
+        return viewList.get(position);  
+    }  
+
+
+    @Override  
+    public void destroyItem(ViewGroup container, int position, Object object) {  
+        container.removeView(viewList.get(position));  
+    }  
+}  
+</code></pre><p>GuideActivity.java</p>
+<pre><code>import android.content.Intent;  
+import android.os.Bundle;  
+import android.support.v4.view.ViewPager;  
+import android.support.v7.app.AppCompatActivity;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.view.Window;  
+import android.widget.ImageButton;  
+import android.widget.ImageView;  
+import android.widget.LinearLayout;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+/** 
+ * 实现首次启动的引导页面 
+ */  
+public class GuideActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{  
+
+    private ViewPager vp;  
+    private int []imageIdArray;//图片资源的数组  
+    private List&lt;View&gt; viewList;//图片资源的集合  
+    private ViewGroup vg;//放置圆点  
+
+    //实例化原点View  
+    private ImageView iv_point;  
+    private ImageView []ivPointArray;  
+
+    //最后一页的按钮  
+    private ImageButton ib_start;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);  
+        setContentView(R.layout.activity_guide);  
+
+        ib_start = (ImageButton) findViewById(R.id.guide_ib_start);  
+        ib_start.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                startActivity(new Intent(GuideActivity.this,MainActivity.class));  
+                finish();  
+            }  
+        });  
+
+        //加载ViewPager  
+        initViewPager();  
+
+        //加载底部圆点  
+        initPoint();  
+    }  
+
+    /** 
+     * 加载底部圆点 
+     */  
+    private void initPoint() {  
+        //这里实例化LinearLayout  
+        vg = (ViewGroup) findViewById(R.id.guide_ll_point);  
+        //根据ViewPager的item数量实例化数组  
+        ivPointArray = new ImageView[viewList.size()];  
+        //循环新建底部圆点ImageView，将生成的ImageView保存到数组中  
+        int size = viewList.size();  
+        for (int i = 0;i&lt;size;i++){  
+            iv_point = new ImageView(this);  
+            iv_point.setLayoutParams(new ViewGroup.LayoutParams(20,20));  
+            iv_point.setPadding(30,0,30,0);//left,top,right,bottom  
+            ivPointArray[i] = iv_point;  
+            //第一个页面需要设置为选中状态，这里采用两张不同的图片  
+            if (i == 0){  
+                iv_point.setBackgroundResource(R.mipmap.full_holo);  
+            }else{  
+                iv_point.setBackgroundResource(R.mipmap.empty_holo);  
+            }  
+            //将数组中的ImageView加入到ViewGroup  
+            vg.addView(ivPointArray[i]);  
+        }  
+
+
+
+    }  
+
+    /** 
+     * 加载图片ViewPager 
+     */  
+    private void initViewPager() {  
+        vp = (ViewPager) findViewById(R.id.guide_vp);  
+        //实例化图片资源  
+        imageIdArray = new int[]{R.mipmap.guide1,R.mipmap.guide2,R.mipmap.guide3};  
+        viewList = new ArrayList&lt;&gt;();  
+        //获取一个Layout参数，设置为全屏  
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(  
+                LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);  
+
+        //循环创建View并加入到集合中  
+        int len = imageIdArray.length;  
+        for (int i = 0;i&lt;len;i++){  
+            //new ImageView并设置全屏和图片资源  
+            ImageView imageView = new ImageView(this);  
+            imageView.setLayoutParams(params);  
+            imageView.setBackgroundResource(imageIdArray[i]);  
+
+            //将ImageView加入到集合中  
+            viewList.add(imageView);  
+        }  
+
+        //View集合初始化好后，设置Adapter  
+        vp.setAdapter(new GuidePageAdapter(viewList));  
+        //设置滑动监听  
+        vp.setOnPageChangeListener(this);  
+    }  
+
+
+    @Override  
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {  
+
+    }  
+
+    /** 
+     * 滑动后的监听 
+     * @param position 
+     */  
+    @Override  
+    public void onPageSelected(int position) {  
+        //循环设置当前页的标记图  
+        int length = imageIdArray.length;  
+        for (int i = 0;i&lt;length;i++){  
+            ivPointArray[position].setBackgroundResource(R.mipmap.full_holo);  
+            if (position != i){  
+                ivPointArray[i].setBackgroundResource(R.mipmap.empty_holo);  
+            }  
+        }  
+
+        //判断是否是最后一页，若是则显示按钮  
+        if (position == imageIdArray.length - 1){  
+            ib_start.setVisibility(View.VISIBLE);  
+        }else {  
+            ib_start.setVisibility(View.GONE);  
+        }  
+    }  
+
+
+    @Override  
+    public void onPageScrollStateChanged(int state) {  
+
+    }  
+}  
+</code></pre><p>总的来说实现流程比较简单。</p>
+<p>1）先加载ViewPager，新建ImageView并添加到View集合中，然后设置Adapter并显示。</p>
+<p>2）然后加载LinearLayout，放置原点图片，同样新建ImageView设置背景后放在圆点图集合中。</p>
+<p>3）最后设置ViewPager的滑动监听事件，在滑动完成的监听OnPageSelected方法中，设置对应的圆点为选中，如果是最后一页，则显示按钮。</p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = '【ViewPager学习2】ViewPager入门以及实现APP引导页'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/23/Gson/">Gson数据解析</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/20/AbstractClass/">抽象类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/19/Java-toString/">toString方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/02/11/OkHttpReadingNotes/">OkHttp框架读书总结笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/06/01/ActivityLifecycle/">Activity生命周期详解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/FragmentStaLoading/">Fragment的静态加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/21/Java-AnonIntClsApp/">匿名内部类在开发中的应用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/GridViewPicLoding/">GridView实现图片加载</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2017/03/13/ViewPagerTwo/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2017/03/13/ViewPagerTwo/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2017/03/13/ViewPagerTwo/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 18.151767419150477px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 8.051510141150793px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

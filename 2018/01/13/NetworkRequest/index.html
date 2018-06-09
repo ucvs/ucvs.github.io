@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>Android网络请求，获取数据，解析数据Demo | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>Android网络请求，获取数据，解析数据Demo</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-01-13
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-01-13
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>添加依赖 </p>
+<p>build.gradle</p>
+<pre><code>dependencies {  
+    compile &apos;com.google.code.gson:gson:2.4&apos;  
+}  
+</code></pre><p>右上角Sync Now</p>
+<p>在AndroidManifest.xml中添加网络访问权限</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;  
+</code></pre><p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/NetworkRequest/1.png" alt=""></p>
+<p>主页面布局</p>
+<p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot; android:id=&quot;@+id/activity_main&quot;  
+    android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    tools:context=&quot;com.example.httpdemo.MainActivity&quot;&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/header&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;48dp&quot;  
+        android:text=&quot;慕课&quot;  
+        android:textSize=&quot;28sp&quot;  
+        android:gravity=&quot;center&quot;  
+        android:textColor=&quot;#ffffff&quot;  
+        android:background=&quot;#3f51b5&quot;  
+        android:paddingRight=&quot;15dp&quot;/&gt;  
+    &lt;ImageView  
+        android:id=&quot;@+id/banner&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:scaleType=&quot;fitXY&quot;/&gt;  
+    &lt;ListView  
+        android:id=&quot;@+id/essay_view&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;&gt;&lt;/ListView&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>被跳转页面布局</p>
+<p>activity_detail.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:id=&quot;@+id/content_detail&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    tools:showIn=&quot;@layout/activity_detail&quot;  
+    android:orientation=&quot;vertical&quot; &gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/name&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:textSize=&quot;24sp&quot;  
+        android:gravity=&quot;center&quot;  
+        android:layout_marginTop=&quot;15dp&quot; /&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/author&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:textSize=&quot;20sp&quot;  
+        android:gravity=&quot;right&quot;  
+        android:paddingRight=&quot;10dp&quot;  
+        android:layout_marginTop=&quot;15dp&quot;/&gt;  
+
+    &lt;TextView  
+        android:id=&quot;@+id/content&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;match_parent&quot;  
+        android:layout_margin=&quot;8dp&quot;  
+        android:layout_marginTop=&quot;15dp&quot;  
+        android:layout_weight=&quot;1&quot;  
+        android:lineSpacingMultiplier=&quot;1.5&quot;  
+        android:textSize=&quot;20sp&quot; /&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>数据实体类</p>
+<p>Essay.java</p>
+<pre><code>package com.administrator.hellodemo;  
+
+
+
+public class Essay {  
+    private String title;  
+    private String author;  
+    private String content;  
+
+    public Essay(String title, String author, String content) {  
+        this.title = title;  
+        this.author = author;  
+        this.content = content;  
+    }  
+
+    public String getTitle() {  
+        return title;  
+    }  
+
+    public void setTitle(String title) {  
+        this.title = title;  
+    }  
+
+    public String getAuthor() {  
+        return author;  
+    }  
+
+    public void setAuthor(String author) {  
+        this.author = author;  
+    }  
+
+    public String getContent() {  
+        return content;  
+    }  
+
+    public void setContent(String content) {  
+        this.content = content;  
+    }  
+}  
+</code></pre><p>主页面Java代码</p>
+<p>MainActivity.java</p>
+<pre><code>package com.administrator.hellodemo;  
+
+import android.content.Intent;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+
+public class MainActivity extends AppCompatActivity {  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        initView();  
+    }  
+
+    private void initView() {  
+        findViewById(R.id.header).setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                startActivity(new Intent(MainActivity.this,DetailActivity.class));  
+            }  
+        });  
+    }  
+}  
+</code></pre><p>被跳转页Java代码</p>
+<pre><code>package com.administrator.hellodemo;  
+
+import android.app.Activity;  
+import android.content.Intent;  
+import android.os.Handler;  
+import android.os.Message;  
+import android.os.Bundle;  
+import android.util.Log;  
+import android.widget.TextView;  
+
+import com.google.gson.Gson;  
+
+import org.json.JSONException;  
+import org.json.JSONObject;  
+
+import java.io.ByteArrayOutputStream;  
+import java.io.IOException;  
+import java.io.InputStream;  
+import java.net.HttpURLConnection;  
+import java.net.MalformedURLException;  
+import java.net.URL;  
+
+public class DetailActivity extends Activity {  
+    private TextView nameView,authorView,contentView;  
+    private int id;  
+    private Handler handler = new Handler(){  
+        @Override  
+
+        public void handleMessage(Message msg) {  
+            super.handleMessage(msg);  
+            Essay e = (Essay) msg.obj;  
+            nameView.setText(e.getTitle());  
+            authorView.setText(e.getAuthor());  
+            contentView.setText(e.getContent());  
+
+        }  
+    };  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_detail);  
+
+        Intent it = getIntent();  
+        id = it.getIntExtra(&quot;essay&quot;,1);  
+        initView();  
+        initData();  
+    }  
+
+    public void initView(){  
+        nameView = (TextView) findViewById(R.id.name);  
+        authorView = (TextView) findViewById(R.id.author);  
+        contentView = (TextView) findViewById(R.id.content);  
+    }  
+
+    public void initData(){  
+        //HttpUrlConnection  
+        /** 
+         * 1.实例化一个url对象 
+         * 2.获取HttpUrlConnection对象 
+         * 3.设置请求连接属性 
+         * 4.获取响应码，判断是否连接成功 
+         * 5.读取输入流并解析 
+         */  
+        //参数：你要访问的接口地址  
+        new Thread(){  
+            @Override  
+            public void run() {  
+                try {  
+                    URL url = new URL(&quot;http://www.imooc.com/api/teacher?type=3&amp;cid=&quot;+id );  
+                    HttpURLConnection coon = (HttpURLConnection) url.openConnection();  
+                    coon.setRequestMethod(&quot;GET&quot;);  
+                    coon.setReadTimeout(6000);  
+                    //获取响应码  
+                    if(coon.getResponseCode() == 200){  
+                        //获取输入流  
+                        InputStream in = coon.getInputStream();  
+                        byte[] b = new byte[1024*512];  
+                        int len = 0;  
+                        //建立缓存流，保存所读取的字节数组  
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+                        while ((len = in.read(b)) &gt; -1){  
+                            baos.write(b,0,len);  
+                        }  
+                        String msg = baos.toString();  
+                        Log.e(&quot;TAG&quot;,msg);  
+                        //JSON数据的解析：  
+                        JSONObject obj = new JSONObject(msg);  
+
+                        //HashMap map = null;  
+                        //map.get(&quot;age&quot;)  
+                        int status = obj.getInt(&quot;status&quot;);  
+                        String msg2 = obj.getString(&quot;msg&quot;);  
+                        Log.e(&quot;TAG&quot;,status + &quot;   &quot; + msg2);  
+
+                        //1.创建Gson对象  
+                        Gson gson = new Gson();  
+                        //参数1：满足json对象格式的字符串  
+                        String data = obj.getString(&quot;data&quot;);  
+                        Essay e = gson.fromJson(data,Essay.class);  
+
+
+
+                        /*JSONObject data = obj.getJSONObject(&quot;data&quot;); 
+                        String title = data.getString(&quot;title&quot;); 
+                        String author = data.getString(&quot;author&quot;); 
+                        String content = data.getString(&quot;content&quot;); 
+                        Log.e(&quot;TAG&quot;,&quot;标题：&quot; + title + &quot;，作者：&quot; + author + &quot;，内容：&quot; + content);*/  
+                        //将操作权交还给主线程  
+
+                        Message message = handler.obtainMessage();  
+                        //Essay e = new Essay(title,author,content);  
+                        message.obj =e;  
+
+                        //调用此方法，则会触发主线程中Handle对象里覆盖了的handleMessage方法  
+                        handler.sendMessage(message);  
+
+                    }  
+                } catch (MalformedURLException e) {  
+                    e.printStackTrace();  
+                } catch (IOException e) {  
+                    e.printStackTrace();  
+                } catch (JSONException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+        }.start();  
+
+
+
+    }  
+
+
+}  
+</code></pre>
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Android网络请求，获取数据，解析数据Demo'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/01/Okhttp/">OkHttp网络请求框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/23/Gson/">Gson数据解析</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/HandlerDemo/">Handler实践的三种效果及Handler内存泄漏</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/03/DateTimePicker/">DatePicker和TimePicker时间和日期选择器</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/04/20/Interface/">接口</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/27/Java-AbstractParame/">抽象类名作为形式参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/08/27/Handler/">Handler常见发送消息方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/29/Java-MemInterCls/">成员内部类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/23/Gson/">Gson数据解析</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/13/ViewPagerTwo/">【ViewPager学习2】ViewPager入门以及实现APP引导页</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2018/01/13/NetworkRequest/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/13/NetworkRequest/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/13/NetworkRequest/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 18.899871099349497px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.887731957832983px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>
