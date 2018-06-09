@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Aestheticism">
+    
+    <meta name="description" content="世界上有两种人，一种懂二进制，一种不懂二进制。">
+    
+    
+    
+    
+    
+    
+    <title>ListView进阶提升（实现列表数据与聊天对话框） | 欢迎来到唯美的网站</title>
+    <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'hqle7GXSB41PTvaohArtGAKq-gzGzoHsz',
+        appKey: 'uObC0YFS5lY314GTLGc6hTtg'
+      })
+    </script>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">唯美</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Android/">Android</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Java/">Java</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
+        >
+        <span>ListView进阶提升（实现列表数据与聊天对话框）</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/02/09/ListViewAdvanced/">ListView进阶提升（实现列表数据与聊天对话框）</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-02-09
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/02/09/ListViewAdvanced/">ListView进阶提升（实现列表数据与聊天对话框）</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-02-09
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Android/">Android</a>
+                
+                
+                
+                <i class="fa fa-eye"></i>
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
+<p>Manifest添加网络访问权限</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;  
+</code></pre><p>string.xml</p>
+<pre><code>&lt;resources&gt;  
+    &lt;string name=&quot;app_name&quot;&gt;ImoocDemoProject&lt;/string&gt;  
+    &lt;string name=&quot;xiaoming&quot;&gt;小明&lt;/string&gt;  
+&lt;/resources&gt;  
+</code></pre><p>colors.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;resources&gt;  
+    &lt;color name=&quot;colorPrimary&quot;&gt;#3F51B5&lt;/color&gt;  
+    &lt;color name=&quot;colorPrimaryDark&quot;&gt;#303F9F&lt;/color&gt;  
+    &lt;color name=&quot;colorAccent&quot;&gt;#FF4081&lt;/color&gt;  
+    &lt;color name=&quot;blue&quot;&gt;#484fd9&lt;/color&gt;  
+    &lt;color name=&quot;main_background&quot;&gt;#f0f0f0&lt;/color&gt;  
+    &lt;color name=&quot;white&quot;&gt;#FFFFFF&lt;/color&gt;  
+&lt;/resources&gt;  
+</code></pre><p>styles.xml</p>
+<pre><code>&lt;resources&gt;  
+
+    &lt;!-- Base application theme. --&gt;  
+    &lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.DarkActionBar&quot;&gt;  
+        &lt;!-- Customize your theme here. --&gt;  
+        &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;  
+        &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;  
+        &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;  
+    &lt;/style&gt;  
+
+    &lt;style name=&quot;chat_text_date_style&quot;&gt;  
+        &lt;item name=&quot;android:padding&quot;&gt;2dp&lt;/item&gt;  
+        &lt;item name=&quot;android:textColor&quot;&gt;#CCCCCC&lt;/item&gt;  
+        &lt;item name=&quot;android:textSize&quot;&gt;14sp&lt;/item&gt;  
+        &lt;item name=&quot;android:background&quot;&gt;@color/main_background&lt;/item&gt;  
+    &lt;/style&gt;  
+
+
+    &lt;style name=&quot;chat_content_date_style&quot;&gt;  
+        &lt;item name=&quot;android:minHeight&quot;&gt;36dp&lt;/item&gt;  
+        &lt;item name=&quot;android:gravity&quot;&gt;left|center&lt;/item&gt;  
+        &lt;item name=&quot;android:textColor&quot;&gt;#000000&lt;/item&gt;  
+        &lt;item name=&quot;android:textSize&quot;&gt;18sp&lt;/item&gt;  
+        &lt;item name=&quot;android:lineSpacingExtra&quot;&gt;2dp&lt;/item&gt;  
+        &lt;item name=&quot;android:clickable&quot;&gt;true&lt;/item&gt;  
+        &lt;item name=&quot;android:focusable&quot;&gt;true&lt;/item&gt;  
+        &lt;item name=&quot;android:background&quot;&gt;#bfbfbf&lt;/item&gt;  
+    &lt;/style&gt;  
+
+    &lt;style name=&quot;chat_text_name_style&quot;&gt;  
+        &lt;item name=&quot;android:textColor&quot;&gt;#818181&lt;/item&gt;  
+        &lt;item name=&quot;android:textSize&quot;&gt;15sp&lt;/item&gt;  
+        &lt;item name=&quot;android:gravity&quot;&gt;center&lt;/item&gt;  
+    &lt;/style&gt;  
+
+&lt;/resources&gt;  
+</code></pre><p>item_main_list.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+              android:orientation=&quot;vertical&quot;  
+              android:layout_width=&quot;match_parent&quot;  
+              android:layout_height=&quot;match_parent&quot;&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/title&quot;  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;60dp&quot;  
+        android:text=&quot;@string/app_name&quot;  
+        android:minHeight=&quot;30dp&quot;  
+        android:layout_centerVertical=&quot;true&quot;  
+        android:gravity=&quot;center_vertical&quot;  
+        android:textColor=&quot;#494949&quot;  
+        android:layout_marginLeft=&quot;16dp&quot;  
+        android:layout_toRightOf=&quot;@+id/breakfast_imageview&quot;  
+        android:textSize=&quot;18sp&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>item_demo_list.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+              android:orientation=&quot;horizontal&quot;  
+              android:layout_width=&quot;match_parent&quot;  
+              android:layout_height=&quot;60dp&quot;&gt;  
+    &lt;ImageView  
+        android:id=&quot;@+id/icon_image_view&quot;  
+        android:layout_width=&quot;60dp&quot;  
+        android:layout_height=&quot;60dp&quot;  
+        android:src=&quot;@mipmap/ic_launcher&quot;/&gt;  
+    &lt;TextView  
+        android:id=&quot;@+id/title_text_view&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;60dp&quot;  
+        android:text=&quot;@string/app_name&quot;  
+        android:minHeight=&quot;30dp&quot;  
+        android:layout_centerVertical=&quot;true&quot;  
+        android:gravity=&quot;left|center&quot;  
+        android:textColor=&quot;#494949&quot;  
+        android:singleLine=&quot;true&quot;  
+        android:layout_marginLeft=&quot;16dp&quot;  
+        android:layout_toRightOf=&quot;@+id/breakfast_imageview&quot;  
+        android:textSize=&quot;18sp&quot;/&gt;  
+&lt;/LinearLayout&gt;  
+</code></pre><p>header_list_demo.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+              android:orientation=&quot;horizontal&quot;  
+              android:layout_width=&quot;match_parent&quot;  
+              android:layout_height=&quot;60dp&quot;&gt;  
+    &lt;ImageView  
+        android:id=&quot;@+id/icon_image_view&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;80dp&quot;  
+        android:background=&quot;@drawable/banner&quot;/&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>chatting_item_msg_text_right.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:orientation=&quot;vertical&quot;  
+        android:padding=&quot;6dp&quot; &gt;  
+
+        &lt;LinearLayout  
+            android:layout_width=&quot;fill_parent&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:orientation=&quot;vertical&quot;   
+            android:gravity=&quot;center_horizontal&quot;&gt;  
+
+            &lt;TextView  
+            android:id=&quot;@+id/tv_send_time&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:padding=&quot;2dp&quot;  
+            android:textColor=&quot;#ffffff&quot;  
+            android:textSize=&quot;12sp&quot;  
+            android:background=&quot;#bfbfbf&quot;/&gt;  
+
+        &lt;/LinearLayout&gt;  
+
+        &lt;RelativeLayout  
+            android:layout_width=&quot;fill_parent&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:layout_marginTop=&quot;5dp&quot;  
+            android:layout_marginRight=&quot;5dp&quot; &gt;  
+
+
+               &lt;ImageView   
+               android:id=&quot;@+id/iv_user_head&quot;  
+               android:layout_width=&quot;40dp&quot;  
+               android:layout_height=&quot;40dp&quot;  
+               android:focusable=&quot;false&quot;   
+               android:layout_alignParentRight=&quot;true&quot;   
+               android:layout_alignParentTop=&quot;true&quot;   
+               android:background=&quot;@drawable/avatar&quot;/&gt;  
+
+                &lt;TextView   
+                android:id=&quot;@+id/tv_chat_content&quot;  
+                android:layout_toLeftOf=&quot;@id/iv_user_head&quot;  
+                android:layout_marginRight=&quot;10dp&quot;  
+                android:layout_width=&quot;wrap_content&quot;  
+                android:layout_height=&quot;wrap_content&quot;  
+                android:minWidth=&quot;50dp&quot;  
+                android:textColor=&quot;#FFFFFF&quot;  
+                android:background=&quot;@drawable/msg_bubble_blue&quot;  
+                android:textSize=&quot;15sp&quot;  
+                android:gravity=&quot;left|center&quot;  
+                android:minHeight=&quot;40dp&quot;  
+                android:lineSpacingExtra=&quot;2dp&quot;  
+                android:clickable=&quot;true&quot;  
+                android:focusable=&quot;true&quot;/&gt;   
+
+                &lt;TextView   
+                android:id=&quot;@+id/tv_time&quot;   
+                android:layout_toLeftOf=&quot;@id/tv_chat_content&quot;  
+                android:layout_marginRight=&quot;10dp&quot;  
+                android:layout_width=&quot;wrap_content&quot;  
+                android:layout_height=&quot;wrap_content&quot;        
+                android:textSize=&quot;15sp&quot;  
+                android:textColor=&quot;#ff000000&quot;  
+                android:gravity=&quot;left|center&quot;  
+                android:minHeight=&quot;50dp&quot;   
+                android:lineSpacingExtra=&quot;2dp&quot;  
+                android:clickable=&quot;true&quot;  
+                android:focusable=&quot;true&quot;/&gt;       
+
+
+                &lt;TextView   
+                android:id=&quot;@+id/tv_username&quot;   
+                android:layout_width=&quot;wrap_content&quot;  
+                android:layout_height=&quot;wrap_content&quot;  
+                android:layout_below=&quot;@id/iv_user_head&quot;  
+                android:layout_alignParentRight=&quot;true&quot;  
+                android:layout_toRightOf=&quot;@id/tv_chat_content&quot;  
+                android:textSize=&quot;15sp&quot;  
+                android:gravity=&quot;center&quot;  
+                android:textColor=&quot;#818181&quot;/&gt;  
+
+        &lt;/RelativeLayout&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>chatting_item_msg_text_left.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;fill_parent&quot;  
+    android:layout_height=&quot;wrap_content&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:padding=&quot;6dp&quot; &gt;  
+
+    &lt;LinearLayout  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:gravity=&quot;center_horizontal&quot;  
+        android:orientation=&quot;vertical&quot; &gt;  
+
+        &lt;TextView  
+            android:id=&quot;@+id/tv_send_time&quot;  
+            android:padding=&quot;2dp&quot;  
+            android:textColor=&quot;#CCCCCC&quot;  
+            android:text=&quot;18:20&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot; /&gt;  
+    &lt;/LinearLayout&gt;  
+
+    &lt;RelativeLayout  
+        android:layout_width=&quot;fill_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:layout_marginLeft=&quot;5dp&quot;  
+        android:layout_marginTop=&quot;5dp&quot; &gt;  
+
+        &lt;ImageView  
+            android:id=&quot;@+id/iv_user_head&quot;  
+            android:layout_width=&quot;40dp&quot;  
+            android:layout_height=&quot;40dp&quot;  
+            android:layout_alignParentLeft=&quot;true&quot;  
+            android:layout_alignParentTop=&quot;true&quot;  
+            android:background=&quot;@drawable/avatar&quot;  
+            android:clickable=&quot;true&quot;  
+             /&gt;  
+
+        &lt;TextView  
+            android:id=&quot;@+id/tv_chat_content&quot;  
+            android:minHeight=&quot;36dp&quot;  
+            android:gravity=&quot;left|center&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:layout_marginLeft=&quot;10dp&quot;  
+            android:minWidth=&quot;50dp&quot;  
+            android:textColor=&quot;#494949&quot;  
+            android:textSize=&quot;18sp&quot;  
+            android:text=&quot;@string/app_name&quot;  
+            android:lineSpacingExtra=&quot;2dp&quot;  
+            android:layout_toRightOf=&quot;@id/iv_user_head&quot;  
+            android:background=&quot;@drawable/msg_bubble_white&quot; /&gt;  
+
+        &lt;TextView  
+            android:id=&quot;@+id/tv_time&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:layout_marginRight=&quot;10dp&quot;  
+            android:layout_toRightOf=&quot;@id/tv_chat_content&quot;  
+            android:clickable=&quot;true&quot;  
+            android:focusable=&quot;true&quot;  
+            android:gravity=&quot;left|center&quot;  
+            android:lineSpacingExtra=&quot;2dp&quot;  
+            android:minHeight=&quot;50dp&quot;  
+            android:textColor=&quot;#ff000000&quot;  
+            android:textSize=&quot;15sp&quot; /&gt;  
+
+        &lt;TextView  
+            android:id=&quot;@+id/tv_username&quot;  
+            android:layout_width=&quot;wrap_content&quot;  
+            android:layout_height=&quot;wrap_content&quot;  
+            android:layout_alignParentLeft=&quot;true&quot;  
+            android:layout_below=&quot;@id/iv_user_head&quot;  
+            android:text=&quot;@string/xiaoming&quot;  
+            android:textSize=&quot;14sp&quot;  
+            android:singleLine=&quot;true&quot;  
+            android:visibility=&quot;visible&quot;  
+            android:textColor=&quot;#818181&quot;  
+            android:gravity=&quot;center&quot;  
+            android:layout_toLeftOf=&quot;@id/tv_chat_content&quot; /&gt;  
+    &lt;/RelativeLayout&gt;  
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>activity_main.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;RelativeLayout  
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+android:layout_width=&quot;match_parent&quot;  
+android:layout_height=&quot;match_parent&quot;  
+android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;  
+android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;  
+android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;  
+android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;&gt;  
+
+&lt;ListView  
+    android:id=&quot;@+id/list_view_demo&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:background=&quot;@color/white&quot;  
+    &gt;  
+&lt;/ListView&gt;  
+</code></pre><p><br>activity_list_view_demo.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;LinearLayout  
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot;  
+    android:background=&quot;@color/blue&quot;&gt;  
+
+
+&lt;/LinearLayout&gt;  
+</code></pre><p>ChatMessage.java</p>
+<pre><code>package com.imooc.demo.model;  
+
+/** 
+ * Function: 
+ * Create date on 16/8/13. 
+ * 
+ * @author Conquer 
+ * @version 1.0 
+ */  
+public class ChatMessage {  
+
+    public ChatMessage(int myID, int friendID, String name, String date, String content, String time, String avatarUrl, boolean isComeMessage) {  
+        this.myID = myID;  
+        this.friendID = friendID;  
+        this.name = name;  
+        this.date = date;  
+        this.content = content;  
+        this.time = time;  
+        this.avatarUrl = avatarUrl;  
+        this.isComeMessage = isComeMessage;  
+    }  
+
+    private int myID;  
+
+    private int friendID;  
+
+    private String name;  
+
+    private String date;  
+
+    private String content;  
+
+    private String time;  
+
+    private String avatarUrl;  
+
+    private boolean isComeMessage = true;  
+
+
+    public String getAvatarUrl() {  
+        return avatarUrl;  
+    }  
+
+    public void setAvatarUrl(String avatarUrl) {  
+        this.avatarUrl = avatarUrl;  
+    }  
+
+    public String getTime() {  
+        return time;  
+    }  
+
+    public void setTime(String time) {  
+        this.time = time;  
+    }  
+
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+
+    public String getDate() {  
+        return date;  
+    }  
+
+    public void setDate(String date) {  
+        this.date = date;  
+    }  
+
+    public String getContent() {  
+        return content;  
+    }  
+
+    public void setContent(String content) {  
+        this.content = content;  
+    }  
+
+    public boolean getMsgType() {  
+        return isComeMessage;  
+    }  
+
+    public void setMsgType(boolean isComMsg) {  
+        isComeMessage = isComMsg;  
+    }  
+
+    public ChatMessage() {  
+    }  
+
+    public int getMyID() {  
+        return myID;  
+    }  
+
+    public void setMyID(int myID) {  
+        this.myID = myID;  
+    }  
+
+    public int getFriendID() {  
+        return friendID;  
+    }  
+
+    public void setFriendID(int friendID) {  
+        this.friendID = friendID;  
+    }  
+
+    public boolean isComeMessage() {  
+        return isComeMessage;  
+    }  
+
+    public void setComeMessage(boolean isComMeg) {  
+        this.isComeMessage = isComMeg;  
+    }  
+}  
+</code></pre><p>ActivityItem.java</p>
+<pre><code>package com.imooc.demo.model;  
+
+/** 
+ * Function: 
+ * Create date on 16/8/9. 
+ * 
+ * @author Conquer 
+ * @version 1.0 
+ */  
+public class ActivityItem {  
+    private String mName;  
+    private Class mActivityClass;  
+
+    public ActivityItem(String name, Class activityClass) {  
+        mName = name;  
+        mActivityClass = activityClass;  
+    }  
+
+    public String getName() {  
+        return mName;  
+    }  
+
+    public void setName(String name) {  
+        mName = name;  
+    }  
+
+    public Class getActivityClass() {  
+        return mActivityClass;  
+    }  
+
+    public void setActivityClass(Class activityClass) {  
+        mActivityClass = activityClass;  
+    }  
+}  
+</code></pre><p>BaseListAdapter.java</p>
+<pre><code>package com.imooc.demo.base;  
+
+import android.content.Context;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.BaseAdapter;  
+
+import java.util.List;  
+
+/** 
+ * Function: 
+ * Create date on 16/8/9. 
+ * 
+ * @author Conquer 
+ * @version 1.0 
+ */  
+public abstract class BaseListAdapter&lt;T&gt; extends BaseAdapter {  
+    private List&lt;T&gt; mList;  
+    private final Context mContext;  
+
+    public BaseListAdapter(Context context) {  
+        this.mContext = context;  
+    }  
+
+    public BaseListAdapter(Context context, List&lt;T&gt; list) {  
+        mContext = context;  
+        mList = list;  
+    }  
+
+    public Context getContext() {  
+        return mContext;  
+    }  
+
+    @Override  
+    public int getCount() {  
+        return mList != null ? mList.size() : 0;  
+    }  
+
+    @Override  
+    public T getItem(int position) {  
+        return mList != null ? mList.get(position) : null;  
+    }  
+
+    @Override  
+    public long getItemId(int position) {  
+        return position;  
+    }  
+
+    public void setData(List&lt;T&gt; list) {  
+        mList = list;  
+        notifyDataSetChanged();  
+    }  
+
+    public List&lt;T&gt; getList() {  
+        return mList;  
+    }  
+
+
+    @Override  
+    public View getView(int position, View convertView, ViewGroup parent) {  
+        if (convertView == null) {  
+            convertView = onNewItemView(LayoutInflater.from(mContext), parent, position);  
+        }  
+
+        onBindItemView(convertView, getItem(position), position, parent);  
+        return convertView;  
+    }  
+
+    protected abstract View onNewItemView(LayoutInflater inflater, ViewGroup parent, int position);  
+
+    protected abstract void onBindItemView(View viewItem, T data, int position, ViewGroup parent);  
+
+    public void notifyDataSetChanged(List&lt;T&gt; mList) {  
+        this.mList = mList;  
+        notifyDataSetChanged();  
+    }  
+}  
+</code></pre><p>BindableAdapter.java</p>
+<pre><code>package com.imooc.demo.base;  
+
+import android.content.Context;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+
+import java.util.List;  
+
+/** 
+ * Function: 
+ * Create date on 16/8/9. 
+ * 
+ * @author Conquer 
+ * @version 1.0 
+ */  
+public abstract class BindableAdapter&lt;T&gt; extends BaseListAdapter&lt;T&gt; {  
+
+    public BindableAdapter(Context context) {  
+        super(context);  
+    }  
+
+    public BindableAdapter(Context context, List&lt;T&gt; list) {  
+        super(context, list);  
+    }  
+
+    @Override  
+    public final View getDropDownView(int position, View view, ViewGroup container) {  
+        if (view == null) {  
+            view = newDropDownView(LayoutInflater.from(getContext()), position, container);  
+            if (view == null) {  
+                throw new IllegalStateException(&quot;newDropDownView result must not be null.&quot;);  
+            }  
+        }  
+        bindDropDownView(getItem(position), position, view, container);  
+        return view;  
+    }  
+
+    /** 
+     * Create a new instance of a drop-down view for the specified position. 
+     */  
+    public View newDropDownView(LayoutInflater inflater, int position, ViewGroup container) {  
+        return onNewItemView(inflater, container, position);  
+    }  
+
+    /** 
+     * Bind the data for the specified {@code position} to the drop-down view. 
+     */  
+    public void bindDropDownView(T item, int position, View view, ViewGroup container) {  
+        onBindItemView(view, item, position, container);  
+    }  
+}  
+</code></pre><p>MainActivity.java</p>
+<pre><code>package com.imooc.demo.app;  
+
+import android.os.Bundle;  
+import android.support.v7.app.AppCompatActivity;  
+import android.widget.ListView;  
+
+import com.imooc.demo.R;  
+import com.imooc.demo.adapter.MainListAdapter;  
+import com.imooc.demo.app.listview.ChatActivity;  
+import com.imooc.demo.app.listview.RequestDataActivity;  
+import com.imooc.demo.model.ActivityItem;  
+
+import java.util.ArrayList;  
+
+public class MainActivity extends AppCompatActivity {  
+
+    private ListView mListView;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        mListView = (ListView) findViewById(R.id.list_view_demo);  
+        ArrayList&lt;ActivityItem&gt; activityItems = new ArrayList&lt;&gt;();  
+        activityItems.add(new ActivityItem(&quot;1. 异步请求数据列表&quot;, RequestDataActivity.class));  
+        activityItems.add(new ActivityItem(&quot;2. 模仿IM聊天布局&quot;, ChatActivity.class));  
+        mListView.setAdapter(new MainListAdapter(MainActivity.this,activityItems ));  
+    }  
+}  
+</code></pre><p>RequestDataActivity.java</p>
+<pre><code>package com.imooc.demo.app.listview;  
+
+import android.content.Context;  
+import android.os.AsyncTask;  
+import android.os.Bundle;  
+import android.support.v7.app.AppCompatActivity;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.BaseAdapter;  
+import android.widget.ImageView;  
+import android.widget.ListView;  
+import android.widget.TextView;  
+
+import com.imooc.demo.R;  
+import com.imooc.demo.app.model.LessonInfo;  
+import com.imooc.demo.app.model.LessonResult;  
+
+import org.json.JSONArray;  
+import org.json.JSONException;  
+import org.json.JSONObject;  
+
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+import java.net.HttpURLConnection;  
+import java.net.URL;  
+import java.util.ArrayList;  
+import java.util.List;  
+
+
+public class RequestDataActivity  extends AppCompatActivity {  
+    private ListView mListView;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        mListView = (ListView) findViewById(R.id.list_view_demo);  
+        LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+        View view = layoutInflater.inflate(R.layout.header_list_demo, null);  
+        mListView.addFooterView(view);  
+
+        new AppAsyncTask().execute();  
+    }  
+
+    public class AppListAdapter extends BaseAdapter {  
+
+        private Context mContext;  
+        private List&lt;LessonInfo&gt; mInfos;  
+
+        public AppListAdapter(Context context, List&lt;LessonInfo&gt; infos) {  
+            mContext = context;  
+            mInfos = infos;  
+        }  
+
+        @Override  
+        public int getCount() {  
+            return mInfos.size();  
+        }  
+
+        @Override  
+        public Object getItem(int position) {  
+            return mInfos.get(position);  
+        }  
+
+        @Override  
+        public long getItemId(int position) {  
+            return position;  
+        }  
+
+        @Override  
+        public View getView(final int position, View convertView, ViewGroup parent) {  
+            ViewHolder viewHolder;  
+            LayoutInflater layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+            if(convertView == null){  
+                viewHolder = new ViewHolder();  
+                convertView = layoutInflater.inflate(R.layout.item_demo_list, null);  
+                // 获取控件  
+                viewHolder.nameTextView = (TextView) convertView.findViewById(R.id.title_text_view);  
+                viewHolder.avatarImageView = (ImageView) convertView.findViewById(R.id.icon_image_view);  
+                convertView.setTag(viewHolder);  
+            } else {  
+                viewHolder = (ViewHolder) convertView.getTag();  
+            }  
+            // 和数据之间进行绑定  
+            viewHolder.nameTextView.setText(mInfos.get(position).getName());  
+            viewHolder.avatarImageView.setVisibility(View.GONE);  
+
+            return convertView;  
+        }  
+
+        class ViewHolder {  
+            ImageView avatarImageView;  
+            TextView nameTextView;  
+        }  
+    }  
+
+
+
+    public class AppAsyncTask extends AsyncTask&lt;Void,Integer, String&gt; {  
+
+        @Override  
+        protected String doInBackground(Void... params) {  
+
+            return request(&quot;http://www.imooc.com/api/teacher?type=2&amp;page=1&quot;);  
+        }  
+
+        @Override  
+        protected void onPostExecute(String result) {  
+            super.onPostExecute(result);  
+            LessonResult lessonResult = new LessonResult();  
+            try {  
+                JSONObject jsonObject = new JSONObject(result);  
+                int status = jsonObject.getInt(&quot;status&quot;);  
+                String message = jsonObject.getString(&quot;msg&quot;);  
+                lessonResult.setStatus(status);  
+                lessonResult.setMessage(message);  
+
+                List&lt;LessonInfo&gt; lessonInfos = new ArrayList&lt;&gt;();  
+                JSONArray dataArray = jsonObject.getJSONArray(&quot;data&quot;);  
+                for (int i = 0; i &lt; dataArray.length(); i++) {  
+                    LessonInfo lessonInfo = new LessonInfo();  
+                    JSONObject tempJsonObject = (JSONObject) dataArray.get(i);  
+                    lessonInfo.setID(tempJsonObject.getInt(&quot;id&quot;));  
+                    lessonInfo.setName(tempJsonObject.getString(&quot;name&quot;));  
+                    lessonInfos.add(lessonInfo);  
+                }  
+                lessonResult.setLessonInfos(lessonInfos);  
+
+            } catch (JSONException e) {  
+                e.printStackTrace();  
+            }  
+            mListView.setAdapter(new AppListAdapter(RequestDataActivity.this, lessonResult.getLessonInfos()));  
+        }  
+
+
+        private String request(String urlString) {  
+            try {  
+                URL url = new URL(urlString);  
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();  
+                connection.setConnectTimeout(30000);  
+                connection.setRequestMethod(&quot;GET&quot;);  // GET POST  
+                connection.connect();  
+                int responseCode = connection.getResponseCode();  
+                String responseMessage = connection.getResponseMessage();  
+                String result = null;  
+                if(responseCode == HttpURLConnection.HTTP_OK){  
+                    InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());  
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);  
+                    StringBuilder stringBuilder = new StringBuilder();  
+                    String line;  
+                    while ((line = bufferedReader.readLine()) != null) {  
+                        stringBuilder.append(line);  
+                    }  
+                    result = stringBuilder.toString();  
+                } else {  
+                  // TODO:  
+                }  
+                return result;  
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            }  
+            return null;  
+        }  
+    }  
+
+}  
+</code></pre><p>ChatActivity.java</p>
+<pre><code>package com.imooc.demo.app.listview;  
+
+import android.content.Context;  
+import android.os.Bundle;  
+import android.support.v7.app.AppCompatActivity;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.BaseAdapter;  
+import android.widget.ImageView;  
+import android.widget.ListView;  
+import android.widget.TextView;  
+
+import com.imooc.demo.R;  
+import com.imooc.demo.model.ChatMessage;  
+
+import java.util.ArrayList;  
+import java.util.List;  
+
+public class ChatActivity extends AppCompatActivity {  
+
+    private ListView mListView;  
+    List&lt;ChatMessage&gt; mChatMessages = new ArrayList&lt;&gt;();  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        mListView = (ListView) findViewById(R.id.list_view_demo);  
+        ChatMessage chatMessage = new ChatMessage(1,2,&quot;刘小明&quot;,&quot;8:20&quot;,&quot;你好吗&quot;,&quot;&quot;,&quot;&quot;,true);  
+        ChatMessage chatMessage2 = new ChatMessage(2,1,&quot;小军&quot;,&quot;8:21&quot;,&quot;我很好&quot;,&quot;&quot;,&quot;&quot;,false);  
+        ChatMessage chatMessage3 = new ChatMessage(1,2,&quot;刘小明&quot;,&quot;8:22&quot;,&quot;今天天气怎么样&quot;,&quot;&quot;,&quot;&quot;,true);  
+        ChatMessage chatMessage4 = new ChatMessage(2,1,&quot;小军&quot;,&quot;8:23&quot;,&quot;热成狗了&quot;,&quot;&quot;,&quot;&quot;,false);  
+
+        mChatMessages.add(chatMessage);  
+        mChatMessages.add(chatMessage2);  
+        mChatMessages.add(chatMessage3);  
+        mChatMessages.add(chatMessage4);  
+
+        mListView.setAdapter(new ChatMessageAdapter(this, mChatMessages));  
+    }  
+
+    public static class ChatMessageAdapter extends BaseAdapter {  
+
+        public interface IMessageViewType {  
+            int COM_MESSAGE = 0;  
+            int TO_MESSAGE = 1;  
+        }  
+
+        private List&lt;ChatMessage&gt; mChatMessages;  
+        private LayoutInflater mInflater;  
+
+        public ChatMessageAdapter(Context context, List&lt;ChatMessage&gt; coll) {  
+            this.mChatMessages = coll;  
+            mInflater = LayoutInflater.from(context);  
+        }  
+
+        public int getCount() {  
+            return mChatMessages.size();  
+        }  
+
+        public Object getItem(int position) {  
+            return mChatMessages.get(position);  
+        }  
+
+        public long getItemId(int position) {  
+            return position;  
+        }  
+
+        public int getItemViewType(int position) {  
+            ChatMessage entity = mChatMessages.get(position);  
+            if (entity.getMsgType()) {  
+                return IMessageViewType.COM_MESSAGE;  
+            } else {  
+                return IMessageViewType.TO_MESSAGE;  
+            }  
+
+        }  
+
+        public int getViewTypeCount() {  
+            return 2;  
+        }  
+
+        public View getView(int position, View convertView, ViewGroup parent) {  
+
+            final ChatMessage entity = mChatMessages.get(position);  
+            boolean isComMsg = entity.getMsgType();  
+
+            ViewHolder viewHolder;  
+            if (convertView == null) {  
+                if (isComMsg) {  
+                    convertView = mInflater.inflate(R.layout.chatting_item_msg_text_left, null);  
+                } else {  
+                    convertView = mInflater.inflate(R.layout.chatting_item_msg_text_right, null);  
+                }  
+                viewHolder = new ViewHolder();  
+                viewHolder.mSendTime = (TextView) convertView.findViewById(R.id.tv_send_time);  
+                viewHolder.mUserName = (TextView) convertView.findViewById(R.id.tv_username);  
+                viewHolder.mContent = (TextView) convertView.findViewById(R.id.tv_chat_content);  
+                viewHolder.mTime = (TextView) convertView.findViewById(R.id.tv_time);  
+                viewHolder.mUserAvatar = (ImageView) convertView.findViewById(R.id.iv_user_head);  
+                viewHolder.mIsComMessage = isComMsg;  
+                convertView.setTag(viewHolder);  
+            } else {  
+                viewHolder = (ViewHolder) convertView.getTag();  
+            }  
+
+            viewHolder.mSendTime.setText(entity.getDate());  
+            viewHolder.mContent.setText(entity.getContent());  
+            viewHolder.mContent.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);  
+            viewHolder.mTime.setText(&quot;&quot;);  
+            viewHolder.mUserName.setText(entity.getName());  
+            if (isComMsg) {  
+                viewHolder.mUserAvatar.setImageResource(R.drawable.avatar);  
+            } else {  
+                viewHolder.mUserAvatar.setImageResource(R.mipmap.ic_launcher);  
+//                ImageLoader.getInstance().displayImage(entity.getAvatarUrl(), viewHolder.mUserAvatar);  
+            }  
+
+            return convertView;  
+        }  
+
+        class ViewHolder {  
+            public TextView mSendTime;  
+            public TextView mUserName;  
+            public TextView mContent;  
+            public TextView mTime;  
+            public ImageView mUserAvatar;  
+            public boolean mIsComMessage = true;  
+        }  
+    }  
+}  
+</code></pre><p>MainListAdapter.java</p>
+<pre><code>package com.imooc.demo.adapter;  
+
+import android.content.Context;  
+import android.content.Intent;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.TextView;  
+
+import com.imooc.demo.R;  
+import com.imooc.demo.base.BindableAdapter;  
+import com.imooc.demo.model.ActivityItem;  
+
+import java.util.List;  
+
+/** 
+ * Function: 
+ * Create date on 16/8/9. 
+ * 
+ * @author Conquer 
+ * @version 1.0 
+ */  
+public class MainListAdapter extends BindableAdapter&lt;ActivityItem&gt; {  
+
+    private Context mContext;  
+    public MainListAdapter(Context context, List&lt;ActivityItem&gt; list) {  
+        super(context, list);  
+        mContext = context;  
+
+    }  
+
+    @Override  
+    protected View onNewItemView(LayoutInflater inflater, ViewGroup parent, int position) {  
+        View view = inflater.inflate(R.layout.item_main_list, null);  
+        ViewHolder holder = new ViewHolder();  
+        holder.mTitle = (TextView) view.findViewById(R.id.title);  
+        view.setTag(holder);  
+        return view;  
+    }  
+
+    @Override  
+    protected void onBindItemView(View viewItem, final ActivityItem data, int position, ViewGroup parent) {  
+        ViewHolder holder = (ViewHolder) viewItem.getTag();  
+        holder.mTitle.setText(data.getName());  
+        viewItem.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                 mContext.startActivity(new Intent(mContext, data.getActivityClass()));  
+            }  
+        });  
+    }  
+
+    private class ViewHolder {  
+        private TextView mTitle;  
+    }  
+}  
+</code></pre><p>如果xml文件的地方，图片处报红，请下载本文配套代码，从中提取该图片</p>
+<p>运行效果：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ListViewAdvanced/1.png" alt=""></p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ListViewAdvanced/2.png" alt=""></p>
+<p>项目Demo下载：</p>
+<p><a href="https://download.csdn.net/download/weimeig/10409593" target="_blank" rel="noopener">https://download.csdn.net/download/weimeig/10409593</a></p>
+
+    </div>
+</article>
+
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'ListView进阶提升（实现列表数据与聊天对话框）'
+    }
+</script>
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Aestheticism
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>世界上有两种人，一种懂二进制，一种不懂二进制。</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/ManifestAmbiguity/">AndroidManifest Ambiguity方案实现</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/27/Picasso/">Picasso图片加载框架</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/09/ListViewAdvanced/">ListView进阶提升（实现列表数据与聊天对话框）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/27/RetrofitOne/">Retrofit框架（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/RetrofitLoginDemo/">Retrofit实现登录与注册网络请求，及代码优化</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/13/NetworkRequest/">Android网络请求，获取数据，解析数据Demo</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/08/RetrofitEncapsul/">Retrofit封装</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/06/RecyclerView/">RecyclerView实现列表效果和瀑布流效果（RecyclerView强化练习）</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/03/18/ASImportCodeNotPrompt/">AndroidStudio导入网上下载的代码慢及AndroidStudio不提示代码的解决方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/03/20/AbstractClass/">抽象类</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/07/09/CheckBox/">CheckBox多选框</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/ConstraintLayout/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2014/05/13/InterfaceCallback/">Java接口回调，Android接口回调读书笔记</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/27/Java-AbstractParame/">抽象类名作为形式参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-IntReturn/">接口作为返回值类型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/06/03/Java-IntParameter/">接口作为形式参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/07/27/FragmentTab/">Fragment实现底部切换标签</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/07/PointNinePic/">安卓.9图适配</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2018/02/09/ListViewAdvanced/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2018/02/09/ListViewAdvanced/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2018/02/09/ListViewAdvanced/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Android/" style="font-size: 16.707211721315335px;" class="tag-cloud-link">Android</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.93309505593005px;" class="tag-cloud-link">Java</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">KDays Forum</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">绅士导航♂</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">萌导航</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=542616848" target="_blank">Coding</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Aestheticism Powered by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848/" target="_blank">唯美</a>.&nbsp;Theme by <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848" target="_blank">Aestheticism</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'ucvs'
+      window.commentConfig.repo = 'MyBlogComment-repo'
+      window.commentConfig.client_id = '3da00ea8bf8ceccba814'
+      window.commentConfig.client_secret = 'fba874587a03708dd71c76b4d85933e967a1cc9e'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'ucvs',
+        repo: 'MyBlogComment-repo',
+        client_id: '3da00ea8bf8ceccba814',
+        client_secret: 'fba874587a03708dd71c76b4d85933e967a1cc9e',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
+
+</html>

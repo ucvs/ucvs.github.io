@@ -12,7 +12,7 @@
     
     
     
-    <title>抽象类名作为形式参数 | 欢迎来到唯美的网站</title>
+    <title>高级控件之滚动视图(ScrollView) | 欢迎来到唯美的网站</title>
     <link href=”tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -204,13 +204,13 @@
         <i class="fa fa-home"></i>
         <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=542616848">欢迎来到唯美的网站</a>
         >
-        <span>抽象类名作为形式参数</span>
+        <span>高级控件之滚动视图(ScrollView)</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/2015/05/27/Java-HashSet - 副本/">抽象类名作为形式参数</a>
+                <a href="/2017/01/17/ScrollView/">高级控件之滚动视图(ScrollView)</a>
             </h1>
         </div>
         <div class="tag-article">
@@ -218,12 +218,12 @@
             <span class="label label-gal">
                 <i class="fa fa-tags"></i>
                 
-                <a href="/tags/Java/">Java</a>
+                <a href="/tags/Android/">Android</a>
                 
             </span>
             
             <span class="label label-gal">
-                <i class="fa fa-calendar"></i> 2015-05-27
+                <i class="fa fa-calendar"></i> 2017-01-17
             </span>
             
             <span class="label label-gal">
@@ -237,17 +237,17 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/2015/05/27/Java-HashSet - 副本/">抽象类名作为形式参数</a>
+                    <a href="/2017/01/17/ScrollView/">高级控件之滚动视图(ScrollView)</a>
                 </h4>
             </div>
             <p>
-                <i class="fa fa-calendar"></i> 2015-05-27
+                <i class="fa fa-calendar"></i> 2017-01-17
             </p>
             <p>
                 
                 <i class="fa fa-tags"></i>
                 
-                <a href="/tags/Java/">Java</a>
+                <a href="/tags/Android/">Android</a>
                 
                 
                 
@@ -258,8 +258,198 @@
     </div>
     <div class="content-article">
         <p>原CSDN博客已弃用，文章会逐渐迁移过来。</p>
-<p>应朋友们反馈的JAVA基础薄弱的问题，决定出一套完整的JAVA基础教程，帮助大家复习，巩固JAVA基础。</p>
+<p>一．滚动视图的基础概念</p>
+<p>  滚动视图用于为其它组件添加滚动条,在默认的情况下,当窗体中内容比较多,而一屏显示不下时, 超出的部分不能被用户所看到.因为Android的布局管理器本身没有提供滚动屏幕的功能.如果 要让其滚动,就要使用滚动视图ScrllView.<br>  滚动视图是FrameLayout的子类,因此,在滚动视图中,可以添加任何想要放入其中的组件,但是一个滚动视图中只能放一个组件,如果要放置多个,可以先放一个存布局管理器.再将要放置的组件放置到该布局管理器中,在滚动视图中,使用比较多的是线性布局管理器.</p>
+<p>（一）滚动视图（ScrollView）的XML配置：</p>
+<pre><code> &lt;ScrollView  
+android:id=&quot;@+id/myscollView&quot;    
+android:layout_width=&quot;match_parent&quot;   
+ android:layout_height=&quot;wrap_content&quot; &gt;   
+//这里只能放一个布局或控件  
+//一般是放LinearLayout布局  
+&lt;/ScrollView&gt;  
+</code></pre><p>（二）水平滚动视图(HorizontalScrollView)</p>
+<p>HorizontalScrollView和ScrollView差不多，只是滚动方式为横向<br>XML配置：</p>
+<pre><code>&lt;HorizontalScrollView   
+android:id=&quot;@+id/scrollView1&quot;   
+android:layout_width=&quot;match_parent&quot;  
+android:layout_height=&quot;wrap_content&quot; &gt;  
+ &lt;/HorizontalScrollView&gt;  
+</code></pre><p>滚动视图的作用：</p>
+<p>   1.滚动视图使用后能让里面的视图控件没展示的部分滚动后可以展示<br>比如一个TextView默认情况文本过大后，超出屏幕或框体的内容是不能显示出来的，但是如果把这个TextView放到一个滚动视图中，就能上下滚动显示没有显示的文本内容。<br>   2.水平滚动的视图内显示横向拉伸的布局的内容<br>比如一个水平的LinearLayout放置十个按钮，那么只能显示五个，如果把这个LinearLayout放在一个水平滚动的视图中，就可以水平的拖动视图显示后面的按钮。<br>   值得注意的是ListView是默认带滚动的，不需要滚动视图的包裹。<br>  而Android的五六布局（线性布局，相对布局，绝对布局，表格布局，网格布局，层布局）和简单控件（TextView，ImageView等等）默认是不能滚动显示的，除非放到滚动视图中。<br>  还有一点值得注意的是，如果ListView放到ScrollView中去这里ListView要自定义的拉长，否则会默认显示ListView中的一行数据，要拉伸才显示其他内容。<br>二．简单展示的示例程序<br>（一）布局文件activity_main.xml设计</p>
+<pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot; &gt;  
 
+    &lt;ScrollView  
+        android:layout_width=&quot;wrap_content&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:scrollbars=&quot;none&quot; &gt;  
+
+        &lt;LinearLayout  
+            android:layout_width=&quot;match_parent&quot;  
+            android:layout_height=&quot;match_parent&quot;  
+            android:orientation=&quot;vertical&quot; &gt;  
+
+            &lt;TextView  
+                android:id=&quot;@+id/tv_title&quot;  
+                android:layout_width=&quot;wrap_content&quot;  
+                android:layout_height=&quot;wrap_content&quot; /&gt;  
+
+            &lt;TextView  
+                android:id=&quot;@+id/tv_content&quot;  
+                android:layout_width=&quot;wrap_content&quot;  
+                android:layout_height=&quot;wrap_content&quot; /&gt;  
+        &lt;/LinearLayout&gt;  
+    &lt;/ScrollView&gt;  
+
+&lt;/RelativeLayout&gt;  
+</code></pre><p>（二）java代码设计</p>
+<pre><code>import android.app.Activity;  
+import android.os.Bundle;  
+import android.widget.TextView;  
+
+/** 
+ * ScrollView的简单展示 
+ */  
+public class MainActivity extends Activity {  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        TextView tvTile = (TextView) findViewById(R.id.tv_title);  
+        tvTile.setTextSize(30);  
+        tvTile.setText(&quot;文章标题：。。。&quot;);  
+        TextView tv = (TextView) findViewById(R.id.tv_content);  
+        tv.setTextSize(20);  
+        CharSequence text = &quot;锅盔的原材料都是庄稼人自家酿种的。&quot;   
+        + &quot;\n&quot; + &quot;面粉是自家地里种的小麦磨成的；&quot;  
+        + &quot;\n&quot; + &quot;是自家饲养的鸡产的；香豆子，&quot; + &quot;\n&quot;  
+                + &quot;是自家地埂上撒出来的。这些材料，&quot; + &quot;\n&quot;   
+                +  &quot;也是靠老天的眷顾，才有的。山区，&quot; + &quot;\n&quot;  
+                + &quot;就是靠天吃饭。万一哪一年，&quot; + &quot;\n&quot;   
+                + &quot;老天一生气不下雨，山就荒了，&quot; + &quot;\n&quot;  
+                + &quot;地也荒了，人也慌了，&quot; + &quot;\n&quot;    
+                + &quot;妈妈的锅盔也会瘪了。&quot; + &quot;\n&quot;  
+                + &quot;妈妈经过泡发面、和面、醒面等几道程序，&quot; + &quot;\n&quot;   
+                + &quot;把这些材料依次揉进面里，&quot; + &quot;\n&quot;  
+                + &quot;再切成碗口大的面团，揉成馒头，再用擀杖稍稍一擀，&quot;  
+                + &quot;\n&quot;  
+                + &quot;或用手掌稍稍一按，就成了一寸多高、盘子大小的圆饼。&quot;   
+                + &quot;\n&quot; + &quot;灵巧、细心、唯美的妈妈总不忘在饼上面&quot;  
+                + &quot;\n&quot; + &quot;用菜刀画出美丽对称的图案：三角形、四边形、菱形等等。&quot; + &quot;\n&quot;  
+                + &quot;妈妈的爱，就在那揉、擀、按、画的过程中，&quot; + &quot;\n&quot;   
+                + &quot;一点一点渗进锅盔里，流进我的血脉里。弄好的锅&quot;;  
+        tv.setText(text);  
+
+    }  
+
+}  
+</code></pre><p>程序运行后的显示界面：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ScrollView/1.png" alt=""></p>
+<p>页面往下拉显示的界面：</p>
+<p><img src="https://coding.net/u/iqq/p/BlogArticlePicture/git/raw/master/article/ScrollView/2.png" alt=""></p>
+<p>如果ListView或GridView放在ScrollVIew中要做的处理：<br>如果是ListView在ScrollView中时的处理：</p>
+<pre><code>import android.content.Context;  
+import android.util.AttributeSet;  
+import android.widget.ListView;  
+
+/** 
+ * 可滚动的ListView，这里是因为这个ListView被包裹在一个ScrollView中才需要设置纵向拉伸 
+ */  
+
+public class ScrollListView extends ListView {  
+    public ScrollListView(Context context) {  
+        super(context);  
+    }  
+
+    public ScrollListView(Context context, AttributeSet attrs) {  
+        super(context, attrs);  
+    }  
+
+    @Override  
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {  
+        int height = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2, MeasureSpec.AT_MOST);  
+        super.onMeasure(widthMeasureSpec, height);  
+    }  
+}  
+</code></pre><p>如果是GridView在ScrollView中时的处理：</p>
+<pre><code>import android.content.Context;  
+import android.util.AttributeSet;  
+import android.widget.GridView;  
+
+/** 
+ * 重写网格View，设置高度 
+ * 可滚动的GridView，这里是因为这个GridView被包裹在一个ScrollView中才需要设置纵向拉伸 
+ */  
+
+public class ScrollGridView extends GridView {  
+    public ScrollGridView(Context context) {  
+        super(context);  
+    }  
+
+    public ScrollGridView(Context context, AttributeSet attrs) {  
+        super(context, attrs);  
+    }  
+
+    @Override  
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {  
+        int height = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE &gt;&gt; 2, MeasureSpec.AT_MOST);  
+        super.onMeasure(widthMeasureSpec, height);  
+    }  
+}  
+</code></pre><p>使用的时候把这两个类分别当中ListView和GridView使用就可以了。</p>
+<p>比如：</p>
+<pre><code>&lt;ScrollView  
+       android:layout_width=&quot;match_parent&quot;  
+       android:layout_height=&quot;match_parent&quot;&gt;  
+
+       &lt;LinearLayout  
+           android:layout_width=&quot;match_parent&quot;  
+           android:layout_height=&quot;match_parent&quot;  
+           android:orientation=&quot;vertical&quot;&gt;  
+
+           &lt;TextView  
+               android:layout_width=&quot;match_parent&quot;  
+               android:layout_height=&quot;wrap_content&quot;  
+               android:background=&quot;@color/hint_color&quot;  
+               android:padding=&quot;10dp&quot;  
+               android:text=&quot;历史记录&quot;  
+               /&gt;  
+
+           &lt;TextView  
+               android:id=&quot;@+id/tv_history&quot;  
+               android:layout_width=&quot;match_parent&quot;  
+               android:layout_height=&quot;wrap_content&quot;  
+               android:padding=&quot;10dp&quot;  
+               android:text=&quot;当前还没有历史记录&quot; /&gt;  
+           //包名+类名  
+           &lt;com.lwz.mathbox.weight.ScrollGridView  
+               android:id=&quot;@+id/gv_topic&quot;  
+               android:layout_width=&quot;match_parent&quot;  
+               android:layout_height=&quot;wrap_content&quot;  
+               android:background=&quot;@color/hint_color&quot;  
+               android:horizontalSpacing=&quot;1dp&quot;  
+               android:numColumns=&quot;2&quot;  
+               android:verticalSpacing=&quot;1dp&quot; /&gt;  
+
+           &lt;TextView  
+               android:layout_width=&quot;match_parent&quot;  
+               android:layout_height=&quot;wrap_content&quot;  
+               android:background=&quot;@color/hint_color&quot;  
+               android:padding=&quot;10dp&quot;  
+               android:text=&quot;社区热门&quot;  
+              /&gt;  
+           //包名+类名  
+           &lt;com.lwz.mathbox.weight.ScrollListView  
+               android:id=&quot;@+id/lv_topic&quot;  
+               android:layout_width=&quot;match_parent&quot;  
+               android:layout_height=&quot;match_parent&quot; /&gt;  
+
+       &lt;/LinearLayout&gt;  
+   &lt;/ScrollView&gt;  
+</code></pre>
     </div>
 </article>
 
@@ -269,7 +459,7 @@
 <script>
 	if(!window.commentConfig) {
       window.commentConfig = {}
-      window.commentConfig.title = '抽象类名作为形式参数'
+      window.commentConfig.title = '高级控件之滚动视图(ScrollView)'
     }
 </script>
 
@@ -360,6 +550,12 @@
             
             <li class="list-group-item">
                 <span class="post-title">
+                    <a href="/2018/02/09/ListViewAdvanced/">ListView进阶提升（实现列表数据与聊天对话框）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
                     <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
                 </span>
             </li>
@@ -394,12 +590,6 @@
                 </span>
             </li>
             
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2018/01/02/OrmLite/">OrmLite数据库操作框架</a>
-                </span>
-            </li>
-            
         </ul>
     </div>
 </aside>
@@ -418,7 +608,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2016/06/23/AndroidEditText/">Android中EditText的常见属性</a>
+                    <a href="/2016/07/10/ImageViewAndImageBtn/">ImageView和ImageButton</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2015/05/17/Java-Genericity/">JAVA中的泛型</a>
                 </span>
             </li>
             
@@ -436,13 +632,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2014/05/11/RetrofitReadNotesOne/">Retrofit框架读书总结笔记（一）</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2016/06/01/ActivityLifecycle/">Activity生命周期详解</a>
+                    <a href="/2016/06/01/GridLayout/">GridLayout网格布局</a>
                 </span>
             </li>
             
@@ -454,25 +644,25 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/03/27/AsyncTask/">Android新特性ConstraintLayout约束布局读书笔记</a>
+                    <a href="/2015/06/03/ObjTransfer/">类的对象传递</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/07/02/FragmentToAty/">Fragment向Activity传值</a>
+                    <a href="/2016/03/27/ActivitySplash/">Android闪屏页</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/02/11/RetrofitToRxJava/">RxJava对Retrofit进一步封装</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2017/08/27/SharedPreferences/">SharedPreferences数据存储及内外部存储空间的读写方式</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2018/01/27/RetrofitTwo/">Retrofit框架（二）</a>
                 </span>
             </li>
             
@@ -485,21 +675,21 @@
         <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
             <ul class="nav nav-pills pills-gal">
                 <li class="">
-                    <a href="/2015/05/27/Java-HashSet - 副本/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2017/01/17/ScrollView/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 <li class="">
-                    <a href="/2015/05/27/Java-HashSet - 副本/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2017/01/17/ScrollView/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 <li class="">
-                    <a href="/2015/05/27/Java-HashSet - 副本/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2017/01/17/ScrollView/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Android/" style="font-size: 12.456740426195859px;" class="tag-cloud-link">Android</a>
+    <a href="/tags/Android/" style="font-size: 16.963894530684357px;" class="tag-cloud-link">Android</a>
     
-    <a href="/tags/Java/" style="font-size: 12.73004961621766px;" class="tag-cloud-link">Java</a>
+    <a href="/tags/Java/" style="font-size: 19.688222898007943px;" class="tag-cloud-link">Java</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
